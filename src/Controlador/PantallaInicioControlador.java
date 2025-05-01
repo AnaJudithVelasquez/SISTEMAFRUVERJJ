@@ -15,7 +15,7 @@ import Modelo.VentaModelo;
 public class PantallaInicioControlador {
     private UsuarioModel modelo;
     private PantallaInicioView vista;
-
+//Ya Estoy
     public PantallaInicioControlador(PantallaInicioView vista, UsuarioModel modelo) {
         this.vista = vista;
         this.modelo = modelo;
