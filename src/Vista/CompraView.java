@@ -16,7 +16,6 @@ public class CompraView extends JFrame {
     public JTextField Nombre_Proveedor;
     public JTextField Direccion;
     public JTextField Telefono;
-    public JTextField Cod_Compra;
     public JTextField Cod_Usuario;
     public JTextField Fecha_Compra;
     public JTextField Producto_Comprado;
@@ -30,23 +29,23 @@ public class CompraView extends JFrame {
     public JTable table1;
     public JScrollPane scrollPane1P;
     public JScrollPane scrollPane;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JTextField textField5;
-    private JTextField textField6;
-    private JTextField textField7;
-    private JTextField textField8;
-    private JTextField textField9;
+    private JTextField Cod_Compra;
     private JTextField textField10;
-    private JTextField textField11;
-    private JTextField textField12;
-    private JButton button1;
-    private JButton button2;
-    private JTextField textField13;
     private JTable table2;
     private JButton button3;
+    private JLabel COD_SUPPLIER;
+    private JLabel SUPPLIER_NAME;
+    private JLabel ADDRESS;
+    private JLabel PHONE_NUMBER;
+    private JLabel COD_PURCHASE;
+    private JLabel COD_USER;
+    private JLabel COD_SUPPLIERC;
+    private JLabel DATE_PURCHASE;
+    private JLabel PURCHASED_PRODUCT;
+    private JLabel QUANTITY_Kg;
+    private JLabel UNIT_VALUE;
+    private JLabel TOTAL_PRODUCT;
+    private JLabel TOTAL_PURCHASE_VALUE;
 
     public CompraView() {
         setContentPane(panelCompras);
