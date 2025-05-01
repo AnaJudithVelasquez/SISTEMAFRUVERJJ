@@ -13,7 +13,8 @@
           <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Label"/>
+          <font name="Century" size="28" style="0"/>
+          <text value="Productos"/>
         </properties>
       </component>
       <hspacer id="c0319">
@@ -31,15 +32,17 @@
           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
-      <component id="5942c" class="javax.swing.JLabel">
+      <component id="5942c" class="javax.swing.JLabel" binding="COD_PRODUCT">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Label"/>
+          <enabled value="true"/>
+          <font name="Century" size="16" style="0"/>
+          <text value="Cod Producto:"/>
         </properties>
       </component>
-      <component id="73449" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+      <component id="73449" class="javax.swing.JTextField" binding="producto1">
         <constraints>
           <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -47,15 +50,16 @@
         </constraints>
         <properties/>
       </component>
-      <component id="a6b1a" class="javax.swing.JLabel">
+      <component id="a6b1a" class="javax.swing.JLabel" binding="COD_PURCHASE">
         <constraints>
           <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Label"/>
+          <font name="Century" size="16" style="0"/>
+          <text value="Cod Compra:"/>
         </properties>
       </component>
-      <component id="5cc60" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+      <component id="5cc60" class="javax.swing.JTextField" binding="codCompra">
         <constraints>
           <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -63,15 +67,16 @@
         </constraints>
         <properties/>
       </component>
-      <component id="8e5b4" class="javax.swing.JLabel">
+      <component id="8e5b4" class="javax.swing.JLabel" binding="PRODUCT_NAME">
         <constraints>
           <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Label"/>
+          <font name="Century" size="16" style="0"/>
+          <text value="Nombre Producto:"/>
         </properties>
       </component>
-      <component id="73b7e" class="javax.swing.JTextField" binding="textField3" default-binding="true">
+      <component id="73b7e" class="javax.swing.JTextField" binding="nombre">
         <constraints>
           <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -79,15 +84,16 @@
         </constraints>
         <properties/>
       </component>
-      <component id="5eadc" class="javax.swing.JLabel">
+      <component id="5eadc" class="javax.swing.JLabel" binding="STOCK">
         <constraints>
           <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Label"/>
+          <font name="Century" size="16" style="0"/>
+          <text value="Stock:"/>
         </properties>
       </component>
-      <component id="fea6a" class="javax.swing.JTextField" binding="textField4" default-binding="true">
+      <component id="fea6a" class="javax.swing.JTextField" binding="stock">
         <constraints>
           <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -95,15 +101,16 @@
         </constraints>
         <properties/>
       </component>
-      <component id="cf15e" class="javax.swing.JLabel">
+      <component id="cf15e" class="javax.swing.JLabel" binding="QUANTITY_Kg">
         <constraints>
           <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Label"/>
+          <font name="Century" size="16" style="0"/>
+          <text value="Cantidad Inicial:"/>
         </properties>
       </component>
-      <component id="df829" class="javax.swing.JTextField" binding="textField5" default-binding="true">
+      <component id="df829" class="javax.swing.JTextField" binding="cantidad">
         <constraints>
           <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -111,15 +118,16 @@
         </constraints>
         <properties/>
       </component>
-      <component id="26872" class="javax.swing.JLabel">
+      <component id="26872" class="javax.swing.JLabel" binding="FINAL_QUANTITY_Kg">
         <constraints>
           <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Label"/>
+          <font name="Century" size="16" style="0"/>
+          <text value="Cantidad Final:"/>
         </properties>
       </component>
-      <component id="df37a" class="javax.swing.JTextField" binding="textField6" default-binding="true">
+      <component id="df37a" class="javax.swing.JTextField" binding="cantidadFinal">
         <constraints>
           <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -127,15 +135,16 @@
         </constraints>
         <properties/>
       </component>
-      <component id="d18a0" class="javax.swing.JLabel">
+      <component id="d18a0" class="javax.swing.JLabel" binding="PURCHASE_VALUE">
         <constraints>
           <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Label"/>
+          <font name="Century" size="16" style="0"/>
+          <text value="Precio Compra:"/>
         </properties>
       </component>
-      <component id="4ebc9" class="javax.swing.JTextField" binding="textField7" default-binding="true">
+      <component id="4ebc9" class="javax.swing.JTextField" binding="precioCompra">
         <constraints>
           <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -143,15 +152,16 @@
         </constraints>
         <properties/>
       </component>
-      <component id="cd37d" class="javax.swing.JLabel">
+      <component id="cd37d" class="javax.swing.JLabel" binding="PRODUCT_PRICE">
         <constraints>
           <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Label"/>
+          <font name="Century" size="16" style="0"/>
+          <text value="Precio Venta:"/>
         </properties>
       </component>
-      <component id="1c502" class="javax.swing.JTextField" binding="textField8" default-binding="true">
+      <component id="1c502" class="javax.swing.JTextField" binding="precioProducto">
         <constraints>
           <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -159,15 +169,16 @@
         </constraints>
         <properties/>
       </component>
-      <component id="1959c" class="javax.swing.JLabel">
+      <component id="1959c" class="javax.swing.JLabel" binding="DESCRIPTION_PRODUCT">
         <constraints>
           <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Label"/>
+          <font name="Century" size="16" style="0"/>
+          <text value="Descripción:"/>
         </properties>
       </component>
-      <component id="8ab1b" class="javax.swing.JTextField" binding="textField9" default-binding="true">
+      <component id="8ab1b" class="javax.swing.JTextField" binding="descripcion">
         <constraints>
           <grid row="9" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -175,36 +186,40 @@
         </constraints>
         <properties/>
       </component>
-      <component id="87518" class="javax.swing.JButton" binding="button1" default-binding="true">
+      <component id="87518" class="javax.swing.JButton" binding="agregarButton">
         <constraints>
           <grid row="11" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Button"/>
+          <font name="Century" size="16" style="0"/>
+          <text value="Agregar"/>
         </properties>
       </component>
-      <component id="b8801" class="javax.swing.JButton" binding="button2" default-binding="true">
+      <component id="b8801" class="javax.swing.JButton" binding="modificarButton">
         <constraints>
           <grid row="11" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Button"/>
+          <font name="Century" size="16" style="0"/>
+          <text value="Modificar"/>
         </properties>
       </component>
-      <component id="fbcb8" class="javax.swing.JButton" binding="button3" default-binding="true">
+      <component id="fbcb8" class="javax.swing.JButton" binding="eliminarButton">
         <constraints>
           <grid row="13" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Button"/>
+          <font name="Century" size="16" style="0"/>
+          <text value="Eliminar"/>
         </properties>
       </component>
-      <component id="67c83" class="javax.swing.JButton" binding="button4" default-binding="true">
+      <component id="67c83" class="javax.swing.JButton" binding="mostrarButton">
         <constraints>
           <grid row="13" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Button"/>
+          <font name="Century" size="16" style="0"/>
+          <text value="Mostrar"/>
         </properties>
       </component>
       <scrollpane id="b09">
@@ -240,12 +255,13 @@
           <grid row="12" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
-      <component id="6c0b6" class="javax.swing.JButton" binding="button5" default-binding="true">
+      <component id="6c0b6" class="javax.swing.JButton" binding="volverButton">
         <constraints>
           <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Button"/>
+          <font name="Century" size="16" style="0"/>
+          <text value="Volver"/>
         </properties>
       </component>
       <vspacer id="f14f7">

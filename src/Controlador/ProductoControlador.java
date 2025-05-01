@@ -43,9 +43,9 @@ public class ProductoControlador {
     private void agregarProducto() {
         try {
             modelo.agregarProducto(
-                    vista.Compra1.getText(), vista.NombreProducto1.getText(), vista.stock.getText(),
-                    vista.Cantidad1.getText(), vista.CantidadFinal.getText(),
-                    vista.PrecioCompra1.getText(), vista.PrecioProducto1.getText(), vista.Descripcion1.getText()
+                    vista.codCompra.getText(), vista.nombre.getText(), vista.stock.getText(),
+                    vista.cantidad.getText(), vista.cantidadFinal.getText(),
+                    vista.precioCompra.getText(), vista.precioProducto.getText(), vista.descripcion.getText()
             );
             JOptionPane.showMessageDialog(vista, "Producto agregado correctamente.");
             mostrarProductos();
@@ -59,9 +59,9 @@ public class ProductoControlador {
     private void modificarProducto() {
         try {
             modelo.modificarProducto(
-                    vista.Producto1.getText(), vista.Compra1.getText(), vista.NombreProducto1.getText(),
-                    vista.stock.getText(), vista.Cantidad1.getText(),
-                    vista.PrecioCompra1.getText(), vista.PrecioProducto1.getText(), vista.Descripcion1.getText()
+                    vista.producto1.getText(), vista.codCompra.getText(), vista.nombre.getText(),
+                    vista.stock.getText(), vista.cantidad.getText(),
+                    vista.precioCompra.getText(), vista.precioProducto.getText(), vista.descripcion.getText()
             );
             JOptionPane.showMessageDialog(vista, "Producto modificado correctamente.");
             mostrarProductos();
@@ -74,7 +74,7 @@ public class ProductoControlador {
 
     private void eliminarProducto() {
         try {
-            modelo.eliminarProducto(vista.Producto1.getText());
+            modelo.eliminarProducto(vista.producto1.getText());
             JOptionPane.showMessageDialog(vista, "Producto eliminado correctamente.");
             mostrarProductos();
         } catch (Exception ex) {
@@ -105,21 +105,21 @@ public class ProductoControlador {
     }
 
     private void llenarFormularioProducto(int row) {
-        vista.Producto1.setText(vista.table1.getValueAt(row, 0).toString());
-        vista.Compra1.setText(vista.table1.getValueAt(row, 1).toString());
-        vista.NombreProducto1.setText(vista.table1.getValueAt(row, 2).toString());
+        vista.producto1.setText(vista.table1.getValueAt(row, 0).toString());
+        vista.codCompra.setText(vista.table1.getValueAt(row, 1).toString());
+        vista.nombre.setText(vista.table1.getValueAt(row, 2).toString());
         vista.stock.setText(vista.table1.getValueAt(row, 3).toString());
-        vista.Cantidad1.setText(vista.table1.getValueAt(row, 4).toString());
-        vista.CantidadFinal.setText(vista.table1.getValueAt(row, 5).toString());
-        vista.PrecioCompra1.setText(vista.table1.getValueAt(row, 6).toString());
-        vista.PrecioProducto1.setText(vista.table1.getValueAt(row, 7).toString());
-        vista.Descripcion1.setText(vista.table1.getValueAt(row, 8).toString());
+        vista.cantidad.setText(vista.table1.getValueAt(row, 4).toString());
+        vista.cantidadFinal.setText(vista.table1.getValueAt(row, 5).toString());
+        vista.precioCompra.setText(vista.table1.getValueAt(row, 6).toString());
+        vista.precioProducto.setText(vista.table1.getValueAt(row, 7).toString());
+        vista.descripcion.setText(vista.table1.getValueAt(row, 8).toString());
     }
 
     private void llenarFormularioCompra(int row) {
-        vista.Compra1.setText(vista.table2.getValueAt(row, 0).toString());
-        vista.NombreProducto1.setText(vista.table2.getValueAt(row, 4).toString());
-        vista.PrecioCompra1.setText(vista.table2.getValueAt(row, 6).toString());
+        vista.codCompra.setText(vista.table2.getValueAt(row, 0).toString());
+        vista.nombre.setText(vista.table2.getValueAt(row, 4).toString());
+        vista.precioCompra.setText(vista.table2.getValueAt(row, 6).toString());
     }
 
     private void volver() {

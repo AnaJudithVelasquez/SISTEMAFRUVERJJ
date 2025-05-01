@@ -4,24 +4,19 @@ import javax.swing.*;
 
 public class ProductoView extends JFrame {
     public JPanel panelProductos;
-    public JTextField Producto1, NombreProducto1, Compra1, Descripcion1, PrecioProducto1, PrecioCompra1, Cantidad1, stock, CantidadFinal;
+    public JTextField producto1, nombre, codCompra, descripcion, precioProducto, precioCompra, cantidad, stock, cantidadFinal;
     public JButton agregarButton, eliminarButton, modificarButton, mostrarButton, volverButton, listaComprasButton;
     public JTable table1, table2;
     public JScrollPane scrollPane, scrollPaneCP;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JTextField textField5;
-    private JTextField textField6;
-    private JTextField textField7;
-    private JTextField textField8;
-    private JTextField textField9;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
-    private JButton button4;
-    private JButton button5;
+    private JLabel COD_PRODUCT;
+    private JLabel COD_PURCHASE;
+    private JLabel PRODUCT_NAME;
+    private JLabel STOCK;
+    private JLabel QUANTITY_Kg;
+    private JLabel FINAL_QUANTITY_Kg;
+    private JLabel PURCHASE_VALUE;
+    private JLabel PRODUCT_PRICE;
+    private JLabel DESCRIPTION_PRODUCT;
 
     public ProductoView() {
         setSize(800, 700);
@@ -33,15 +28,15 @@ public class ProductoView extends JFrame {
         setContentPane(panelProductos);
         panelProductos.setLayout(null);
 
-        Producto1 = new JTextField(); Producto1.setBounds(50, 30, 150, 20); panelProductos.add(Producto1);
-        Compra1 = new JTextField(); Compra1.setBounds(50, 60, 150, 20); panelProductos.add(Compra1);
-        NombreProducto1 = new JTextField(); NombreProducto1.setBounds(50, 90, 150, 20); panelProductos.add(NombreProducto1);
+        producto1 = new JTextField(); producto1.setBounds(50, 30, 150, 20); panelProductos.add(producto1);
+        codCompra = new JTextField(); codCompra.setBounds(50, 60, 150, 20); panelProductos.add(codCompra);
+        nombre = new JTextField(); nombre.setBounds(50, 90, 150, 20); panelProductos.add(nombre);
         stock = new JTextField(); stock.setBounds(50, 120, 150, 20); panelProductos.add(stock);
-        Cantidad1 = new JTextField(); Cantidad1.setBounds(50, 150, 150, 20); panelProductos.add(Cantidad1);
-        CantidadFinal = new JTextField(); CantidadFinal.setBounds(50, 180, 150, 20); panelProductos.add(CantidadFinal);
-        PrecioCompra1 = new JTextField(); PrecioCompra1.setBounds(50, 210, 150, 20); panelProductos.add(PrecioCompra1);
-        PrecioProducto1 = new JTextField(); PrecioProducto1.setBounds(50, 240, 150, 20); panelProductos.add(PrecioProducto1);
-        Descripcion1 = new JTextField(); Descripcion1.setBounds(50, 270, 150, 20); panelProductos.add(Descripcion1);
+        cantidad = new JTextField(); cantidad.setBounds(50, 150, 150, 20); panelProductos.add(cantidad);
+        cantidadFinal = new JTextField(); cantidadFinal.setBounds(50, 180, 150, 20); panelProductos.add(cantidadFinal);
+        precioCompra = new JTextField(); precioCompra.setBounds(50, 210, 150, 20); panelProductos.add(precioCompra);
+        precioProducto = new JTextField(); precioProducto.setBounds(50, 240, 150, 20); panelProductos.add(precioProducto);
+        descripcion = new JTextField(); descripcion.setBounds(50, 270, 150, 20); panelProductos.add(descripcion);
 
         agregarButton = new JButton("Agregar"); agregarButton.setBounds(250, 30, 150, 25); panelProductos.add(agregarButton);
         modificarButton = new JButton("Modificar"); modificarButton.setBounds(250, 60, 150, 25); panelProductos.add(modificarButton);
