@@ -5,7 +5,6 @@ import javax.swing.JFrame;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.table.DefaultTableModel;
 
 
 public class VentaView extends JFrame {
@@ -18,21 +17,33 @@ public class VentaView extends JFrame {
     public JButton btnVolver;
     private JTable table1;
     public JTextField txtCodVenta, txtCodUsuario, txtCodProducto, txtCantidad, txtPrecioProducto, txtTotalProducto, txtNombreProducto, txtTotalVenta, txtIdentificacionCliente, txtFechaVenta;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JTextField textField5;
-    private JTextField textField6;
-    private JTextField textField7;
-    private JTextField textField8;
-    private JTextField textField9;
-    private JButton button1;
-    private JButton button2;
-    private JTextField textField10;
-    private JButton button3;
+    private JTextField Cod_Venta;
+    private JTextField Cod_Usuario;
+    private JTextField Fecha_Venta;
+    private JTextField Identificacion_Cliente;
+    private JTextField Cod_Producto;
+    private JTextField Cantidad;
+    private JTextField Precio_Producto;
+    private JTextField Total_Por_Producto;
+    private JButton agregarProductoButton;
+    private JButton agregarVentaButton;
+    private JTextField Total_Venta;
+    private JButton mostrarButton;
     private JTable table2;
     private JButton button4;
+    private JLabel COD_SALE;
+    private JLabel COD_USER;
+    private JLabel DATE_SALE;
+    private JLabel COSTUMER_IDENTIFICATIO;
+    private JLabel COD_PRODUCT;
+    private JLabel PRODUCT_NAME;
+    private JTextField Nombre_Producto;
+    private JLabel PRODUCT_QUANTITY_Kg;
+    private JLabel PRODUCT_PRICE;
+    private JLabel TOTAL_PRODUCT;
+    private JLabel TOTAL_SALE_VALUE;
+    private JScrollPane scrollPane;
+    private JScrollPane scrollPane2;
 
 
     public VentaView() {
