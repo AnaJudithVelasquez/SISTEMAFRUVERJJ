@@ -1,54 +1,173 @@
 package Vista;
 
 import javax.swing.*;
+import Controlador.ProductoControlador;
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+
+import Modelo.ProductoModelo;
+
 
 public class ProductoView extends JFrame {
-    public JPanel panelProductos;
-    public JTextField producto1, nombre, codCompra, descripcion, precioProducto, precioCompra, cantidad, stock, cantidadFinal;
-    public JButton agregarButton, eliminarButton, modificarButton, mostrarButton, volverButton, listaComprasButton;
-    public JTable table1, table2;
-    public JScrollPane scrollPane, scrollPaneCP;
-    private JLabel COD_PRODUCT;
-    private JLabel COD_PURCHASE;
-    private JLabel PRODUCT_NAME;
-    private JLabel STOCK;
-    private JLabel QUANTITY_Kg;
-    private JLabel FINAL_QUANTITY_Kg;
-    private JLabel PURCHASE_VALUE;
-    private JLabel PRODUCT_PRICE;
-    private JLabel DESCRIPTION_PRODUCT;
+    JPanel panelProductos;
+    JTextField Producto1;
+    JTextField NombreProducto1;
+    JTextField Compra1;
+    JTextField Descripcion1;
+    JTextField PrecioProducto1;
+    JTextField PrecioCompra1;
+    JTextField Cantidad1;
+    JTextField stock;
+    JTextField CantidadFinal;
+    JButton agregarButton;
+    JButton eliminarButton;
+    JButton modificarButton;
+    JButton mostrarButton;
+    JTable table1;
+    JButton volverButton;
+    JLabel COD_PRODUCT;
+    JLabel COD_PURCHASE;
+    JLabel PRODUCT_NAME;
+    JLabel QUANTITY_Kg;
+    JLabel PURCHASE_VALUE;
+    JLabel PRODUCT_PRICE;
+    JLabel DESCRIPTION_PRODUCT_STATUS;
+    JLabel STOCK;
+    JLabel FINAL_QUANTITY_Kg;
+    JScrollPane scrollPane;
+    JTable table2;
+    JScrollPane scrollPaneCP;
+    JButton listaComprasButton;
 
+    // Constructor
     public ProductoView() {
-        setSize(800, 700);
-        setTitle("Gestión de Productos");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setSize(600, 600);
         setLocationRelativeTo(null);
-
-        panelProductos = new JPanel();
         setContentPane(panelProductos);
-        panelProductos.setLayout(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }
 
-        producto1 = new JTextField(); producto1.setBounds(50, 30, 150, 20); panelProductos.add(producto1);
-        codCompra = new JTextField(); codCompra.setBounds(50, 60, 150, 20); panelProductos.add(codCompra);
-        nombre = new JTextField(); nombre.setBounds(50, 90, 150, 20); panelProductos.add(nombre);
-        stock = new JTextField(); stock.setBounds(50, 120, 150, 20); panelProductos.add(stock);
-        cantidad = new JTextField(); cantidad.setBounds(50, 150, 150, 20); panelProductos.add(cantidad);
-        cantidadFinal = new JTextField(); cantidadFinal.setBounds(50, 180, 150, 20); panelProductos.add(cantidadFinal);
-        precioCompra = new JTextField(); precioCompra.setBounds(50, 210, 150, 20); panelProductos.add(precioCompra);
-        precioProducto = new JTextField(); precioProducto.setBounds(50, 240, 150, 20); panelProductos.add(precioProducto);
-        descripcion = new JTextField(); descripcion.setBounds(50, 270, 150, 20); panelProductos.add(descripcion);
+    // Métodos para configurar los listeners de los botones
+    public void agregarListenerAgregar(ActionListener listener) {
+        agregarButton.addActionListener(listener);
+    }
 
-        agregarButton = new JButton("Agregar"); agregarButton.setBounds(250, 30, 150, 25); panelProductos.add(agregarButton);
-        modificarButton = new JButton("Modificar"); modificarButton.setBounds(250, 60, 150, 25); panelProductos.add(modificarButton);
-        eliminarButton = new JButton("Eliminar"); eliminarButton.setBounds(250, 90, 150, 25); panelProductos.add(eliminarButton);
-        mostrarButton = new JButton("Mostrar"); mostrarButton.setBounds(250, 120, 150, 25); panelProductos.add(mostrarButton);
-        volverButton = new JButton("Volver"); volverButton.setBounds(250, 150, 150, 25); panelProductos.add(volverButton);
-        listaComprasButton = new JButton("Lista Compras"); listaComprasButton.setBounds(250, 180, 150, 25); panelProductos.add(listaComprasButton);
+    public void agregarListenerModificar(ActionListener listener) {
+        modificarButton.addActionListener(listener);
+    }
 
-        table1 = new JTable(new javax.swing.table.DefaultTableModel());
-        scrollPane = new JScrollPane(table1); scrollPane.setBounds(50, 310, 300, 150); panelProductos.add(scrollPane);
+    public void agregarListenerEliminar(ActionListener listener) {
+        eliminarButton.addActionListener(listener);
+    }
 
-        table2 = new JTable(new javax.swing.table.DefaultTableModel());
-        scrollPaneCP = new JScrollPane(table2); scrollPaneCP.setBounds(400, 310, 300, 150); panelProductos.add(scrollPaneCP);
+    public void agregarListenerMostrar(ActionListener listener) {
+        mostrarButton.addActionListener(listener);
+    }
+
+    public void agregarListenerVolver(ActionListener listener) {
+        volverButton.addActionListener(listener);
+    }
+
+    // Configurar listener para la tabla de productos
+    public void configurarTablaProductos() {
+        table1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int row = table1.getSelectedRow();
+                if (row != -1) {
+                    Producto1.setText(table1.getValueAt(row, 0).toString());
+                    Compra1.setText(table1.getValueAt(row, 1).toString());
+                    NombreProducto1.setText(table1.getValueAt(row, 2).toString());
+                    stock.setText(table1.getValueAt(row, 3).toString());
+                    Cantidad1.setText(table1.getValueAt(row, 4).toString());
+                    CantidadFinal.setText(table1.getValueAt(row, 5).toString());
+                    PrecioCompra1.setText(table1.getValueAt(row, 6).toString());
+                    PrecioProducto1.setText(table1.getValueAt(row, 7).toString());
+                    Descripcion1.setText(table1.getValueAt(row, 8).toString());
+                }
+            }
+        });
+    }
+
+    // Configurar listener para la tabla de compras
+    public void configurarTablaCompras() {
+        table2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int row = table2.getSelectedRow();
+                if (row != -1) {
+                    Compra1.setText(table2.getValueAt(row, 0).toString());
+                    NombreProducto1.setText(table2.getValueAt(row, 4).toString());
+                    PrecioCompra1.setText(table2.getValueAt(row, 6).toString());
+                }
+            }
+        });
+    }
+
+    // Métodos para obtener los valores de los campos
+    public String getCodigoProducto() {
+        return Producto1.getText();
+    }
+
+    public String getCodigoCompra() {
+        return Compra1.getText();
+    }
+
+    public String getNombreProducto() {
+        return NombreProducto1.getText();
+    }
+
+    public String getStock() {
+        return stock.getText();
+    }
+
+    public String getCantidad() {
+        return Cantidad1.getText();
+    }
+
+    public String getCantidadFinal() {
+        return CantidadFinal.getText();
+    }
+
+    public String getPrecioCompra() {
+        return PrecioCompra1.getText();
+    }
+
+    public String getPrecioProducto() {
+        return PrecioProducto1.getText();
+    }
+
+    public String getDescripcion() {
+        return Descripcion1.getText();
+    }
+
+    // Método para actualizar el código de producto generado
+    public void setCodigoProducto(int codigo) {
+        Producto1.setText(String.valueOf(codigo));
+    }
+
+    // Métodos para actualizar las tablas
+    public void actualizarTablaProductos(DefaultTableModel modelo) {
+        table1.setModel(modelo);
+    }
+
+    public void actualizarTablaCompras(DefaultTableModel modelo) {
+        table2.setModel(modelo);
+    }
+
+    // Mostrar mensajes al usuario
+    public void mostrarMensaje(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje);
+    }
+
+    public static void mostrarVentanaProductos() {
+        ProductoView vista = new ProductoView();
+        ProductoModelo modelo = new ProductoModelo();
+        ProductoControlador controlador = new ProductoControlador(vista, modelo);
+
+        vista.setVisible(true);
+        vista.pack();
     }
 }

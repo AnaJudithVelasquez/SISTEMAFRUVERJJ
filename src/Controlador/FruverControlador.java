@@ -1,71 +1,73 @@
 package Controlador;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 
-import Modelo.ConexionModel;
-import Modelo.VentaModelo;
+
+
 import Vista.FruverView;
-import Modelo.ProductoModelo;
-import Modelo.CompraModelo;
+import Modelo.FruverModelo;
+import Vista.ProductoView;
+import Vista.CompraView;
+import Vista.VentaView;
 
 public class FruverControlador {
     private FruverView vista;
-    private ConexionModel modelo;
+    private FruverModelo modelo;
 
-    public FruverControlador(FruverView vista, ConexionModel modelo) {
+    public FruverControlador(FruverView vista, FruverModelo modelo) {
         this.vista = vista;
         this.modelo = modelo;
 
-        this.vista.getProductosButton().addActionListener(new ActionListener() {
+        inicializarControlador();
+    }
+
+    private void inicializarControlador() {
+        // Configurar los listeners de los botones
+        vista.getProductosButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                abrirProductos();
+                llamarBotonProducto();
             }
         });
 
-        this.vista.getVentasButton().addActionListener(new ActionListener() {
+        vista.getVentasButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                abrirVentas();
+                llamarBotonVenta();
             }
         });
 
-        this.vista.getComprasButton().addActionListener(new ActionListener() {
+        vista.getComprasButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                abrirCompras();
+                llamarBotonCompra();
             }
         });
     }
 
-    private void abrirProductos() {
+    void llamarBotonCompra() {
         modelo.conectar();
-        ProductoModelo productos = new ProductoModelo();
-        productos.mostrarVentanaProductos();
+        CompraView enlace = new CompraView();
+        enlace.mostrarVentanaCompras();
         vista.dispose();
     }
 
-    private void abrirVentas() {
+    void llamarBotonProducto() {
         modelo.conectar();
-        VentaModelo ventas = new VentaModelo();
-        ventas.mostrarVentanaVentas();
+        ProductoView enlace = new ProductoView();
+        enlace.mostrarVentanaProductos();
         vista.dispose();
     }
 
-    private void abrirCompras() {
+    void llamarBotonVenta() {
         modelo.conectar();
-        CompraModelo compras = new CompraModelo();
-        compras.mostrarVentanaCompras();
+        VentaView enlace = new VentaView();
+        enlace.mostrarVentanaVentas();
         vista.dispose();
     }
 
-    public static void main(String[] args) {
-        FruverView vista = new FruverView();
-        ConexionModel modelo = new ConexionModel();
-        new FruverControlador(vista, modelo);
-
-        vista.setVisible(true);
-    }
 }
 

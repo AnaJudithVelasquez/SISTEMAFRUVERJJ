@@ -25,7 +25,7 @@ public class Main {
 
         CompraView vistaCompra = new CompraView();
         CompraModelo modeloCompra = new CompraModelo();
-        CompraControlador controladorCompra = new VentaControlador(vistaCompra, modeloCompra);
+        CompraControlador controladorCompra = new CompraControlador(vistaCompra, modeloCompra);
     }
 }
 
