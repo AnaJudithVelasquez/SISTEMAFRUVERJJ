@@ -1,46 +1,35 @@
 package Controlador;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-
-
 
 import Vista.FruverView;
 import Modelo.FruverModelo;
-import Vista.ProductoView;
-import Vista.CompraView;
-import Vista.VentaView;
 
 public class FruverControlador {
-    private FruverView vista;
     private FruverModelo modelo;
+    private FruverView vista;
 
-    public FruverControlador(FruverView vista, FruverModelo modelo) {
-        this.vista = vista;
+    public FruverControlador(FruverModelo modelo, FruverView vista) {
         this.modelo = modelo;
+        this.vista = vista;
 
-        inicializarControlador();
-    }
-
-    private void inicializarControlador() {
-        // Configurar los listeners de los botones
-        vista.getProductosButton().addActionListener(new ActionListener() {
+        // Agregar los listeners a los botones
+        this.vista.getProductosButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 llamarBotonProducto();
             }
         });
 
-        vista.getVentasButton().addActionListener(new ActionListener() {
+        this.vista.getVentasButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 llamarBotonVenta();
             }
         });
 
-        vista.getComprasButton().addActionListener(new ActionListener() {
+        this.vista.getComprasButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 llamarBotonCompra();
@@ -48,26 +37,29 @@ public class FruverControlador {
         });
     }
 
-    void llamarBotonCompra() {
-        modelo.conectar();
-        CompraView enlace = new CompraView();
-        enlace.mostrarVentanaCompras();
-        vista.dispose();
+    // Método para iniciar la aplicación
+    public void iniciar() {
+        vista.mostrarVentana();
     }
 
-    void llamarBotonProducto() {
+    // Método para manejar la acción del botón de productos
+    private void llamarBotonProducto() {
         modelo.conectar();
-        ProductoView enlace = new ProductoView();
-        enlace.mostrarVentanaProductos();
-        vista.dispose();
+        modelo.abrirProductos();
+        vista.cerrarVentana();
     }
 
-    void llamarBotonVenta() {
+    // Método para manejar la acción del botón de ventas
+    private void llamarBotonVenta() {
         modelo.conectar();
-        VentaView enlace = new VentaView();
-        enlace.mostrarVentanaVentas();
-        vista.dispose();
+        modelo.abrirVentas();
+        vista.cerrarVentana();
     }
 
+    // Método para manejar la acción del botón de compras
+    private void llamarBotonCompra() {
+        modelo.conectar();
+        modelo.abrirCompras();
+        vista.cerrarVentana();
+    }
 }
-

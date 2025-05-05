@@ -1,9 +1,10 @@
 package Vista;
 
-import Controlador.FruverControlador;
-import Modelo.FruverModelo;
+
 
 import javax.swing.*;
+import Modelo.FruverModelo;
+import Controlador.FruverControlador;
 
 public class FruverView extends JFrame {
     private JPanel panelOpciones;
@@ -14,19 +15,11 @@ public class FruverView extends JFrame {
     public FruverView() {
         setSize(600, 600);
         setLocationRelativeTo(null);
+        setContentPane(panelOpciones);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
-    public void mostrarVentana() {
-        setContentPane(panelOpciones);
-        setVisible(true);
-        pack();
-    }
-
-    public JPanel getPanelOpciones() {
-        return panelOpciones;
-    }
-
+    // Getters para que el controlador pueda acceder a los componentes
     public JButton getProductosButton() {
         return productosButton;
     }
@@ -39,15 +32,21 @@ public class FruverView extends JFrame {
         return comprasButton;
     }
 
-    public void setPanelOpciones(JPanel panelOpciones) {
-        this.panelOpciones = panelOpciones;
+    // Método para mostrar la ventana
+    public void mostrarVentana() {
+        setVisible(true);
+        pack();
     }
 
-    public static void mostrarVentanaFruver() {
-        FruverModelo modelo = new FruverModelo();
+    // Método para cerrar la ventana
+    public void cerrarVentana() {
+        dispose();
+    }
+    public static void mostrarVentanaFruver_Aguacates_JJ() {
         FruverView vista = new FruverView();
-        FruverControlador controlador = new FruverControlador(vista, modelo);
-        vista.mostrarVentana();
+        FruverModelo modelo = new FruverModelo();
+        FruverControlador controlador = new FruverControlador(modelo, vista);
+        controlador.iniciar();
     }
-}
 
+}

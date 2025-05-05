@@ -5,9 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import Modelo.UsuarioModel;
-import Vista.FruverView;
 import Vista.PantallaInicioView;
-import Vista.VentaView;
+
 
 
 public class PantallaInicioControlador {
@@ -18,44 +17,50 @@ public class PantallaInicioControlador {
         this.modelo = modelo;
         this.vista = vista;
 
-        this.vista.addIngresarListener(new ActionListener() {
+        // Agregar ActionListener al botón INGRESAR
+        this.vista.getBotonIngresar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                validarUSER();
-                vista.dispose();
+                validarUsuario();
             }
         });
     }
 
-    private void validarUSER() {
-        modelo.conectar();
-        String NAME_U = vista.getUsuario();
-        String PASS_W = vista.getPassword();
+    // Método para validar el usuario y redirigir según su posición
+    private void validarUsuario() {
+        String usuario = vista.getUsuario();
+        String password = vista.getPassword();
 
-        if (modelo.validarUsuario(NAME_U, PASS_W)) {
-            int POSITION = modelo.obtenerPosicion();
-            JOptionPane.showMessageDialog(null, "Las credenciales del usuario son correctas");
+        int posicion = modelo.validarUsuario(usuario, password);
 
-            if (POSITION == 1) {
-                FruverView enlace = new FruverView();
-                enlace.mostrarVentanaFruver();
-            } else if (POSITION == 2) {
-                VentaView enlaceVentas = new VentaView();
-                enlaceVentas.mostrarVentanaVentas();
-            } else {
+        switch (posicion) {
+            case 1:
+                vista.mostrarFruver();
+                vista.cerrar();
+                break;
+            case 2:
+                vista.mostrarVentas();
+                vista.cerrar();
+                break;
+            case -1:
+                // Las credenciales ya se notificaron como incorrectas en el modelo
+                break;
+            default:
                 JOptionPane.showMessageDialog(null, "El rol del usuario no está definido correctamente.");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Las credenciales no son correctas");
+                break;
         }
     }
 
+    // Método para iniciar la aplicación
+    public void iniciar() {
+        vista.mostrarVentana();
+    }
+
+    // Método main que inicia la aplicación
     public static void main(String[] args) {
         UsuarioModel modelo = new UsuarioModel();
         PantallaInicioView vista = new PantallaInicioView();
         PantallaInicioControlador controlador = new PantallaInicioControlador(modelo, vista);
-        vista.mostrarVentana();
+        controlador.iniciar();
     }
 }
-
-

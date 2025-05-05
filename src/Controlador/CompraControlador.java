@@ -8,8 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 
 public class CompraControlador {
     private CompraModelo modelo;
@@ -19,212 +20,189 @@ public class CompraControlador {
         this.modelo = modelo;
         this.vista = vista;
 
-        // Inicializar la vista con datos
-        cargarDatosProveedores();
-        cargarDatosCompras();
+        // Agregar listeners a los botones
+        this.vista.agregarProveedorListener(new AgregarProveedorListener());
+        this.vista.modificarProveedorListener(new ModificarProveedorListener());
+        this.vista.eliminarProveedorListener(new EliminarProveedorListener());
+        this.vista.mostrarProveedoresListener(new MostrarProveedoresListener());
+        this.vista.agregarProductoListener(new AgregarProductoListener());
+        this.vista.agregarCompraListener(new AgregarCompraListener());
+        this.vista.mostrarComprasListener(new MostrarComprasListener());
+        this.vista.volverListener(new VolverListener());
+        this.vista.calcularTotalProductoListener(new CalcularTotalProductoKeyListener());
 
-        // Añadir listeners a los componentes de la vista
-        añadirEventListeners();
+        // Mostrar datos iniciales
+        mostrarDatosProveedores();
+        mostrarDatosCompras();
     }
 
-    private void añadirEventListeners() {
-        // Botones de proveedores
-        vista.addAgregarButtonListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                agregarProveedor();
+    // Listener para agregar proveedor
+    class AgregarProveedorListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String nombre = vista.getNombreProveedor();
+            String direccion = vista.getDireccion();
+            String telefono = vista.getTelefono();
+
+            int codProveedor = modelo.agregarProveedor(nombre, direccion, telefono);
+
+            if (codProveedor != -1) {
+                vista.setCodProveedor(String.valueOf(codProveedor));
+                vista.mostrarMensaje("Los datos se insertaron correctamente.");
+                mostrarDatosProveedores();
+            } else {
+                vista.mostrarError("Hay un error al insertar datos.");
             }
-        });
-
-        vista.addModificarButtonListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                modificarProveedor();
-            }
-        });
-
-        vista.addEliminarButtonListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                eliminarProveedor();
-            }
-        });
-
-        vista.addMostrarButtonListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cargarDatosProveedores();
-            }
-        });
-
-        // Botones de compras
-        vista.addAgregarProductoButtonListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                agregarArticulo();
-                actualizarTotalCompra();
-            }
-        });
-
-        vista.addAgregarCompraButtonListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                agregarCompra();
-            }
-        });
-
-        vista.addMostrarComprasButtonListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cargarDatosCompras();
-            }
-        });
-
-        vista.addVolverButtonListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                regresar();
-            }
-        });
-
-        // KeyListeners para cálculos
-        vista.addCantidadKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                calcularTotalPorProducto();
-            }
-        });
-
-        vista.addValorUnitarioKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                calcularTotalPorProducto();
-            }
-        });
-
-        // ListSelectionListener para la tabla de proveedores
-        vista.addTableSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent event) {
-                if (!event.getValueIsAdjusting() && vista.getFilaSeleccionadaProveedores() != -1) {
-                    vista.setCodProveedorC(vista.getValorTablaProveedores(vista.getFilaSeleccionadaProveedores(), 0).toString());
-                }
-            }
-        });
-    }
-
-    // Métodos de acción para proveedores
-    private void agregarProveedor() {
-        String nombre = vista.getNombreProveedor();
-        String direccion = vista.getDireccion();
-        String telefono = vista.getTelefono();
-
-        int codProveedorGenerado = modelo.agregarProveedor(nombre, direccion, telefono);
-
-        if (codProveedorGenerado != -1) {
-            vista.setCodProveedor(String.valueOf(codProveedorGenerado));
-            vista.mostrarMensaje("Los datos se insertaron correctamente.");
-            cargarDatosProveedores();
-        } else {
-            vista.mostrarError("Hay un error al insertar datos.");
         }
     }
 
-    private void modificarProveedor() {
-        String codProveedor = vista.getCodProveedor();
-        String nombre = vista.getNombreProveedor();
-        String direccion = vista.getDireccion();
-        String telefono = vista.getTelefono();
+    // Listener para modificar proveedor
+    class ModificarProveedorListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String codProveedor = vista.getCodProveedor();
+            String nombre = vista.getNombreProveedor();
+            String direccion = vista.getDireccion();
+            String telefono = vista.getTelefono();
 
-        boolean exito = modelo.modificarProveedor(codProveedor, nombre, direccion, telefono);
+            boolean exito = modelo.modificarProveedor(codProveedor, nombre, direccion, telefono);
 
-        if (exito) {
-            vista.mostrarMensaje("Los datos se actualizaron correctamente.");
-            cargarDatosProveedores();
-        } else {
-            vista.mostrarError("No se encuentra el proveedor con el código que especificaste.");
+            if (exito) {
+                vista.mostrarMensaje("Los datos se actualizaron correctamente.");
+                mostrarDatosProveedores();
+            } else {
+                vista.mostrarError("No se encuentra el proveedor con el código que especificastes.");
+            }
         }
     }
 
-    private void eliminarProveedor() {
-        String codProveedor = vista.getCodProveedor();
+    // Listener para eliminar proveedor
+    class EliminarProveedorListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String codProveedor = vista.getCodProveedor();
 
-        boolean exito = modelo.eliminarProveedor(codProveedor);
+            boolean exito = modelo.eliminarProveedor(codProveedor);
 
-        if (exito) {
-            vista.mostrarMensaje("El proveedor se eliminó correctamente.");
-            cargarDatosProveedores();
-        } else {
-            vista.mostrarError("No se encontró el proveedor con el código que especificaste.");
+            if (exito) {
+                vista.mostrarMensaje("El proveedor se eliminó correctamente.");
+                mostrarDatosProveedores();
+            } else {
+                vista.mostrarError("No se encontró el proveedor con el código que especificastes.");
+            }
         }
     }
 
-    // Métodos de acción para compras
-    private void agregarArticulo() {
-        String codCompra = vista.getCodCompra();
-        String producto = vista.getProductoComprado();
-        String valorUnitario = vista.getValorUnitario();
-        String cantidad = vista.getCantidadProductoKg();
-        String totalProducto = vista.getTotalProducto();
-
-        modelo.agregarArticulo(codCompra, producto, valorUnitario, cantidad, totalProducto);
-        vista.mostrarMensaje("Producto agregado a la compra.");
+    // Listener para mostrar proveedores
+    class MostrarProveedoresListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            mostrarDatosProveedores();
+        }
     }
 
-    private void calcularTotalPorProducto() {
+    // Listener para agregar producto a la compra
+    class AgregarProductoListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String codCompra = vista.getCodCompra();
+            String productoComprado = vista.getProductoComprado();
+            String valorUnitario = vista.getValorUnitario();
+            String cantidadProductoKg = vista.getCantidadProductoKg();
+            String totalProducto = vista.getTotalProducto();
+
+            CompraModelo.CompraDetalle producto = modelo.new CompraDetalle(
+                    codCompra, productoComprado, valorUnitario, cantidadProductoKg, totalProducto);
+
+            modelo.agregarProductoACompra(producto);
+            vista.mostrarMensaje("Producto agregado a la compra.");
+
+            actualizarTotalCompra();
+        }
+    }
+
+    // Listener para agregar compra completa
+    class AgregarCompraListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String codUsuario = vista.getCodUsuario();
+            String codProveedor = vista.getCodProveedorC();
+            String fechaCompra = vista.getFechaCompra();
+            String totalCompra = vista.getTotalCompra();
+
+            int codCompraGenerado = modelo.agregarCompra(
+                    codUsuario, codProveedor, fechaCompra, totalCompra, modelo.getProductosCompra());
+
+            if (codCompraGenerado != -1) {
+                vista.setCodCompra(String.valueOf(codCompraGenerado));
+                vista.mostrarMensaje("Compra registrada correctamente y cantidades actualizadas.");
+                modelo.limpiarProductosCompra();
+                mostrarDatosCompras();
+            } else {
+                vista.mostrarError("Error al registrar la compra.");
+            }
+        }
+    }
+
+    // Listener para mostrar compras
+    class MostrarComprasListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            mostrarDatosCompras();
+        }
+    }
+
+    // Listener para volver a la ventana principal
+    class VolverListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            vista.setVisible(false);
+            FruverView enlace = new FruverView();
+            enlace.mostrarVentanaFruver();
+            vista.dispose();
+        }
+    }
+
+    // KeyListener para calcular total por producto
+    class CalcularTotalProductoKeyListener extends KeyAdapter {
+        @Override
+        public void keyReleased(KeyEvent e) {
+            try {
+                double cantidad = Double.parseDouble(vista.getCantidadProductoKg());
+                double precio = Double.parseDouble(vista.getValorUnitario());
+                double totalProducto = modelo.calcularTotalProducto(cantidad, precio);
+                vista.setTotalProducto(String.format("%.2f", totalProducto));
+            } catch (NumberFormatException ex) {
+                // Ignorar si no se pueden convertir los valores
+            }
+        }
+    }
+
+    // Métodos para actualizar la interfaz
+    private void mostrarDatosProveedores() {
+        ResultSet rs = modelo.obtenerProveedores();
+        vista.mostrarDatosProveedores(rs);
         try {
-            double cantidad = Double.parseDouble(vista.getCantidadProductoKg());
-            double precio = Double.parseDouble(vista.getValorUnitario());
-            double totalProducto = modelo.calcularTotalPorProducto(cantidad, precio);
-            vista.setTotalProducto(String.format("%.2f", totalProducto));
-        } catch (NumberFormatException ex) {
-            // Ignorar si los campos están vacíos o tienen formato incorrecto
+            if (rs != null) rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void mostrarDatosCompras() {
+        ResultSet rs = modelo.obtenerCompras();
+        vista.mostrarDatosCompras(rs);
+        try {
+            if (rs != null) rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
     private void actualizarTotalCompra() {
-        double totalCompra = modelo.calcularTotalCompra();
+        double totalCompra = modelo.calcularTotalCompra(modelo.getProductosCompra());
         vista.setTotalCompra(String.format("%.2f", totalCompra));
-        System.out.println("Total de compra actualizado: " + totalCompra);
-    }
-
-    private void agregarCompra() {
-        String codUsuario = vista.getCodUsuario();
-        String codProveedor = vista.getCodProveedorC();
-        String fechaCompra = vista.getFechaCompra();
-        String totalCompra = vista.getTotalCompra().replace(",", ".");
-
-        int codCompraGenerado = modelo.agregarCompra(codUsuario, codProveedor, fechaCompra, totalCompra);
-
-        if (codCompraGenerado != -1) {
-            vista.setCodCompra(String.valueOf(codCompraGenerado));
-            vista.mostrarMensaje("Compra registrada correctamente y cantidades actualizadas.");
-            cargarDatosCompras();
-        } else {
-            vista.mostrarError("Error al registrar la compra.");
-        }
-    }
-
-    // Métodos para cargar datos en las tablas
-    private void cargarDatosProveedores() {
-        Object[][] datos = modelo.obtenerProveedores();
-        vista.actualizarTablaProveedores(datos);
-    }
-
-    private void cargarDatosCompras() {
-        Object[][] datos = modelo.obtenerCompras();
-        vista.actualizarTablaCompras(datos);
-    }
-
-    // Método para regresar a la ventana principal
-    private void regresar() {
-        vista.setVisible(false);
-        vista.dispose();
-        // Aquí se llamaría a la ventana principal del sistema
-        FruverView enlace = new FruverView();
-        enlace.mostrarVentanaFruver();
     }
 
 
 }
-
