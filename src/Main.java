@@ -10,22 +10,24 @@ import Vista.VentaView;
 
 public class Main {
     public static void main(String[] args) {
-        ProductoModelo modelo = new ProductoModelo();
-        ProductoView vista = new ProductoView();
-        ProductoControlador controlador = new ProductoControlador(modelo, vista);
+        ProductoModelo modeloProducto = new ProductoModelo();
+        ProductoView vistaProducto = new ProductoView();
+        ProductoControlador controlador = new ProductoControlador(vistaProducto, modeloProducto);
 
-        vista.setVisible(true);
+        vistaProducto.setVisible(true);
 
 
         VentaView vistaVenta = new VentaView();
         VentaModelo modeloVenta = new VentaModelo();
-        VentaControlador controladorVenta = new VentaControlador(vistaVenta, modeloVenta);
+        VentaControlador controladorVenta = new VentaControlador(modeloVenta, vistaVenta);
 
-        vista.setVisible(true);
+        vistaVenta.setVisible(true);
 
         CompraView vistaCompra = new CompraView();
         CompraModelo modeloCompra = new CompraModelo();
-        CompraControlador controladorCompra = new CompraControlador(vistaCompra, modeloCompra);
+        CompraControlador controladorCompra = new CompraControlador(modeloCompra, vistaCompra);
+
+        vistaCompra.setVisible(true);
     }
 }
 

@@ -1,18 +1,15 @@
 package Vista;
 
-
-import Controlador.CompraControlador;
-import Modelo.CompraModelo;
-
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class CompraView extends JFrame {
     private JButton agregarProductoButton;
@@ -58,205 +55,174 @@ public class CompraView extends JFrame {
     public CompraView() {
         setContentPane(panelCompras);
 
-        // Establecer fecha actual
+        // Configurar fecha actual
         LocalDate fechaActual = LocalDate.now();
         DateTimeFormatter formatofecha = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         Fecha_Compra.setText(fechaActual.format(formatofecha));
 
-        // Configuración de campos no editables
+        // Configurar campos no editables
         Cod_ProveedorC.setEditable(false);
         Total_Producto.setEditable(false);
         Total_Compra.setEditable(false);
         Fecha_Compra.setEditable(false);
 
-        // Configurar modelos de tablas
-        DefaultTableModel modeloProveedores = new DefaultTableModel();
-        modeloProveedores.addColumn("Cod_Proveedor");
-        modeloProveedores.addColumn("Nombre_Proveedor");
-        modeloProveedores.addColumn("Direccion");
-        modeloProveedores.addColumn("Telefono");
-        table1P.setModel(modeloProveedores);
-
-        DefaultTableModel modeloCompras = new DefaultTableModel();
-        modeloCompras.addColumn("Cod_Compra");
-        modeloCompras.addColumn("Cod_Administrador");
-        modeloCompras.addColumn("Cod_Proveedor");
-        modeloCompras.addColumn("Fecha_Compra");
-        modeloCompras.addColumn("Producto_Comprado");
-        modeloCompras.addColumn("Valor_Unitario");
-        modeloCompras.addColumn("Cantidad_Producto_Kg");
-        modeloCompras.addColumn("Total_Producto");
-        modeloCompras.addColumn("Total_Compra");
-        table1.setModel(modeloCompras);
+        // Configuración de selección de tabla
+        agregarSeleccionTabla();
     }
 
-    // Métodos para añadir listeners a los botones
-    public void addAgregarButtonListener(java.awt.event.ActionListener listener) {
+    // Getters para los campos de texto
+    public String getNombreProveedor() { return Nombre_Proveedor.getText(); }
+    public String getDireccion() { return Direccion.getText(); }
+    public String getTelefono() { return Telefono.getText(); }
+    public String getCodProveedor() { return Cod_Proveedor.getText().trim(); }
+    public String getCodProveedorC() { return Cod_ProveedorC.getText().trim(); }
+    public String getCodUsuario() { return Cod_Usuario.getText().trim(); }
+    public String getFechaCompra() { return Fecha_Compra.getText().trim(); }
+    public String getProductoComprado() { return Producto_Comprado.getText(); }
+    public String getCantidadProductoKg() { return Cantidad_Producto_Kg.getText().trim(); }
+    public String getValorUnitario() { return Valor_Unitario.getText().trim(); }
+    public String getTotalProducto() { return Total_Producto.getText().trim().replace(",","."); }
+    public String getTotalCompra() { return Total_Compra.getText().trim().replace(",", "."); }
+    public String getCodCompra() { return Cod_Compra.getText().trim(); }
+
+    // Setters para los campos de texto
+    public void setCodProveedor(String valor) { Cod_Proveedor.setText(valor); }
+    public void setCodCompra(String valor) { Cod_Compra.setText(valor); }
+    public void setTotalProducto(String valor) { Total_Producto.setText(valor); }
+    public void setTotalCompra(String valor) { Total_Compra.setText(valor); }
+
+    // Métodos para visualizar datos en tablas
+    public void mostrarDatosProveedores(ResultSet rs) {
+        try {
+            DefaultTableModel model = (DefaultTableModel) table1P.getModel();
+            model.setRowCount(0);
+
+            if (model.getColumnCount() == 0) {
+                model.addColumn("Cod_Proveedor");
+                model.addColumn("Nombre_Proveedor");
+                model.addColumn("Direccion");
+                model.addColumn("Telefono");
+            }
+
+            while (rs.next()) {
+                Object[] fila = {
+                        rs.getString("COD_SUPPLIER"),
+                        rs.getString("SUPPLIER_NAME"),
+                        rs.getString("ADDRESS"),
+                        rs.getString("PHONE_NUMBER")
+                };
+                model.addRow(fila);
+            }
+
+            table1P.setModel(model);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al mostrar los datos: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void mostrarDatosCompras(ResultSet rs) {
+        try {
+            DefaultTableModel model = (DefaultTableModel) table1.getModel();
+            model.setRowCount(0);
+
+            if (model.getColumnCount() == 0) {
+                model.addColumn("Cod_Compra");
+                model.addColumn("Cod_Administrador");
+                model.addColumn("Cod_Proveedor");
+                model.addColumn("Fecha_Compra");
+                model.addColumn("Producto_Comprado");
+                model.addColumn("Valor_Unitario");
+                model.addColumn("Cantidad_Producto_Kg");
+                model.addColumn("Total_Producto");
+                model.addColumn("Total_Compra");
+            }
+
+            while (rs.next()) {
+                Object[] fila = {
+                        rs.getString("COD_PURCHASE"),
+                        rs.getString("COD_USER"),
+                        rs.getString("COD_SUPPLIER"),
+                        rs.getString("DATE_PURCHASE"),
+                        rs.getString("PURCHASED_PRODUCT"),
+                        rs.getString("UNIT_VALUE"),
+                        rs.getString("QUANTITY_Kg"),
+                        rs.getString("TOTAL_PRODUCT"),
+                        rs.getString("TOTAL_PURCHASE_VALUE")
+                };
+                model.addRow(fila);
+            }
+
+            table1.setModel(model);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al mostrar los datos de compra: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    // Métodos para manejadores de eventos
+    private void agregarSeleccionTabla() {
+        table1P.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent event) {
+                if (!event.getValueIsAdjusting() && table1P.getSelectedRow() != -1) {
+                    Cod_ProveedorC.setText(table1P.getValueAt(table1P.getSelectedRow(), 0).toString());
+                }
+            }
+        });
+    }
+
+    // Métodos para agregar listeners a los botones
+    public void agregarProveedorListener(ActionListener listener) {
         agregarButton.addActionListener(listener);
     }
 
-    public void addModificarButtonListener(java.awt.event.ActionListener listener) {
+    public void modificarProveedorListener(ActionListener listener) {
         modificarButton.addActionListener(listener);
     }
 
-    public void addEliminarButtonListener(java.awt.event.ActionListener listener) {
+    public void eliminarProveedorListener(ActionListener listener) {
         eliminarButton.addActionListener(listener);
     }
 
-    public void addMostrarButtonListener(java.awt.event.ActionListener listener) {
+    public void mostrarProveedoresListener(ActionListener listener) {
         mostrarButton.addActionListener(listener);
     }
 
-    public void addAgregarProductoButtonListener(java.awt.event.ActionListener listener) {
+    public void agregarProductoListener(ActionListener listener) {
         agregarProductoButton.addActionListener(listener);
     }
 
-    public void addAgregarCompraButtonListener(java.awt.event.ActionListener listener) {
+    public void agregarCompraListener(ActionListener listener) {
         agregarCompraButton.addActionListener(listener);
     }
 
-    public void addMostrarComprasButtonListener(java.awt.event.ActionListener listener) {
+    public void mostrarComprasListener(ActionListener listener) {
         mostrarComprasButton.addActionListener(listener);
     }
 
-    public void addVolverButtonListener(java.awt.event.ActionListener listener) {
+    public void volverListener(ActionListener listener) {
         volverButton.addActionListener(listener);
     }
 
-    // Añadir KeyListeners para calcular totales
-    public void addCantidadKeyListener(KeyAdapter keyAdapter) {
-        Cantidad_Producto_Kg.addKeyListener(keyAdapter);
-    }
-
-    public void addValorUnitarioKeyListener(KeyAdapter keyAdapter) {
-        Valor_Unitario.addKeyListener(keyAdapter);
-    }
-
-    // Método para añadir ListSelectionListener a la tabla de proveedores
-    public void addTableSelectionListener(ListSelectionListener listener) {
-        table1P.getSelectionModel().addListSelectionListener(listener);
-    }
-
-    // Métodos para obtener datos de los campos
-    public String getNombreProveedor() {
-        return Nombre_Proveedor.getText();
-    }
-
-    public String getDireccion() {
-        return Direccion.getText();
-    }
-
-    public String getTelefono() {
-        return Telefono.getText();
-    }
-
-    public String getCodProveedor() {
-        return Cod_Proveedor.getText();
-    }
-
-    public String getCodProveedorC() {
-        return Cod_ProveedorC.getText();
-    }
-
-    public String getCodCompra() {
-        return Cod_Compra.getText();
-    }
-
-    public String getCodUsuario() {
-        return Cod_Usuario.getText();
-    }
-
-    public String getFechaCompra() {
-        return Fecha_Compra.getText();
-    }
-
-    public String getProductoComprado() {
-        return Producto_Comprado.getText();
-    }
-
-    public String getCantidadProductoKg() {
-        return Cantidad_Producto_Kg.getText().trim();
-    }
-
-    public String getValorUnitario() {
-        return Valor_Unitario.getText().trim();
-    }
-
-    public String getTotalProducto() {
-        return Total_Producto.getText().trim();
-    }
-
-    public String getTotalCompra() {
-        return Total_Compra.getText().trim();
-    }
-
-    // Métodos para establecer datos en los campos
-    public void setCodProveedor(String codProveedor) {
-        Cod_Proveedor.setText(codProveedor);
-    }
-
-    public void setCodProveedorC(String codProveedorC) {
-        Cod_ProveedorC.setText(codProveedorC);
-    }
-
-    public void setCodCompra(String codCompra) {
-        Cod_Compra.setText(codCompra);
-    }
-
-    public void setTotalProducto(String totalProducto) {
-        Total_Producto.setText(totalProducto);
-    }
-
-    public void setTotalCompra(String totalCompra) {
-        Total_Compra.setText(totalCompra);
-    }
-
-    // Métodos para actualizar las tablas
-    public void actualizarTablaProveedores(Object[][] datos) {
-        DefaultTableModel model = (DefaultTableModel) table1P.getModel();
-        model.setRowCount(0);
-
-        for (Object[] fila : datos) {
-            model.addRow(fila);
-        }
-    }
-
-    public void actualizarTablaCompras(Object[][] datos) {
-        DefaultTableModel model = (DefaultTableModel) table1.getModel();
-        model.setRowCount(0);
-
-        for (Object[] fila : datos) {
-            model.addRow(fila);
-        }
+    public void calcularTotalProductoListener(KeyAdapter listener) {
+        Cantidad_Producto_Kg.addKeyListener(listener);
+        Valor_Unitario.addKeyListener(listener);
     }
 
     // Métodos para mostrar mensajes
     public void mostrarMensaje(String mensaje) {
-        JOptionPane.showMessageDialog(this, mensaje);
+        JOptionPane.showMessageDialog(null, mensaje);
     }
 
     public void mostrarError(String mensaje) {
-        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Error: " + mensaje);
     }
 
-    // Método para obtener la fila seleccionada en la tabla de proveedores
-    public int getFilaSeleccionadaProveedores() {
-        return table1P.getSelectedRow();
-    }
-
-    // Método para obtener datos de la tabla de proveedores
-    public Object getValorTablaProveedores(int fila, int columna) {
-        return table1P.getValueAt(fila, columna);
-    }
-
-    public static void mostrarVentanaCompras() {
-        CompraModelo modelo = new CompraModelo();
-        CompraView vista = new CompraView();
-        CompraControlador controlador = new CompraControlador(modelo, vista);
-
-        vista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        vista.setVisible(true);
-        vista.pack();
+    // Método para mostrar la ventana
+    public void mostrarVentanaCompras() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+        pack();
     }
 }
-

@@ -11,11 +11,8 @@ public class CompraModelo extends JFrame {
     private PreparedStatement ps;
     private ResultSet rs;
 
-    // Lista para almacenar los detalles de productos de una compra
-    private List<CompraDetalle> productosCompra = new ArrayList<>();
-
-    // Clase interna para representar un detalle de compra
-    public static class CompraDetalle {
+    // Clase interna para manejar detalles de compra
+    public class CompraDetalle {
         String COD_PURCHASE;
         String PURCHASED_PRODUCT;
         String UNIT_VALUE;
@@ -31,7 +28,22 @@ public class CompraModelo extends JFrame {
         }
     }
 
-    // Método para conectar a la base de datos
+    // Lista para almacenar los productos de una compra
+    private List<CompraDetalle> productosCompra = new ArrayList<>();
+
+    public List<CompraDetalle> getProductosCompra() {
+        return productosCompra;
+    }
+
+    public void limpiarProductosCompra() {
+        productosCompra.clear();
+    }
+
+    public void agregarProductoACompra(CompraDetalle producto) {
+        productosCompra.add(producto);
+    }
+
+    // Métodos para conexión a base de datos
     public void conectar() {
         try {
             conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/FruverAguacates", "root", "10j56yeyo");
@@ -40,7 +52,6 @@ public class CompraModelo extends JFrame {
         }
     }
 
-    // Método para cerrar la conexión y recursos
     public void cerrarConexion() {
         try {
             if (rs != null) rs.close();
@@ -51,7 +62,7 @@ public class CompraModelo extends JFrame {
         }
     }
 
-    // Método para agregar un proveedor
+    // Operaciones CRUD para proveedores
     public int agregarProveedor(String nombre, String direccion, String telefono) {
         conectar();
         int codProveedorGenerado = -1;
@@ -59,14 +70,12 @@ public class CompraModelo extends JFrame {
 
         try {
             ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
             ps.setString(1, nombre);
             ps.setString(2, direccion);
             ps.setString(3, telefono);
-
             ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
 
+            ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 codProveedorGenerado = rs.getInt(1);
             } else {
@@ -80,24 +89,20 @@ public class CompraModelo extends JFrame {
         return codProveedorGenerado;
     }
 
-    // Método para modificar un proveedor
     public boolean modificarProveedor(String codProveedor, String nombre, String direccion, String telefono) {
         conectar();
         boolean exito = false;
-        String sql = "UPDATE SUPPLIERS SET SUPPLIER_NAME = ?, ADDRESS = ?, PHONE_NUMBER = ? WHERE COD_SUPPLIER = ?";
+        String sql = "update SUPPLIERS set SUPPLIER_NAME = ?, ADDRESS = ?, PHONE_NUMBER = ? WHERE COD_SUPPLIER = ?";
 
         try {
             ps = conexion.prepareStatement(sql);
-
             ps.setString(1, nombre);
             ps.setString(2, direccion);
             ps.setString(3, telefono);
             ps.setString(4, codProveedor);
 
             int filasModificadas = ps.executeUpdate();
-            if (filasModificadas > 0) {
-                exito = true;
-            }
+            exito = filasModificadas > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -106,20 +111,16 @@ public class CompraModelo extends JFrame {
         return exito;
     }
 
-    // Método para eliminar un proveedor
     public boolean eliminarProveedor(String codProveedor) {
         conectar();
         boolean exito = false;
-        String sql = "DELETE FROM SUPPLIERS WHERE COD_SUPPLIER = ?";
+        String sql = "delete from SUPPLIERS where COD_SUPPLIER = ?";
 
         try {
             ps = conexion.prepareStatement(sql);
             ps.setString(1, codProveedor);
-
             int filasEliminadas = ps.executeUpdate();
-            if (filasEliminadas > 0) {
-                exito = true;
-            }
+            exito = filasEliminadas > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -128,65 +129,23 @@ public class CompraModelo extends JFrame {
         return exito;
     }
 
-    // Método para obtener todos los proveedores
-    public Object[][] obtenerProveedores() {
+    public ResultSet obtenerProveedores() {
         conectar();
-        List<Object[]> filas = new ArrayList<>();
+        ResultSet resultado = null;
         String sql = "SELECT * FROM SUPPLIERS";
 
         try {
             ps = conexion.prepareStatement(sql);
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-                Object[] fila = {
-                        rs.getString("COD_SUPPLIER"),
-                        rs.getString("SUPPLIER_NAME"),
-                        rs.getString("ADDRESS"),
-                        rs.getString("PHONE_NUMBER")
-                };
-                filas.add(fila);
-            }
+            resultado = ps.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
             cerrarConexion();
-        }
-
-        Object[][] resultado = new Object[filas.size()][];
-        for (int i = 0; i < filas.size(); i++) {
-            resultado[i] = filas.get(i);
         }
         return resultado;
     }
 
-    // Método para agregar un artículo a la compra actual
-    public void agregarArticulo(String codCompra, String producto, String valorUnitario, String cantidad, String totalProducto) {
-        CompraDetalle nuevoProducto = new CompraDetalle(codCompra, producto, valorUnitario, cantidad, totalProducto);
-        productosCompra.add(nuevoProducto);
-    }
-
-    // Método para calcular el total por producto
-    public double calcularTotalPorProducto(double cantidad, double precio) {
-        return cantidad * precio;
-    }
-
-    // Método para calcular el total de la compra
-    public double calcularTotalCompra() {
-        double totalCompra = 0;
-        for (CompraDetalle producto : productosCompra) {
-            try {
-                double totalProducto = Double.parseDouble(producto.TOTAL_PRODUCT.replace(",","."));
-                totalCompra += totalProducto;
-            } catch (NumberFormatException e) {
-                System.out.println("Error al parsear el total del producto: " + producto.TOTAL_PRODUCT);
-            }
-        }
-        return totalCompra;
-    }
-
-    // Método para realizar la compra
-    public int agregarCompra(String codUsuario, String codProveedor, String fechaCompra, String totalCompra) {
+    // Operaciones para compras
+    public int agregarCompra(String codUsuario, String codProveedor, String fechaCompra, String totalCompra, List<CompraDetalle> productos) {
         conectar();
         int codCompraGenerado = -1;
 
@@ -198,7 +157,7 @@ public class CompraModelo extends JFrame {
             ps.setString(1, codUsuario);
             ps.setString(2, codProveedor);
             ps.setString(3, fechaCompra);
-            ps.setString(4, totalCompra);
+            ps.setString(4, totalCompra.replace(",", "."));
 
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -211,7 +170,7 @@ public class CompraModelo extends JFrame {
             String sqlDetalle = "INSERT INTO PURCHASES_DETAILS (COD_PURCHASE, PURCHASED_PRODUCT, UNIT_VALUE, QUANTITY_Kg, TOTAL_PRODUCT) VALUES (?, ?, ?, ?, ?)";
             ps = conexion.prepareStatement(sqlDetalle);
 
-            for (CompraDetalle producto : productosCompra) {
+            for (CompraDetalle producto : productos) {
                 ps.setInt(1, codCompraGenerado);
                 ps.setString(2, producto.PURCHASED_PRODUCT);
                 ps.setString(3, producto.UNIT_VALUE);
@@ -226,7 +185,7 @@ public class CompraModelo extends JFrame {
             String sqlUpdate = "UPDATE PRODUCTS SET FINAL_QUANTITY_Kg = FINAL_QUANTITY_Kg + ? WHERE PRODUCT_NAME = ?";
             PreparedStatement psUpdate = conexion.prepareStatement(sqlUpdate);
 
-            for (CompraDetalle producto : productosCompra) {
+            for (CompraDetalle producto : productos) {
                 double cantidad = Double.parseDouble(producto.QUANTITY_Kg);
                 psUpdate.setDouble(1, cantidad);
                 psUpdate.setString(2, producto.PURCHASED_PRODUCT);
@@ -236,7 +195,6 @@ public class CompraModelo extends JFrame {
             psUpdate.close();
 
             conexion.commit();
-            productosCompra.clear();
         } catch (SQLException e) {
             try {
                 conexion.rollback();
@@ -245,62 +203,42 @@ public class CompraModelo extends JFrame {
             }
             e.printStackTrace();
         } finally {
-            try {
-                if (ps != null) ps.close();
-                if (conexion != null) conexion.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            cerrarConexion();
         }
         return codCompraGenerado;
     }
 
-    // Método para obtener las compras realizadas
-    public Object[][] obtenerCompras() {
+    public double calcularTotalProducto(double cantidad, double precioUnitario) {
+        return cantidad * precioUnitario;
+    }
+
+    public double calcularTotalCompra(List<CompraDetalle> productos) {
+        double totalCompra = 0;
+        for (CompraDetalle producto : productos) {
+            try {
+                double totalProducto = Double.parseDouble(producto.TOTAL_PRODUCT.replace(",","."));
+                totalCompra += totalProducto;
+            } catch (NumberFormatException e) {
+                System.out.println("Error al parsear el total del producto: " + producto.TOTAL_PRODUCT);
+            }
+        }
+        return totalCompra;
+    }
+
+    public ResultSet obtenerCompras() {
         conectar();
-        List<Object[]> filas = new ArrayList<>();
+        ResultSet resultado = null;
         String sqlPURCHASE = "SELECT p.COD_PURCHASE, p.COD_USER, p.COD_SUPPLIER, p.DATE_PURCHASE, p.TOTAL_PURCHASE_VALUE, " +
                 "pd.PURCHASED_PRODUCT, pd.UNIT_VALUE, pd.QUANTITY_Kg, pd.TOTAL_PRODUCT " +
                 "FROM PURCHASES p JOIN PURCHASES_DETAILS pd ON p.COD_PURCHASE = pd.COD_PURCHASE";
 
         try {
             ps = conexion.prepareStatement(sqlPURCHASE);
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-                Object[] fila = {
-                        rs.getString("COD_PURCHASE"),
-                        rs.getString("COD_USER"),
-                        rs.getString("COD_SUPPLIER"),
-                        rs.getString("DATE_PURCHASE"),
-                        rs.getString("PURCHASED_PRODUCT"),
-                        rs.getString("UNIT_VALUE"),
-                        rs.getString("QUANTITY_Kg"),
-                        rs.getString("TOTAL_PRODUCT"),
-                        rs.getString("TOTAL_PURCHASE_VALUE")
-                };
-                filas.add(fila);
-            }
+            resultado = ps.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
             cerrarConexion();
         }
-
-        Object[][] resultado = new Object[filas.size()][];
-        for (int i = 0; i < filas.size(); i++) {
-            resultado[i] = filas.get(i);
-        }
         return resultado;
-    }
-
-    // Método para obtener la lista de productos de la compra
-    public List<CompraDetalle> getProductosCompra() {
-        return productosCompra;
-    }
-
-    // Método para limpiar la lista de productos
-    public void limpiarProductosCompra() {
-        productosCompra.clear();
     }
 }

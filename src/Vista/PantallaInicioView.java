@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 
 public class PantallaInicioView extends JFrame {
-    private JPanel panelInicio;
+    private JPanel panelFruver;
     private JLabel PASS;
     private JTextField USER1;
     private JLabel USER;
@@ -14,19 +14,10 @@ public class PantallaInicioView extends JFrame {
     public PantallaInicioView() {
         setSize(600, 600);
         setLocationRelativeTo(null);
-    }
-
-    public void mostrarVentana() {
-        setContentPane(panelInicio);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setVisible(true);
-        pack();
     }
 
-    public void addIngresarListener(ActionListener listener) {
-        INGRESAR.addActionListener(listener);
-    }
-
+    // Métodos getter para obtener los valores de los componentes
     public String getUsuario() {
         return USER1.getText();
     }
@@ -35,21 +26,30 @@ public class PantallaInicioView extends JFrame {
         return String.valueOf(PASS1.getText());
     }
 
-    public JPanel getPanelFruver() {
-        return panelInicio;
-    }
-
-    public JTextField getUSER1() {
-        return USER1;
-    }
-
-    public JPasswordField getPASS1() {
-        return PASS1;
-    }
-
-    public JButton getINGRESAR() {
+    public JButton getBotonIngresar() {
         return INGRESAR;
     }
+
+    public void cerrar() {
+        dispose();
+    }
+
+    // Método para mostrar la ventana principal
+    public void mostrarVentana() {
+        setContentPane(panelFruver);
+        setVisible(true);
+        pack();
+    }
+
+    // Método para mostrar la ventana de Fruver_Aguacates_JJ
+    public void mostrarFruver() {
+        FruverView enlace = new FruverView();
+        enlace.mostrarVentanaFruver();
+    }
+
+    // Método para mostrar la ventana de Ventas
+    public void mostrarVentas() {
+        VentaView enlaceVentas = new VentaView();
+        enlaceVentas.mostrarVentanaVentas();
+    }
 }
-
-
