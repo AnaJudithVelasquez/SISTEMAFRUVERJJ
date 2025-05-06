@@ -1,5 +1,8 @@
 package Vista;
 
+import Controlador.CompraControlador;
+import Modelo.CompraModelo;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -220,9 +223,12 @@ public class CompraView extends JFrame {
     }
 
     // Método para mostrar la ventana
-    public void mostrarVentanaCompras() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
-        pack();
+    public static void mostrarVentanaCompras() {
+        CompraView vista = new CompraView();
+        CompraModelo modelo = new CompraModelo();
+        CompraControlador controlador = new CompraControlador(modelo, vista);
+
+        vista.setVisible(true);
+        vista.pack();
     }
 }

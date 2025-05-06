@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import Vista.FruverView;
 import Modelo.FruverModelo;
 
+
 public class FruverControlador {
     private FruverModelo modelo;
     private FruverView vista;
@@ -18,21 +19,25 @@ public class FruverControlador {
         this.vista.getProductosButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                llamarBotonProducto();
+                System.out.println("Botón Productos presionado");
+                modelo.abrirProductos();
+                vista.cerrarVentana();
             }
         });
 
         this.vista.getVentasButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                llamarBotonVenta();
+                modelo.abrirVentas();
+                vista.cerrarVentana(); // Opcional
             }
         });
 
         this.vista.getComprasButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                llamarBotonCompra();
+                modelo.abrirCompras();
+                vista.cerrarVentana(); // Opcional
             }
         });
     }
@@ -42,24 +47,4 @@ public class FruverControlador {
         vista.mostrarVentana();
     }
 
-    // Método para manejar la acción del botón de productos
-    private void llamarBotonProducto() {
-        modelo.conectar();
-        modelo.abrirProductos();
-        vista.cerrarVentana();
-    }
-
-    // Método para manejar la acción del botón de ventas
-    private void llamarBotonVenta() {
-        modelo.conectar();
-        modelo.abrirVentas();
-        vista.cerrarVentana();
-    }
-
-    // Método para manejar la acción del botón de compras
-    private void llamarBotonCompra() {
-        modelo.conectar();
-        modelo.abrirCompras();
-        vista.cerrarVentana();
-    }
 }

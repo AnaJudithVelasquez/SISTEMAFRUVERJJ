@@ -1,7 +1,6 @@
 package Vista;
 
 import javax.swing.*;
-import java.awt.event.ActionListener;
 
 public class PantallaInicioView extends JFrame {
     private JPanel panelFruver;
@@ -12,6 +11,7 @@ public class PantallaInicioView extends JFrame {
     private JButton INGRESAR;
 
     public PantallaInicioView() {
+        setContentPane(panelFruver);
         setSize(600, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -36,7 +36,6 @@ public class PantallaInicioView extends JFrame {
 
     // Método para mostrar la ventana principal
     public void mostrarVentana() {
-        setContentPane(panelFruver);
         setVisible(true);
         pack();
     }
@@ -52,4 +51,5 @@ public class PantallaInicioView extends JFrame {
         VentaView enlaceVentas = new VentaView();
         enlaceVentas.mostrarVentanaVentas();
     }
+
 }

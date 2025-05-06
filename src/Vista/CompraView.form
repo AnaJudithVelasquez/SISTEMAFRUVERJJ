@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Vista.CompraView">
-  <grid id="27dc6" layout-manager="GridLayoutManager" row-count="20" column-count="10" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="panelCompras" layout-manager="GridLayoutManager" row-count="20" column-count="10" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="20" width="1145" height="656"/>
@@ -217,7 +217,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="8ef1f" class="javax.swing.JTextField" binding="textField10" default-binding="true">
+      <component id="8ef1f" class="javax.swing.JTextField" binding="Cantidad_Producto_Kg">
         <constraints>
           <grid row="10" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -225,7 +225,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="5fba5" class="javax.swing.JTextField" binding="Cantidad_Producto_Kg">
+      <component id="5fba5" class="javax.swing.JTextField" binding="Valor_Unitario">
         <constraints>
           <grid row="11" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -313,7 +313,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="32538" class="javax.swing.JTable" binding="table1" default-binding="true">
+          <component id="32538" class="javax.swing.JTable" binding="table1P">
             <constraints/>
             <properties/>
           </component>
@@ -326,13 +326,13 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="e18ad" class="javax.swing.JTable" binding="table2" default-binding="true">
+          <component id="e18ad" class="javax.swing.JTable" binding="table1">
             <constraints/>
             <properties/>
           </component>
         </children>
       </scrollpane>
-      <component id="3382c" class="javax.swing.JButton" binding="button3" default-binding="true">
+      <component id="3382c" class="javax.swing.JButton" binding="mostrarComprasButton">
         <constraints>
           <grid row="12" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>

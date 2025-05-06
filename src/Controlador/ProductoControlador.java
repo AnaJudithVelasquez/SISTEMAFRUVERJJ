@@ -18,11 +18,10 @@ public class ProductoControlador {
 
         // Inicializar la vista
         mostrarDatos();
-        mostrarDatosCompra();
+
 
         // Configurar los listeners de la vista
         this.vista.configurarTablaProductos();
-        this.vista.configurarTablaCompras();
 
         this.vista.agregarListenerAgregar(new ActionListener() {
             @Override
@@ -108,9 +107,6 @@ public class ProductoControlador {
         vista.actualizarTablaProductos(modelo.listarProductos());
     }
 
-    private void mostrarDatosCompra() {
-        vista.actualizarTablaCompras(modelo.listarCompras());
-    }
 
     private void regresar() {
         vista.setVisible(false);
