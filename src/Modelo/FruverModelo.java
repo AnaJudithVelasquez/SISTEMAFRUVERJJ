@@ -36,20 +36,20 @@ public class FruverModelo {
 
     // Método para navegar a la ventana de productos
     public void abrirProductos() {
-        ProductoView productos = new ProductoView();
-        productos.mostrarVentanaProductos();
+        ProductoView enlace = new ProductoView();
+        enlace.mostrarVentanaProductos();
     }
 
     // Método para navegar a la ventana de ventas
     public void abrirVentas() {
-        VentaView ventas = new VentaView();
-        ventas.mostrarVentanaVentas();
+        VentaView enlace = new VentaView();
+        enlace.mostrarVentanaVentas();
     }
 
     // Método para navegar a la ventana de compras
     public void abrirCompras() {
-        CompraView compras = new CompraView();
-        compras.mostrarVentanaCompras();
+        CompraView enlace = new CompraView();
+        enlace.mostrarVentanaCompras();
     }
 
 }

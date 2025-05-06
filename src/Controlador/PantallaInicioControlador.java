@@ -5,8 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import Modelo.UsuarioModel;
+import Vista.FruverView;
 import Vista.PantallaInicioView;
-
+import Vista.VentaView;
 
 
 public class PantallaInicioControlador {
@@ -17,16 +18,16 @@ public class PantallaInicioControlador {
         this.modelo = modelo;
         this.vista = vista;
 
-        // Agregar ActionListener al botón INGRESAR
         this.vista.getBotonIngresar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 validarUsuario();
             }
         });
+
     }
 
-    // Método para validar el usuario y redirigir según su posición
+
     private void validarUsuario() {
         String usuario = vista.getUsuario();
         String password = vista.getPassword();
@@ -35,12 +36,14 @@ public class PantallaInicioControlador {
 
         switch (posicion) {
             case 1:
-                vista.mostrarFruver();
                 vista.cerrar();
+                FruverView menuview = new FruverView();
+                menuview.setVisible(true);
                 break;
             case 2:
-                vista.mostrarVentas();
                 vista.cerrar();
+                VentaView ventaView = new VentaView();
+                ventaView.setVisible(true);
                 break;
             case -1:
                 // Las credenciales ya se notificaron como incorrectas en el modelo
@@ -51,12 +54,12 @@ public class PantallaInicioControlador {
         }
     }
 
-    // Método para iniciar la aplicación
+
     public void iniciar() {
         vista.mostrarVentana();
     }
 
-    // Método main que inicia la aplicación
+
     public static void main(String[] args) {
         UsuarioModel modelo = new UsuarioModel();
         PantallaInicioView vista = new PantallaInicioView();

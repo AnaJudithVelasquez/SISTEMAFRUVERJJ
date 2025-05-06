@@ -37,7 +37,6 @@ public class ProductoView extends JFrame {
     JLabel STOCK;
     JLabel FINAL_QUANTITY_Kg;
     JScrollPane scrollPane;
-    JTable table2;
     JScrollPane scrollPaneCP;
     JButton listaComprasButton;
 
@@ -91,20 +90,7 @@ public class ProductoView extends JFrame {
         });
     }
 
-    // Configurar listener para la tabla de compras
-    public void configurarTablaCompras() {
-        table2.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int row = table2.getSelectedRow();
-                if (row != -1) {
-                    Compra1.setText(table2.getValueAt(row, 0).toString());
-                    NombreProducto1.setText(table2.getValueAt(row, 4).toString());
-                    PrecioCompra1.setText(table2.getValueAt(row, 6).toString());
-                }
-            }
-        });
-    }
+
 
     // Métodos para obtener los valores de los campos
     public String getCodigoProducto() {
@@ -153,9 +139,6 @@ public class ProductoView extends JFrame {
         table1.setModel(modelo);
     }
 
-    public void actualizarTablaCompras(DefaultTableModel modelo) {
-        table2.setModel(modelo);
-    }
 
     // Mostrar mensajes al usuario
     public void mostrarMensaje(String mensaje) {
