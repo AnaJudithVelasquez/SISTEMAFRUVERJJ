@@ -24,10 +24,8 @@ public class CompraControlador {
         this.vista.agregarProveedorListener(new AgregarProveedorListener());
         this.vista.modificarProveedorListener(new ModificarProveedorListener());
         this.vista.eliminarProveedorListener(new EliminarProveedorListener());
-        this.vista.mostrarProveedoresListener(new MostrarProveedoresListener());
         this.vista.agregarProductoListener(new AgregarProductoListener());
         this.vista.agregarCompraListener(new AgregarCompraListener());
-        this.vista.mostrarComprasListener(new MostrarComprasListener());
         this.vista.volverListener(new VolverListener());
         this.vista.calcularTotalProductoListener(new CalcularTotalProductoKeyListener());
 
@@ -94,12 +92,7 @@ public class CompraControlador {
     }
 
     // Listener para mostrar proveedores
-    class MostrarProveedoresListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            mostrarDatosProveedores();
-        }
-    }
+
 
     // Listener para agregar producto a la compra
     class AgregarProductoListener implements ActionListener {
@@ -145,12 +138,6 @@ public class CompraControlador {
     }
 
     // Listener para mostrar compras
-    class MostrarComprasListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            mostrarDatosCompras();
-        }
-    }
 
     // Listener para volver a la ventana principal
     class VolverListener implements ActionListener {

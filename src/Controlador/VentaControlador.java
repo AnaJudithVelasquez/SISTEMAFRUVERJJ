@@ -6,6 +6,8 @@ import java.util.List;
 import java.awt.event.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import Vista.FruverView;
 import com.itextpdf.text.*;
 import java.util.ArrayList;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -30,12 +32,9 @@ public class VentaControlador {
         cargarDatosProductos();
 
         // Configurar los listeners
-        configurarListeners();
-    }
 
-    private void configurarListeners() {
-        // Listener para el botón de agregar producto
-        vista.setAgregarProductoButtonListener(new ActionListener() {
+
+        this.vista.setAgregarProductoButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 agregarProducto();
@@ -44,7 +43,7 @@ public class VentaControlador {
         });
 
         // Listener para el botón de agregar venta
-        vista.setAgregarVentaButtonListener(new ActionListener() {
+        this.vista.setAgregarVentaButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 agregarVenta();
@@ -53,7 +52,7 @@ public class VentaControlador {
         });
 
         // Listener para el botón de mostrar datos
-        vista.setMostrarButtonListener(new ActionListener() {
+        this.vista.setMostrarButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cargarDatosVentas();
@@ -61,22 +60,17 @@ public class VentaControlador {
         });
 
         // Listener para el botón de volver
-        vista.setVolverButtonListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                volverAMenuPrincipal();
-            }
-        });
+
 
         // Listener para cambios en campos de cantidad o precio
-        vista.Cantidad.addKeyListener(new KeyAdapter() {
+        this.vista.Cantidad.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
                 calcularTotalPorProducto();
             }
         });
 
-        vista.Precio_Producto.addKeyListener(new KeyAdapter() {
+        this.vista.Precio_Producto.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
                 calcularTotalPorProducto();
@@ -84,9 +78,11 @@ public class VentaControlador {
         });
     }
 
+
     private void cargarDatosVentas() {
         List<Object[]> datosVentas = modelo.obtenerDatosVentas();
         vista.actualizarTablaVentas(datosVentas);
+
     }
 
     private void cargarDatosProductos() {
@@ -165,10 +161,9 @@ public class VentaControlador {
         System.out.println("Total de venta actualizado: " + totalVenta);
     }
 
-    private void volverAMenuPrincipal() {
-        vista.dispose();
-        // Aquí se puede agregar código para volver al menú principal
-        // Por ejemplo: new MenuPrincipalControlador(new MenuPrincipalModelo(), new MenuPrincipalVista());
+    public static void regresar() {
+        FruverView enlace = new FruverView();
+        enlace.mostrarVentanaFruver();
     }
 
     public void generarFacturaPDF() {

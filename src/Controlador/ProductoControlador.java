@@ -4,7 +4,6 @@ import Modelo.ProductoModelo;
 import Vista.ProductoView;
 import Vista.FruverView;
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -113,5 +112,9 @@ public class ProductoControlador {
         vista.dispose();
         FruverView enlace = new FruverView();
         enlace.mostrarVentanaFruver();
+    }
+
+    public void iniciar() {
+        vista.mostrarVentana();
     }
 }

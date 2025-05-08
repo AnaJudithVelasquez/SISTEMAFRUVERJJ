@@ -1,6 +1,7 @@
 package Vista;
 
 import javax.swing.*;
+import javax.swing.JFrame;
 import Controlador.ProductoControlador;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseAdapter;
@@ -42,10 +43,11 @@ public class ProductoView extends JFrame {
 
     // Constructor
     public ProductoView() {
-        setSize(600, 600);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         setContentPane(panelProductos);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
     }
 
     // Métodos para configurar los listeners de los botones
@@ -145,12 +147,18 @@ public class ProductoView extends JFrame {
         JOptionPane.showMessageDialog(this, mensaje);
     }
 
+    public void mostrarVentana() {
+        setVisible(true);
+        pack();
+    }
+
+
     public static void mostrarVentanaProductos() {
         ProductoView vista = new ProductoView();
         ProductoModelo modelo = new ProductoModelo();
         ProductoControlador controlador = new ProductoControlador(vista, modelo);
-
-        vista.setVisible(true);
-        vista.pack();
+        controlador.iniciar();
     }
+
+
 }

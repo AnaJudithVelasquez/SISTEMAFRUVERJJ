@@ -121,6 +121,7 @@ public class VentaModelo extends JFrame{
 
                 productos.add(fila);
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -169,17 +170,6 @@ public class VentaModelo extends JFrame{
                 ps.setString(6, producto.getTotalProducto());
                 ps.addBatch();
 
-                // Actualizar la cantidad en el inventario después de cada venta
-                String cantidadVendida = producto.getCantidadKg();
-                String codProducto = producto.getCodProducto();
-
-                // Actualizamos la cantidad del producto en el inventario (disminuir QUANTITY_Kg y FINAL_QUANTITY_Kg)
-                String actualizarCantidadSQL = "UPDATE PRODUCTS SET FINAL_QUANTITY_Kg = FINAL_QUANTITY_Kg - ? WHERE COD_PRODUCT = ?";
-                PreparedStatement actualizarCantidadPS = conexion.prepareStatement(actualizarCantidadSQL);
-                actualizarCantidadPS.setString(1, cantidadVendida);
-                actualizarCantidadPS.setString(2, codProducto);
-                actualizarCantidadPS.executeUpdate();
-                actualizarCantidadPS.close();
             }
 
             int[] filasInsertadas = ps.executeBatch();
