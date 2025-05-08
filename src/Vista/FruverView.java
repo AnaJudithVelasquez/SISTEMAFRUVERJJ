@@ -1,23 +1,48 @@
 package Vista;
 
-
 import javax.swing.*;
 import Modelo.FruverModelo;
 import Controlador.FruverControlador;
-import java.awt.*;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 public class FruverView extends JFrame {
     private JPanel panelOpciones;
+    private JButton comprasButton;
     private JButton productosButton;
     private JButton ventasButton;
-    private JButton comprasButton;
 
     public FruverView() {
-        setSize(600, 600);
-        setLocationRelativeTo(null);
         setContentPane(panelOpciones);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+        comprasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               FruverModelo.abrirCompras();
+               dispose();
+            }
+        });
+
+
+        productosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FruverModelo.abrirProductos();
+                dispose();
+            }
+        });
+        ventasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FruverModelo.abrirVentas();
+                dispose();
+            }
+        });
     }
 
     // Getters para que el controlador pueda acceder a los componentes
@@ -44,6 +69,7 @@ public class FruverView extends JFrame {
     public void cerrarVentana() {
         dispose();
     }
+
     public static void mostrarVentanaFruver() {
         FruverView vista = new FruverView();
         FruverModelo modelo = new FruverModelo();
@@ -52,3 +78,4 @@ public class FruverView extends JFrame {
     }
 
 }
+

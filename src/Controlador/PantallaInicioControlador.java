@@ -5,9 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import Modelo.UsuarioModel;
-import Vista.FruverView;
 import Vista.PantallaInicioView;
 import Vista.VentaView;
+import Vista.FruverView;
 
 
 public class PantallaInicioControlador {

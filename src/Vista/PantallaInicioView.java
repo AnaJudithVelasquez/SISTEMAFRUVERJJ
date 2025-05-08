@@ -12,7 +12,7 @@ public class PantallaInicioView extends JFrame {
 
     public PantallaInicioView() {
         setContentPane(panelFruver);
-        setSize(600, 600);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
@@ -41,15 +41,5 @@ public class PantallaInicioView extends JFrame {
     }
 
     // Método para mostrar la ventana de Fruver_Aguacates_JJ
-    public void mostrarFruver() {
-        FruverView enlace = new FruverView();
-        enlace.mostrarVentanaFruver();
-    }
-
-    // Método para mostrar la ventana de Ventas
-    public void mostrarVentas() {
-        VentaView enlaceVentas = new VentaView();
-        enlaceVentas.mostrarVentanaVentas();
-    }
 
 }

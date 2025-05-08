@@ -4,6 +4,7 @@ import Controlador.CompraControlador;
 import Modelo.CompraModelo;
 
 import javax.swing.*;
+import javax.swing.JFrame;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -20,7 +21,6 @@ public class CompraView extends JFrame {
     private JButton agregarButton;
     private JButton modificarButton;
     private JButton eliminarButton;
-    private JButton mostrarButton;
     private JTextField Nombre_Proveedor;
     private JTextField Direccion;
     private JTextField Telefono;
@@ -57,6 +57,9 @@ public class CompraView extends JFrame {
 
     public CompraView() {
         setContentPane(panelCompras);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Configurar fecha actual
         LocalDate fechaActual = LocalDate.now();
@@ -188,9 +191,7 @@ public class CompraView extends JFrame {
         eliminarButton.addActionListener(listener);
     }
 
-    public void mostrarProveedoresListener(ActionListener listener) {
-        mostrarButton.addActionListener(listener);
-    }
+
 
     public void agregarProductoListener(ActionListener listener) {
         agregarProductoButton.addActionListener(listener);
@@ -200,9 +201,7 @@ public class CompraView extends JFrame {
         agregarCompraButton.addActionListener(listener);
     }
 
-    public void mostrarComprasListener(ActionListener listener) {
-        mostrarComprasButton.addActionListener(listener);
-    }
+
 
     public void volverListener(ActionListener listener) {
         volverButton.addActionListener(listener);

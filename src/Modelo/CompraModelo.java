@@ -181,19 +181,6 @@ public class CompraModelo extends JFrame {
             ps.executeBatch();
             ps.close();
 
-            // Actualización del inventario
-            String sqlUpdate = "UPDATE PRODUCTS SET FINAL_QUANTITY_Kg = FINAL_QUANTITY_Kg + ? WHERE PRODUCT_NAME = ?";
-            PreparedStatement psUpdate = conexion.prepareStatement(sqlUpdate);
-
-            for (CompraDetalle producto : productos) {
-                double cantidad = Double.parseDouble(producto.QUANTITY_Kg);
-                psUpdate.setDouble(1, cantidad);
-                psUpdate.setString(2, producto.PURCHASED_PRODUCT);
-                psUpdate.addBatch();
-            }
-            psUpdate.executeBatch();
-            psUpdate.close();
-
             conexion.commit();
         } catch (SQLException e) {
             try {

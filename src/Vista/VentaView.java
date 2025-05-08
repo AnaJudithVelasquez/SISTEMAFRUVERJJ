@@ -1,18 +1,15 @@
 package Vista;
 
+import Controlador.VentaControlador;
+
 import javax.swing.*;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import Modelo.VentaModelo.ProductoDetalle;
 
 public class VentaView extends JFrame {
     private JPanel panelVentas;
@@ -48,7 +45,7 @@ public class VentaView extends JFrame {
 
     public VentaView() {
         setTitle("Sistema de Ventas - Fruver Aguacates JJ");
-        setSize(600, 600);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setContentPane(panelVentas);
@@ -86,6 +83,14 @@ public class VentaView extends JFrame {
                 }
             }
         });
+
+        volverButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VentaControlador.regresar();
+                dispose();
+            }
+        });
     }
 
     // Métodos para configurar los listeners de los botones
@@ -101,7 +106,7 @@ public class VentaView extends JFrame {
         mostrarButton.addActionListener(listener);
     }
 
-    public void setVolverButtonListener(ActionListener listener) {
+    public void volverListener(ActionListener listener) {
         volverButton.addActionListener(listener);
     }
 
@@ -246,6 +251,8 @@ public class VentaView extends JFrame {
         Total_Venta.setText("");
         limpiarCamposProducto();
     }
+
+
 
     public static void mostrarVentanaVentas() {
         VentaView ventaView = new VentaView();
