@@ -228,4 +228,27 @@ public class CompraModelo extends JFrame {
         }
         return resultado;
     }
+
+    public double obtenerTotalComprasPorPeriodo(String fechaInicio, String fechaFin) {
+        conectar();
+        double totalCompras = 0;
+        String sql = "{CALL ObtenerTotalComprasPorPeriodo(?, ?)}";
+
+        try (CallableStatement cs = conexion.prepareCall(sql)) {
+            cs.setString(1, fechaInicio);
+            cs.setString(2, fechaFin);
+
+            try (ResultSet rsLocal = cs.executeQuery()) {
+                if (rsLocal.next()) {
+                    totalCompras = rsLocal.getDouble("Total_Compras");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            cerrarConexion();
+        }
+
+        return totalCompras;
+    }
 }

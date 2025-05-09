@@ -21,6 +21,7 @@ public class CompraControlador {
         this.vista = vista;
 
         // Agregar listeners a los botones
+        this.vista.consultarTotalListener(new ConsultarTotalListener());
         this.vista.agregarProveedorListener(new AgregarProveedorListener());
         this.vista.modificarProveedorListener(new ModificarProveedorListener());
         this.vista.eliminarProveedorListener(new EliminarProveedorListener());
@@ -191,5 +192,18 @@ public class CompraControlador {
         vista.setTotalCompra(String.format("%.2f", totalCompra));
     }
 
+    class ConsultarTotalListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String fechaInicio = vista.getFechaInicio();
+            String fechaFin = vista.getFechaFin();
 
+            try {
+                double total = modelo.obtenerTotalComprasPorPeriodo(fechaInicio, fechaFin);
+                vista.mostrarMensaje("Total de compras entre " + fechaInicio + " y " + fechaFin + ": $" + String.format("%.2f", total));
+            } catch (Exception ex) {
+                vista.mostrarError("Error al consultar total de compras: " + ex.getMessage());
+            }
+        }
+    }
 }
