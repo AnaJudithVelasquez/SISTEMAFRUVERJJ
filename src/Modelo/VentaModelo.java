@@ -1,6 +1,7 @@
 package Modelo;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -100,35 +101,53 @@ public class VentaModelo extends JFrame{
         return datos;
     }
 
-    public List<Object[]> obtenerProductos() {
-        List<Object[]> productos = new ArrayList<>();
+
+
+    public DefaultTableModel listarProductos() {
+        DefaultTableModel modelo = new DefaultTableModel();
+
+        // Definir columnas
+        modelo.addColumn("Cod_Producto");
+        modelo.addColumn("Cod_Compra");
+        modelo.addColumn("Nombre_Producto");
+        modelo.addColumn("Stock");
+        modelo.addColumn("Cantidad_Kg");
+        modelo.addColumn("Cantidad Final_KG");
+        modelo.addColumn("Valor_Compra");
+        modelo.addColumn("Precio_Producto");
+        modelo.addColumn("Descripcion");
+
         conectar();
-        String sqlProducts = "SELECT * FROM PRODUCTS";
+        String sql = "SELECT * FROM PRODUCTS";
 
         try {
-            ps = conexion.prepareStatement(sqlProducts);
+            ps = conexion.prepareStatement(sql);
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                Object[] fila = new Object[7];
+                Object[] fila = new Object[9];
                 fila[0] = rs.getString("COD_PRODUCT");
                 fila[1] = rs.getString("COD_PURCHASE");
                 fila[2] = rs.getString("PRODUCT_NAME");
-                fila[3] = rs.getString("QUANTITY_Kg");
-                fila[4] = rs.getString("PURCHASE_VALUE");
-                fila[5] = rs.getString("PRODUCT_PRICE");
-                fila[6] = rs.getString("DESCRIPTION_PRODUCT_STATUS");
+                fila[3] = rs.getString("STOCK");
+                fila[4] = rs.getString("QUANTITY_Kg");
+                fila[5] = rs.getString("FINAL_QUANTITY_KG");
+                fila[6] = rs.getString("PURCHASE_VALUE");
+                fila[7] = rs.getString("PRODUCT_PRICE");
+                fila[8] = rs.getString("DESCRIPTION_PRODUCT_STATUS");
 
-                productos.add(fila);
+                modelo.addRow(fila);
             }
-
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Hay un error al mostrar los datos: " + e.getMessage());
             e.printStackTrace();
         } finally {
-            cerrarRecursos();
+            cerrarConexiones();
         }
-        return productos;
+
+        return modelo;
     }
+
 
     public int agregarVenta(String codUsuario, String fechaVenta, String identificacionCliente, String totalVenta, List<ProductoDetalle> productosVenta) {
         conectar();
@@ -211,6 +230,16 @@ public class VentaModelo extends JFrame{
             }
         }
         return totalVenta;
+    }
+
+    private void cerrarConexiones() {
+        try {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+            if (conexion != null) conexion.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
 

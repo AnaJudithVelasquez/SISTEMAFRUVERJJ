@@ -221,4 +221,16 @@ public class ProductoModelo extends JFrame{
             e.printStackTrace();
         }
     }
+
+    public ResultSet obtenerProductos() {
+        ResultSet rs = null;
+        try {
+            conectar();
+            PreparedStatement ps = conexion.prepareStatement("SELECT * FROM producto");
+            rs = ps.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
 }

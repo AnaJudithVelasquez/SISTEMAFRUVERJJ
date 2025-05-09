@@ -2,12 +2,17 @@ package Controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.table.DefaultTableModel;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.awt.event.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import Modelo.ProductoModelo;
 import Vista.FruverView;
+import Vista.ProductoView;
 import com.itextpdf.text.*;
 import java.util.ArrayList;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -18,21 +23,32 @@ import Modelo.VentaModelo;
 import Vista.VentaView;
 
 
+
 public class VentaControlador {
     private VentaModelo modelo;
     private VentaView vista;
     private List<ProductoDetalle> productosVenta = new ArrayList<>();
+    private ProductoView productoVista;
 
-    public VentaControlador(VentaModelo modelo, VentaView vista) {
-        this.modelo = modelo;
+    public VentaControlador(ProductoView productoVista, VentaView vista, VentaModelo modelo) {
+        this.productoVista = productoVista;
         this.vista = vista;
+        this.modelo = modelo;
+
 
         // Inicializar la vista con datos
         cargarDatosVentas();
-        cargarDatosProductos();
-
+        mostrarDatos();
         // Configurar los listeners
 
+        this.productoVista.configurarTablaProductos();
+
+        this.vista.getMostrarProductosButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostrarDatos();
+            }
+        });
 
         this.vista.setAgregarProductoButtonListener(new ActionListener() {
             @Override
@@ -76,8 +92,10 @@ public class VentaControlador {
                 calcularTotalPorProducto();
             }
         });
-    }
 
+
+
+    }
 
     private void cargarDatosVentas() {
         List<Object[]> datosVentas = modelo.obtenerDatosVentas();
@@ -85,9 +103,8 @@ public class VentaControlador {
 
     }
 
-    private void cargarDatosProductos() {
-        List<Object[]> datosProductos = modelo.obtenerProductos();
-        vista.actualizarTablaProductos(datosProductos);
+    private void mostrarDatos() {
+        vista.actualizarTablaProductos(modelo.listarProductos());
     }
 
     private void agregarProducto() {
@@ -133,7 +150,7 @@ public class VentaControlador {
             vista.setCodVenta(String.valueOf(codVentaGenerado));
             vista.mostrarMensaje("La venta y los productos se insertaron correctamente.");
             cargarDatosVentas();
-            cargarDatosProductos();
+            agregarProducto();
         } else {
             vista.mostrarError("Error al registrar la venta");
         }

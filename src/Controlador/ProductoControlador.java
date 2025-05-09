@@ -56,6 +56,14 @@ public class ProductoControlador {
                 regresar();
             }
         });
+
+        this.vista.agregarListenerVolver(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                regresar();
+            }
+        });
+
     }
 
     private void agregar() {
