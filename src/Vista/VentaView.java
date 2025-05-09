@@ -6,10 +6,12 @@ import javax.swing.*;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import Modelo.VentaModelo;
 
 public class VentaView extends JFrame {
     private JPanel panelVentas;
@@ -42,6 +44,12 @@ public class VentaView extends JFrame {
     private JButton volverButton;
     private JScrollPane scrollPane;
     private JScrollPane scrollPane2;
+    private JButton mostrarProductosButton;
+    private VentaModelo modelo = new VentaModelo();
+    private Connection conexion;
+    private PreparedStatement ps;
+    private ResultSet rs;
+
 
     public VentaView() {
         setTitle("Sistema de Ventas - Fruver Aguacates JJ");
@@ -50,10 +58,12 @@ public class VentaView extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setContentPane(panelVentas);
 
+
         // Configuración inicial de los campos
         LocalDate fechaActual = LocalDate.now();
         DateTimeFormatter formatofecha = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         Fecha_Venta.setText(fechaActual.format(formatofecha));
+
 
         // Configurar campos no editables
         Cod_Producto.setEditable(false);
@@ -91,7 +101,29 @@ public class VentaView extends JFrame {
                 dispose();
             }
         });
+
+
+        mostrarProductosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                listarProductos();
+            }
+        });
     }
+
+
+    public void actualizarTablaProductos(DefaultTableModel modelo) {
+        table1.setModel(modelo);
+    }
+
+    public void conectar() {
+        try {
+            conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/FruverAguacates", "root", "10j56yeyo");
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al conectar a la base de datos", e);
+        }
+    }
+
 
     // Métodos para configurar los listeners de los botones
     public void setAgregarProductoButtonListener(ActionListener listener) {
@@ -110,9 +142,10 @@ public class VentaView extends JFrame {
         volverButton.addActionListener(listener);
     }
 
-    public void setListaProductosButtonListener(ActionListener listener) {
-        listaProductosButton.addActionListener(listener);
+    public void setMostrarProductosButtonListener(ActionListener listener) {
+        mostrarProductosButton.addActionListener(listener);
     }
+
 
     // Métodos para notificar eventos
     public void notificarCambioEnCantidad() {
@@ -172,6 +205,11 @@ public class VentaView extends JFrame {
         return Total_Venta.getText().trim();
     }
 
+    public JButton getMostrarProductosButton() {
+        return mostrarProductosButton;
+    }
+
+
     // Métodos para establecer valores en los campos
     public void setCodVenta(String codVenta) {
         Cod_Venta.setText(codVenta);
@@ -183,6 +221,10 @@ public class VentaView extends JFrame {
 
     public void setTotalVenta(String totalVenta) {
         Total_Venta.setText(totalVenta);
+    }
+
+    public JTable getTable1() {
+        return table1;
     }
 
     // Métodos para actualizar las tablas
@@ -208,24 +250,54 @@ public class VentaView extends JFrame {
         }
     }
 
-    public void actualizarTablaProductos(List<Object[]> datosProductos) {
-        DefaultTableModel model = (DefaultTableModel) table1.getModel();
-        model.setRowCount(0);
 
-        if (model.getColumnCount() == 0) {
-            model.addColumn("Cod_Producto");
-            model.addColumn("Cod_Compra");
-            model.addColumn("Nombre_Producto");
-            model.addColumn("Cantidad_Kg");
-            model.addColumn("Valor_Compra");
-            model.addColumn("Precio_Producto");
-            model.addColumn("Descripcion");
+    public void listarProductos() {
+      conectar();
+
+      String sql = "SELECT * FROM PRODUCTS";
+
+       try {
+           ps = conexion.prepareStatement(sql);
+           rs = ps.executeQuery();
+        DefaultTableModel modelo = (DefaultTableModel) table1.getModel();
+           modelo.setRowCount(0);
+        // Definir columnas
+
+           if (modelo.getColumnCount() == 0) {
+               modelo.addColumn("Cod_Producto");
+               modelo.addColumn("Cod_Compra");
+               modelo.addColumn("Nombre_Producto");
+               modelo.addColumn("Stock");
+               modelo.addColumn("Cantidad_Kg");
+               modelo.addColumn("Cantidad Final_KG");
+               modelo.addColumn("Valor_Compra");
+               modelo.addColumn("Precio_Producto");
+               modelo.addColumn("Descripcion");
+           }
+
+
+            while (rs.next()) {
+                Object[] fila = {
+                        rs.getString("COD_PRODUCT"),
+               rs.getString("COD_PURCHASE"),
+                rs.getString("PRODUCT_NAME"),
+                rs.getString("STOCK"),
+                rs.getString("QUANTITY_Kg"),
+                rs.getString("FINAL_QUANTITY_KG"),
+               rs.getString("PURCHASE_VALUE"),
+               rs.getString("PRODUCT_PRICE"),
+                rs.getString("DESCRIPTION_PRODUCT_STATUS")
+                };
+                modelo.addRow(fila);
+            }
+            table1.setModel(modelo);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Hay un error al mostrar los datos: " + e.getMessage());
+            e.printStackTrace();
         }
 
-        for (Object[] fila : datosProductos) {
-            model.addRow(fila);
-        }
     }
+
 
     // Métodos de utilidad para interactuar con el usuario
     public void mostrarMensaje(String mensaje) {
@@ -251,8 +323,15 @@ public class VentaView extends JFrame {
         Total_Venta.setText("");
         limpiarCamposProducto();
     }
-
-
+    private void cerrarConexiones() {
+        try {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+            if (conexion != null) conexion.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void mostrarVentanaVentas() {
         VentaView ventaView = new VentaView();
@@ -260,5 +339,11 @@ public class VentaView extends JFrame {
         ventaView.setVisible(true);
         ventaView.pack();
     }
+
+
+
 }
+
+
+
 

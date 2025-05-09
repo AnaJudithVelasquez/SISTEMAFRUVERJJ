@@ -289,6 +289,14 @@
           <text value="Cod_Ventas"/>
         </properties>
       </component>
+      <component id="d7187" class="javax.swing.JButton" binding="mostrarProductosButton" default-binding="true">
+        <constraints>
+          <grid row="12" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Mostrar Productos"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>
