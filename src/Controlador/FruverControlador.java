@@ -1,7 +1,5 @@
 package Controlador;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import Modelo.FruverModelo;
 import Vista.FruverView;

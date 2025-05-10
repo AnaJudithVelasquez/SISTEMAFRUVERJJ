@@ -9,6 +9,7 @@ import java.awt.event.*;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import Modelo.VentaModelo;
@@ -49,15 +50,19 @@ public class VentaView extends JFrame {
     private Connection conexion;
     private PreparedStatement ps;
     private ResultSet rs;
-
+    private List<VentaModelo.ProductoDetalle> productosVenta = new ArrayList<>();
 
     public VentaView() {
+
         setTitle("Sistema de Ventas - Fruver Aguacates JJ");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setContentPane(panelVentas);
 
+         actualizarTablaVentas();
+        verificarStockMinimoConMargen();
+         listarProductos();
 
         // Configuración inicial de los campos
         LocalDate fechaActual = LocalDate.now();
@@ -72,6 +77,9 @@ public class VentaView extends JFrame {
         Total_Por_Producto.setEditable(false);
         Total_Venta.setEditable(false);
         Fecha_Venta.setEditable(false);
+
+        Cod_Usuario.setText("2");
+        Cod_Usuario.setEditable(false);
 
         // Establecer el listener para calcular el total por producto cuando cambia la cantidad
         Cantidad.addKeyListener(new KeyAdapter() {
@@ -89,7 +97,7 @@ public class VentaView extends JFrame {
                 if (selectedRow != -1) {
                     Cod_Producto.setText(table1.getValueAt(selectedRow, 0).toString());
                     Nombre_Producto.setText(table1.getValueAt(selectedRow, 2).toString());
-                    Precio_Producto.setText(table1.getValueAt(selectedRow, 5).toString());
+                    Precio_Producto.setText(table1.getValueAt(selectedRow, 7).toString());
                 }
             }
         });
@@ -103,10 +111,37 @@ public class VentaView extends JFrame {
         });
 
 
-        mostrarProductosButton.addActionListener(new ActionListener() {
+
+
+        agregarProductoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                listarProductos();
+                agregarProducto();
+            }
+        });
+
+
+        agregarVentaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String codUsuario = getCodUsuario();
+                String fechaVenta = getFechaVenta();
+                String identificacionCliente = getIdentificacionCliente();
+                String totalVenta = actualizarTotalVenta();
+
+                if (productosVenta.isEmpty()) {
+                    mostrarError("Agregue al menos un producto a la venta.");
+                    return;
+                }
+
+                int codVenta = agregarVenta(codUsuario, fechaVenta, identificacionCliente, totalVenta, productosVenta);
+                if (codVenta != -1) {
+                    mostrarMensaje("Venta registrada exitosamente. Código: " + codVenta);
+                    limpiarCamposVenta();
+                } else {
+                    mostrarError("Error al registrar la venta.");
+                }
+               actualizarTablaVentas();
             }
         });
     }
@@ -146,23 +181,15 @@ public class VentaView extends JFrame {
         mostrarProductosButton.addActionListener(listener);
     }
 
-
-    // Métodos para notificar eventos
-    public void notificarCambioEnCantidad() {
-        try {
-            String cantidadText = Cantidad.getText().trim();
-            String precioText = Precio_Producto.getText().trim();
-
-            if (!cantidadText.isEmpty() && !precioText.isEmpty()) {
-                double cantidad = Double.parseDouble(cantidadText);
-                double precio = Double.parseDouble(precioText);
-
-                // El controlador llamará a un método que usará esta información
-            }
-        } catch (NumberFormatException ignored) {
-            // Se maneja en el controlador
-        }
+    public void agregarProductoListener(ActionListener listener) {
+        agregarProductoButton.addActionListener(listener);
     }
+
+    public void agregarVentaListener(ActionListener listener) {
+        agregarVentaButton.addActionListener(listener);
+    }
+
+
 
     // Métodos para obtener la información de los campos
     public String getCodVenta() {
@@ -226,6 +253,123 @@ public class VentaView extends JFrame {
     public JTable getTable1() {
         return table1;
     }
+
+    // Métodos para notificar eventos
+    // Métodos para notificar eventos
+    public void notificarCambioEnCantidad() {
+        try {
+            String cantidadText = Cantidad.getText().trim();
+            String precioText = Precio_Producto.getText().trim();
+
+            if (!cantidadText.isEmpty() && !precioText.isEmpty()) {
+                double cantidad = Double.parseDouble(cantidadText.replace(",", "."));
+                double precio = Double.parseDouble(precioText.replace(",", "."));
+
+                double totalPorProducto = cantidad * precio;
+                // Formatear el resultado a dos decimales y establecerlo en el campo correspondiente
+                Total_Por_Producto.setText(String.format("%.2f", totalPorProducto));
+            } else {
+                Total_Por_Producto.setText("");
+            }
+        } catch (NumberFormatException e) {
+            Total_Por_Producto.setText("Error");
+        }
+    }
+
+
+    private void agregarProducto() {
+        String codProducto = getCodProducto();
+        String nombreProducto = getNombreProducto();
+        String cantidad = getCantidad();
+        String precioProducto = getPrecioProducto();
+        String totalProducto = getTotalPorProducto().replace(",", ".");
+
+        if (codProducto.isEmpty() || nombreProducto.isEmpty() || cantidad.isEmpty() ||
+                precioProducto.isEmpty() || totalProducto.isEmpty()) {
+            mostrarError("Debe completar todos los campos del producto");
+            return;
+        }
+
+        // Crear el objeto ProductoDetalle y agregarlo a la lista
+        VentaModelo.ProductoDetalle producto = new VentaModelo.ProductoDetalle(
+                codProducto, nombreProducto, cantidad, precioProducto, totalProducto
+        );
+        productosVenta.add(producto);
+
+        // Recalcular el total de la venta
+        actualizarTotalVenta();
+
+        mostrarMensaje("Producto agregado a la venta.");
+        limpiarCamposProducto();
+    }
+
+
+    public int agregarVenta(String codUsuario, String fechaVenta, String identificacionCliente, String totalVenta, List<VentaModelo.ProductoDetalle> productosVenta) {
+        conectar();
+        int codVentaGenerado = -1;
+        try {
+            conexion.setAutoCommit(false);
+
+            String sqlSales = "INSERT INTO SALES (COD_USER, DATE_SALE, COSTUMER_IDENTIFICATION, TOTAL_SALE_VALUE) VALUES (?, ?, ?, ?)";
+            ps = conexion.prepareStatement(sqlSales, Statement.RETURN_GENERATED_KEYS);
+
+            ps.setString(1, codUsuario);
+            ps.setString(2, fechaVenta);
+            if(identificacionCliente.isEmpty()){
+                ps.setNull(3, java.sql.Types.VARCHAR);
+            } else {
+                ps.setString(3, identificacionCliente);
+            }
+            ps.setString(4, totalVenta.replace(",", "."));
+
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+
+            if (rs.next()) {
+                codVentaGenerado = rs.getInt(1);
+            } else {
+                throw new SQLException("Error al obtener el COD_SALE generado.");
+            }
+
+            String sqlSales_Details = "INSERT INTO SALES_DETAILS (COD_SALE, COD_PRODUCT, PRODUCT_NAME, PRODUCT_QUANTITY_Kg, PRODUCT_PRICE, TOTAL_PRODUCT) VALUES (?, ?, ?, ?, ?, ?)";
+            ps = conexion.prepareStatement(sqlSales_Details);
+
+            for (VentaModelo.ProductoDetalle producto : productosVenta) {
+                ps.setInt(1, codVentaGenerado);
+                ps.setString(2, producto.getCodProducto());
+                ps.setString(3, producto.getNombreProducto());
+                ps.setString(4, producto.getCantidadKg());
+                ps.setString(5, producto.getPrecioProducto());
+                ps.setString(6, producto.getTotalProducto());
+                ps.addBatch();
+
+            }
+
+            int[] filasInsertadas = ps.executeBatch();
+
+            if (filasInsertadas.length > 0) {
+                conexion.commit();
+                return codVentaGenerado;
+            } else {
+                throw new SQLException("No se pudieron insertar los productos en la venta.");
+            }
+
+        } catch (SQLException e) {
+            try {
+                if (conexion != null) {
+                    conexion.rollback();
+                }
+                e.printStackTrace();
+            } catch (SQLException rollbackEx) {
+                rollbackEx.printStackTrace();
+            }
+            return -1;
+        } finally {
+            cerrarConexiones();
+        }
+    }
+
 
     // Métodos para actualizar las tablas
     public void actualizarTablaVentas(List<Object[]> datosVentas) {
@@ -298,7 +442,6 @@ public class VentaView extends JFrame {
 
     }
 
-
     // Métodos de utilidad para interactuar con el usuario
     public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje);
@@ -308,8 +451,111 @@ public class VentaView extends JFrame {
         JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
+
+
+    public String actualizarTotalVenta() {
+        double total = 0.0;
+        for (VentaModelo.ProductoDetalle producto : productosVenta) {
+            try {
+                double subtotal = Double.parseDouble(producto.getTotalProducto().replace(",", "."));
+                total += subtotal;
+            } catch (NumberFormatException e) {
+                mostrarError("Error al calcular el total de la venta.");
+                return "";
+            }
+        }
+        String totalFormateado = String.format("%.2f", total);
+        Total_Venta.setText(totalFormateado);
+        return totalFormateado;
+    }
+
+
+    public void actualizarTablaVentas() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Cod_Venta");
+        modelo.addColumn("Cod_Empleado");
+        modelo.addColumn("Fecha_Venta");
+        modelo.addColumn("Identificación_Cliente");
+        modelo.addColumn("Cod_Producto");
+        modelo.addColumn("Nombre_Producto");
+        modelo.addColumn("Cantidad_Kg");
+        modelo.addColumn("Precio_Producto");
+        modelo.addColumn("Total_Por_Producto");
+        modelo.addColumn("Total_Venta");
+
+        conectar();
+        try {
+            Statement st = conexion.createStatement();
+            ResultSet rs = st.executeQuery("""
+    SELECT s.COD_SALE, s.COD_USER, s.DATE_SALE, s.COSTUMER_IDENTIFICATION,
+           d.COD_PRODUCT, d.PRODUCT_NAME, d.PRODUCT_QUANTITY_Kg, d.PRODUCT_PRICE,
+           d.TOTAL_PRODUCT, s.TOTAL_SALE_VALUE
+    FROM SALES s
+    JOIN SALES_DETAILS d ON s.COD_SALE = d.COD_SALE
+""");
+
+            while (rs.next()) {
+                Object[] fila = new Object[10];
+                fila[0] = rs.getInt("COD_SALE");
+                fila[1] = rs.getInt("COD_USER");
+                fila[2] = rs.getString("DATE_SALE");
+                fila[3] = rs.getString("COSTUMER_IDENTIFICATION");
+                fila[4] = rs.getInt("COD_PRODUCT");
+                fila[5] = rs.getString("PRODUCT_NAME");
+                fila[6] = rs.getString("PRODUCT_QUANTITY_Kg");
+                fila[7] = rs.getDouble("PRODUCT_PRICE");
+                fila[8] = rs.getInt("TOTAL_PRODUCT");
+                fila[9] = rs.getString("TOTAL_SALE_VALUE");
+                modelo.addRow(fila);
+            }
+
+            table2.setModel(modelo);
+
+        } catch (SQLException e) {
+            mostrarError("Error al cargar ventas: " + e.getMessage());
+        }
+    }
+
+    private static boolean yaMostroAlertaStock = false;
+
+    public void verificarStockMinimoConMargen() {
+        if (yaMostroAlertaStock) return;
+
+        conectar();
+        double margen = 2.0;
+        boolean yaAlertoEsteProducto = false;  // Nueva bandera local
+
+        try {
+            Statement st = conexion.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM PRODUCTS");
+
+            while (rs.next()) {
+                String nombre = rs.getString("PRODUCT_NAME");
+                double cantidadActual = rs.getDouble("FINAL_QUANTITY_KG");
+                double stockMinimo = rs.getDouble("STOCK");
+
+                if (cantidadActual <= stockMinimo + margen && !yaAlertoEsteProducto) {
+                    JOptionPane.showMessageDialog(null,
+                            "⚠ El producto '" + nombre + "' está por llegar al stock mínimo.\n" +
+                                    "Cantidad actual: " + cantidadActual + " kg (mínimo: " + stockMinimo + " kg).",
+                            "Alerta de Stock Bajo", JOptionPane.WARNING_MESSAGE);
+
+                    yaMostroAlertaStock = true;
+                    yaAlertoEsteProducto = true;  // Se asegura de no repetir alerta
+                    break;  // Ya alertamos, salimos del while
+                }
+            }
+
+        } catch (SQLException e) {
+            mostrarError("Error al verificar el stock mínimo: " + e.getMessage());
+        }
+    }
+
+
+
+
     public void limpiarCamposProducto() {
-        Cod_Producto.setText("");
+
         Nombre_Producto.setText("");
         Cantidad.setText("");
         Precio_Producto.setText("");
@@ -322,6 +568,7 @@ public class VentaView extends JFrame {
         Identificacion_Cliente.setText("");
         Total_Venta.setText("");
         limpiarCamposProducto();
+        Total_Venta.setText("");
     }
     private void cerrarConexiones() {
         try {

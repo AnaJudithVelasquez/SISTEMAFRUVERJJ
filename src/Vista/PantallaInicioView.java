@@ -40,6 +40,5 @@ public class PantallaInicioView extends JFrame {
         pack();
     }
 
-    // Método para mostrar la ventana de Fruver_Aguacates_JJ
 
 }

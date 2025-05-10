@@ -50,6 +50,7 @@ public class VentaModelo extends JFrame{
         }
     }
 
+
     public void conectar() {
         try {
             conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/FruverAguacates", "root", "10j56yeyo");

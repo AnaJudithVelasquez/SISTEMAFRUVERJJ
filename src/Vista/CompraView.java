@@ -8,9 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.sql.ResultSet;
@@ -55,15 +56,15 @@ public class CompraView extends JFrame {
     private JButton mostrarComprasButton;
     private JButton volverButton;
     private JScrollPane scrollPane;
-    private JTextField campoFechaInicio;
-    private JTextField campoFechaFin;
-    private JButton botonConsultarTotal;
+
 
     public CompraView() {
         setContentPane(panelCompras);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+
 
         // Configurar fecha actual
         LocalDate fechaActual = LocalDate.now();
@@ -76,38 +77,30 @@ public class CompraView extends JFrame {
         Total_Compra.setEditable(false);
         Fecha_Compra.setEditable(false);
 
+        Cod_Usuario.setText("1");
+        Cod_Usuario.setEditable(false);
+
         // Configuración de selección de tabla
         agregarSeleccionTabla();
 
-        campoFechaInicio = new JTextField(10);
-        campoFechaFin = new JTextField(10);
-        botonConsultarTotal = new JButton("Consultar Total Compras");
 
-        JPanel panelConsultaTotal = new JPanel();
-        panelConsultaTotal.setLayout(new FlowLayout(FlowLayout.LEFT));
-        panelConsultaTotal.setBorder(BorderFactory.createTitledBorder("Consulta Total de Compras por Fecha"));
+        table1P.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int selectedRow = table1P.getSelectedRow();
+                if (selectedRow != -1) {
+                    Cod_Proveedor.setText(table1P.getValueAt(selectedRow, 0).toString());
+                    Nombre_Proveedor.setText(table1P.getValueAt(selectedRow, 1).toString());
+                    Direccion.setText(table1P.getValueAt(selectedRow, 2).toString());
+                    Telefono.setText(table1P.getValueAt(selectedRow, 3).toString());
+                }
+            }
+        });
 
-        panelConsultaTotal.add(new JLabel("Fecha Inicio (yyyy-MM-dd):"));
-        panelConsultaTotal.add(campoFechaInicio);
-        panelConsultaTotal.add(new JLabel("Fecha Fin (yyyy-MM-dd):"));
-        panelConsultaTotal.add(campoFechaFin);
-        panelConsultaTotal.add(botonConsultarTotal);
 
-        botonConsultarTotal = new JButton("Consultar Total");
-
-        // Añádelo a la interfaz
-        add(botonConsultarTotal); // o al panel correspondiente con layout adecuado
-
-        // Asegúrate de tener campos de fecha
-        campoFechaInicio = new JTextField();
-        campoFechaFin = new JTextField();
-        add(campoFechaInicio);
-        add(campoFechaFin);
     }
 
 
-    public String getFechaInicio() { return campoFechaInicio.getText().trim(); }
-    public String getFechaFin() { return campoFechaFin.getText().trim(); }
 
     // Getters para los campos de texto
     public String getNombreProveedor() { return Nombre_Proveedor.getText(); }
@@ -245,9 +238,6 @@ public class CompraView extends JFrame {
         Valor_Unitario.addKeyListener(listener);
     }
 
-    public void consultarTotalListener(ActionListener listener) {
-        botonConsultarTotal.addActionListener(listener);
-    }
 
     // Métodos para mostrar mensajes
     public void mostrarMensaje(String mensaje) {

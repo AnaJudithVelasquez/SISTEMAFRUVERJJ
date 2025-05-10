@@ -96,16 +96,16 @@ public class ProductoModelo extends JFrame{
         return exito;
     }
 
+    //PROCESO ALMACENADO 2
     public boolean eliminar(String codProducto) {
         boolean exito = false;
         conectar();
-        String sql = "DELETE FROM PRODUCTS WHERE COD_PRODUCT = ?";
+        String sql = "{CALL eliminarProducto(?)}";
 
         try {
-            ps = conexion.prepareStatement(sql);
-            ps.setString(1, codProducto);
-
-            int filasEliminadas = ps.executeUpdate();
+            CallableStatement cs = conexion.prepareCall(sql);
+            cs.setString(1, codProducto);
+            int filasEliminadas = cs.executeUpdate();
             if (filasEliminadas > 0) {
                 exito = true;
                 JOptionPane.showMessageDialog(null, "El producto se eliminó correctamente.");
@@ -167,50 +167,6 @@ public class ProductoModelo extends JFrame{
         return modelo;
     }
 
-    public DefaultTableModel listarCompras() {
-        DefaultTableModel modelo = new DefaultTableModel();
-
-        // Definir columnas
-        modelo.addColumn("Cod_Compra");
-        modelo.addColumn("Cod_Administrador");
-        modelo.addColumn("Cod_Proveedor");
-        modelo.addColumn("Fecha_Compra");
-        modelo.addColumn("Producto_Comprado");
-        modelo.addColumn("Cantidad_Producto_Kg");
-        modelo.addColumn("Valor_Unitario");
-        modelo.addColumn("Total_Producto");
-        modelo.addColumn("Total_Compra");
-
-        conectar();
-        String sqlPURCHASE = "SELECT p.COD_PURCHASE, p.COD_USER, p.COD_SUPPLIER, p.DATE_PURCHASE, p.TOTAL_PURCHASE_VALUE, pd.PURCHASED_PRODUCT, pd.UNIT_VALUE, pd.QUANTITY_Kg, pd.TOTAL_PRODUCT FROM PURCHASES p JOIN PURCHASES_DETAILS pd ON p.COD_PURCHASE = pd.COD_PURCHASE";
-
-        try {
-            ps = conexion.prepareStatement(sqlPURCHASE);
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-                Object[] fila = new Object[9];
-                fila[0] = rs.getString("COD_PURCHASE");
-                fila[1] = rs.getString("COD_USER");
-                fila[2] = rs.getString("COD_SUPPLIER");
-                fila[3] = rs.getString("DATE_PURCHASE");
-                fila[4] = rs.getString("PURCHASED_PRODUCT");
-                fila[5] = rs.getString("QUANTITY_Kg");
-                fila[6] = rs.getString("UNIT_VALUE");
-                fila[7] = rs.getString("TOTAL_PRODUCT");
-                fila[8] = rs.getString("TOTAL_PURCHASE_VALUE");
-
-                modelo.addRow(fila);
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Hay un error al mostrar los datos: " + e.getMessage());
-            e.printStackTrace();
-        } finally {
-            cerrarConexiones();
-        }
-
-        return modelo;
-    }
 
     private void cerrarConexiones() {
         try {
