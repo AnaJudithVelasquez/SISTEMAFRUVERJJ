@@ -62,30 +62,29 @@ public class CompraModelo extends JFrame {
         }
     }
 
-    // Operaciones CRUD para proveedores
+    // Operaciones CRUD para proveedores PROCESO ALMACENADO 1
     public int agregarProveedor(String nombre, String direccion, String telefono) {
         conectar();
         int codProveedorGenerado = -1;
-        String sql = "INSERT INTO SUPPLIERS (SUPPLIER_NAME, ADDRESS, PHONE_NUMBER) VALUES (?, ?, ?)";
+        String sql = "{CALL agregarProveedor(?, ?, ?, ?)}";  // Llamar al procedimiento con 3 IN y 1 OUT
 
         try {
-            ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, nombre);
-            ps.setString(2, direccion);
-            ps.setString(3, telefono);
-            ps.executeUpdate();
+            CallableStatement cs = conexion.prepareCall(sql);
+            cs.setString(1, nombre);
+            cs.setString(2, direccion);
+            cs.setString(3, telefono);
+            cs.registerOutParameter(4, java.sql.Types.INTEGER);  // OUT cod_supplier
 
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                codProveedorGenerado = rs.getInt(1);
-            } else {
-                throw new SQLException("Error al obtener el COD_SUPPLIER generado.");
-            }
+            cs.execute();
+
+            codProveedorGenerado = cs.getInt(4);  // Recuperar el OUT
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             cerrarConexion();
         }
+
         return codProveedorGenerado;
     }
 
@@ -228,4 +227,6 @@ public class CompraModelo extends JFrame {
         }
         return resultado;
     }
+
+
 }

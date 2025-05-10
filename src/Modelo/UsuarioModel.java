@@ -17,17 +17,21 @@ public class UsuarioModel {
         }
     }
 
-    // Método para validar los datos del usuario
+    // Método para validar los datos del usuario metodo almacenado
     public int validarUsuario(String nombreUsuario, String password) {
         conectar();
         int posicion = -1; // Valor por defecto si no se encuentra el usuario
 
         try {
-            st = conexion.createStatement();
-            rs = st.executeQuery("SELECT * FROM USERS WHERE NAME_U = '" + nombreUsuario + "' AND PASS_W = '" + password + "'");
+            String sql = "{CALL validarUsuario(?, ?)}";
+            CallableStatement cs = conexion.prepareCall(sql);
+            cs.setString(1, nombreUsuario);
+            cs.setString(2, password);
+
+            rs = cs.executeQuery();
 
             if (rs.next()) {
-                posicion = rs.getInt("POSITION");
+                posicion = rs.getInt("POSITION");  // Asegúrate de que el campo se llame así en el resultado del SP
                 JOptionPane.showMessageDialog(null, "Las credenciales del usuario son correctas");
             } else {
                 JOptionPane.showMessageDialog(null, "Las credenciales no son correctas");
@@ -35,6 +39,8 @@ public class UsuarioModel {
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        } finally {
+            cerrarConexion();
         }
 
         return posicion;

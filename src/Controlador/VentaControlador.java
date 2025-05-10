@@ -2,15 +2,11 @@ package Controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.table.DefaultTableModel;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 import java.awt.event.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import Modelo.ProductoModelo;
 import Vista.FruverView;
 import Vista.ProductoView;
 import com.itextpdf.text.*;
@@ -63,7 +59,6 @@ public class VentaControlador {
             @Override
             public void actionPerformed(ActionEvent e) {
                 agregarVenta();
-                generarFacturaPDF();
             }
         });
 
@@ -181,40 +176,6 @@ public class VentaControlador {
     public static void regresar() {
         FruverView enlace = new FruverView();
         enlace.mostrarVentanaFruver();
-    }
-
-    public void generarFacturaPDF() {
-        try {
-            Document documento = new Document();
-            PdfWriter.getInstance(documento, new FileOutputStream("Factura_Venta.pdf"));
-            documento.open();
-
-            documento.add(new Paragraph("FACTURA DE VENTA FRUVER AGUACATES JJ"));
-            documento.add(new Paragraph("Cod_Venta: " + vista.getCodVenta()));
-            documento.add(new Paragraph("Fecha_Venta: " + vista.getFechaVenta()));
-            documento.add(new Paragraph("Identificación_Cliente: " + vista.getIdentificacionCliente()));
-            documento.add(new Paragraph("Total_Venta: " + vista.getTotalVenta()));
-
-            List<ProductoDetalle> copiaProductos = new ArrayList<>(productosVenta);
-            for (ProductoDetalle producto : copiaProductos) {
-                documento.add(new Paragraph("Cod_Producto: " + producto.getCodProducto()));
-                documento.add(new Paragraph("Nombre_Producto: " + producto.getNombreProducto()));
-                documento.add(new Paragraph("Cantidad_Producto_Kg: " + producto.getCantidadKg()));
-                documento.add(new Paragraph("Precio_Producto: " + producto.getPrecioProducto()));
-                documento.add(new Paragraph("Total_Producto: " + producto.getTotalProducto()));
-                documento.add(new Paragraph("\n"));
-            }
-            documento.close();
-            vista.mostrarMensaje("Factura generada con éxito y se guardó en Factura_Venta.pdf");
-
-            // Limpiar la lista de productos y los campos después de generar la factura
-            productosVenta.clear();
-            vista.limpiarCamposVenta();
-
-        } catch (DocumentException | IOException e) {
-            vista.mostrarError("Error al generar la factura: " + e.getMessage());
-            e.printStackTrace();
-        }
     }
 
 

@@ -107,7 +107,7 @@
         </constraints>
         <properties>
           <font name="Century" size="16" style="0"/>
-          <text value="Cantidad Inicial:"/>
+          <text value="Inicial Cantidad:"/>
         </properties>
       </component>
       <component id="df829" class="javax.swing.JTextField" binding="Cantidad1">
@@ -124,7 +124,7 @@
         </constraints>
         <properties>
           <font name="Century" size="16" style="0"/>
-          <text value="Cantidad Final:"/>
+          <text value="Final Cantidad:"/>
         </properties>
       </component>
       <component id="df37a" class="javax.swing.JTextField" binding="CantidadFinal">
