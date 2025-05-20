@@ -8,10 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.sql.ResultSet;
@@ -55,7 +52,8 @@ public class CompraView extends JFrame {
     private JPanel panelCompras;
     private JButton mostrarComprasButton;
     private JButton volverButton;
-    private JScrollPane scrollPane;
+    private JButton consultarComprasButton;
+    private JScrollPane scrollPane;// nuevo botón
 
 
     public CompraView() {
@@ -98,6 +96,12 @@ public class CompraView extends JFrame {
         });
 
 
+        consultarComprasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ConsultaView.mostrarVentanaConsulta();
+            }
+        });
     }
 
 
