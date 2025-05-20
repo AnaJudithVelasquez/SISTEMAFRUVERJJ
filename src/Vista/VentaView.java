@@ -45,6 +45,7 @@ public class VentaView extends JFrame {
     private JButton volverButton;
     private JScrollPane scrollPane;
     private JScrollPane scrollPane2;
+    private JButton consultarVentasButton;
     private JButton mostrarProductosButton;
     private VentaModelo modelo = new VentaModelo();
     private Connection conexion;
@@ -142,6 +143,12 @@ public class VentaView extends JFrame {
                     mostrarError("Error al registrar la venta.");
                 }
                actualizarTablaVentas();
+            }
+        });
+        consultarVentasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ConsultaView.mostrarVentanaConsulta();
             }
         });
     }
