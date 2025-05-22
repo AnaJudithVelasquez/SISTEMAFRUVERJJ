@@ -5,14 +5,22 @@ import Controlador.VentaControlador;
 import javax.swing.*;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.awt.Desktop;
 import Modelo.VentaModelo;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 
 public class VentaView extends JFrame {
     private JPanel panelVentas;
@@ -145,12 +153,7 @@ public class VentaView extends JFrame {
                actualizarTablaVentas();
             }
         });
-        consultarVentasButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ConsultaView.mostrarVentanaConsulta();
-            }
-        });
+
     }
 
 
@@ -357,6 +360,11 @@ public class VentaView extends JFrame {
 
             if (filasInsertadas.length > 0) {
                 conexion.commit();
+                int opcion = JOptionPane.showConfirmDialog(null, "¿Deseas imprimir la factura?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                if (opcion == JOptionPane.YES_OPTION) {
+                    generarFacturaPDF(codVentaGenerado, fechaVenta, identificacionCliente, codUsuario, totalVenta, productosVenta);
+                }
+
                 return codVentaGenerado;
             } else {
                 throw new SQLException("No se pudieron insertar los productos en la venta.");
@@ -586,6 +594,53 @@ public class VentaView extends JFrame {
             e.printStackTrace();
         }
     }
+
+    private void generarFacturaPDF(int codVenta, String fechaVenta, String identificacionCliente, String codUsuario, String totalVenta, List<VentaModelo.ProductoDetalle> productosVenta) {
+        Document document = new Document();
+
+        try {
+            File folder = new File("facturas");
+            if (!folder.exists()) folder.mkdirs();
+
+            // Nombre único para cada factura
+            String nombreArchivo = "facturas/Factura_" + codVenta + "_" + System.currentTimeMillis() + ".pdf";
+            PdfWriter.getInstance(document, new FileOutputStream(nombreArchivo));
+            document.open();
+
+            Font tituloFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18);
+            Font textoFont = FontFactory.getFont(FontFactory.HELVETICA, 12);
+
+            document.add(new Paragraph("FRUVER AGUACATES JJ", tituloFont));
+            document.add(new Paragraph(" ", textoFont));
+            document.add(new Paragraph("Factura N°: " + codVenta, textoFont));
+            document.add(new Paragraph("Fecha: " + fechaVenta, textoFont));
+            document.add(new Paragraph("Cliente (CC): " + identificacionCliente, textoFont));
+            document.add(new Paragraph("Empleado (ID): " + codUsuario, textoFont));
+            document.add(new Paragraph("\nDetalles de la venta:", textoFont));
+            document.add(new Paragraph("--------------------------------------", textoFont));
+
+            for (VentaModelo.ProductoDetalle detalle : productosVenta) {
+                document.add(new Paragraph("Producto: " + detalle.getNombreProducto(), textoFont));
+                document.add(new Paragraph("Cantidad (Kg): " + detalle.getCantidadKg(), textoFont));
+                document.add(new Paragraph("Precio Unitario: $" + String.format("%.0f", Double.parseDouble(detalle.getPrecioProducto())), textoFont));
+                document.add(new Paragraph("Total: $" + String.format("%.0f", Double.parseDouble(detalle.getTotalProducto())), textoFont));
+                document.add(new Paragraph(" ", textoFont));
+            }
+
+            document.add(new Paragraph("--------------------------------------", textoFont));
+            document.add(new Paragraph("Total venta: $" + totalVenta, tituloFont));
+            document.add(new Paragraph("\nGracias por su compra.", textoFont));
+            document.close();
+
+            JOptionPane.showMessageDialog(null, "Factura generada exitosamente: " + nombreArchivo);
+            Desktop.getDesktop().open(new File(nombreArchivo));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al generar PDF: " + e.getClass().getName() + " - " + e.getMessage());
+        }
+    }
+
 
     public static void mostrarVentanaVentas() {
         VentaView ventaView = new VentaView();

@@ -96,12 +96,6 @@ public class CompraView extends JFrame {
         });
 
 
-        consultarComprasButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ConsultaView.mostrarVentanaConsulta();
-            }
-        });
     }
 
 

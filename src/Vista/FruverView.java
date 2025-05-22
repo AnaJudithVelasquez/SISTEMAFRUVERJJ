@@ -13,6 +13,7 @@ public class FruverView extends JFrame {
     private JButton comprasButton;
     private JButton productosButton;
     private JButton ventasButton;
+    private JButton consultarComprasYVentasButton;
 
     public FruverView() {
         setContentPane(panelOpciones);
@@ -40,6 +41,13 @@ public class FruverView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FruverModelo.abrirVentas();
+                dispose();
+            }
+        });
+        consultarComprasYVentasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ConsultaView.mostrarVentanaConsulta();
                 dispose();
             }
         });

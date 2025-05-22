@@ -12,6 +12,8 @@ public class ConsultaView extends JFrame {
     public JTable tablaResultados;
     public JDateChooser fechaInicioChooser;
     public JDateChooser fechaFinChooser;
+    public JTextField txtTotal;
+    public JButton btnVolver;
 
     public ConsultaView() {
         setTitle("Consulta de Ventas y Compras");
@@ -31,10 +33,17 @@ public class ConsultaView extends JFrame {
 
         btnConsultarVentas = new JButton("Consultar Ventas");
         btnConsultarCompras = new JButton("Consultar Compras");
+        btnVolver = new JButton("Volver");
         panelSuperior.add(btnConsultarVentas);
         panelSuperior.add(btnConsultarCompras);
+        panelSuperior.add(btnVolver);
 
         add(panelSuperior, BorderLayout.NORTH);
+
+        panelSuperior.add(new JLabel("Total:"));
+        txtTotal = new JTextField(10);
+        txtTotal.setEditable(false);
+        panelSuperior.add(txtTotal);
 
         // Tabla en el centro
         tablaResultados = new JTable();
@@ -50,6 +59,10 @@ public class ConsultaView extends JFrame {
 
     public String getFechaFin() {
         return new SimpleDateFormat("yyyy-MM-dd").format(fechaFinChooser.getDate());
+    }
+
+    public void setTotal(String total) {
+        txtTotal.setText(total);
     }
 
     public static void mostrarVentanaConsulta() {
