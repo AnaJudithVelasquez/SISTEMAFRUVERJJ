@@ -18,6 +18,7 @@ import Modelo.VentaModelo.ProductoDetalle;
 import Modelo.VentaModelo;
 import Vista.VentaView;
 
+import javax.swing.*;
 
 
 public class VentaControlador {
@@ -146,6 +147,8 @@ public class VentaControlador {
             vista.mostrarMensaje("La venta y los productos se insertaron correctamente.");
             cargarDatosVentas();
             agregarProducto();
+
+
         } else {
             vista.mostrarError("Error al registrar la venta");
         }
@@ -172,6 +175,8 @@ public class VentaControlador {
         vista.setTotalVenta(String.format("%.2f", totalVenta));
         System.out.println("Total de venta actualizado: " + totalVenta);
     }
+
+
 
     public static void regresar() {
         FruverView enlace = new FruverView();

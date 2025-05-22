@@ -12,11 +12,8 @@ public class ConsultaModelo {
     }
 
     public DefaultTableModel consultarVentasPorFecha(String fechaInicio, String fechaFin) throws SQLException {
-        String sql = "SELECT s.COD_SALE, s.COD_USER, s.DATE_SALE, s.COSTUMER_IDENTIFICATION,\n" +
-                "           d.COD_PRODUCT, d.PRODUCT_NAME, d.PRODUCT_QUANTITY_Kg, d.PRODUCT_PRICE,\n" +
-                "           d.TOTAL_PRODUCT, s.TOTAL_SALE_VALUE\n" +
-                "    FROM SALES s\n" +
-                "    JOIN SALES_DETAILS d ON s.COD_SALE = d.COD_SALE WHERE DATE_SALE BETWEEN ? AND ?";
+        String sql = "SELECT COD_SALE, DATE_SALE, COSTUMER_IDENTIFICATION, TOTAL_SALE_VALUE " +
+                "FROM SALES WHERE DATE_SALE BETWEEN ? AND ?";
         PreparedStatement ps = conexion.prepareStatement(sql);
         ps.setString(1, fechaInicio);
         ps.setString(2, fechaFin);
@@ -25,10 +22,10 @@ public class ConsultaModelo {
         return construirModeloDesdeResultSet(rs);
     }
 
+
     public DefaultTableModel consultarComprasPorFecha(String fechaInicio, String fechaFin) throws SQLException {
-        String sql = "SELECT p.COD_PURCHASE, p.COD_USER, p.COD_SUPPLIER, p.DATE_PURCHASE, p.TOTAL_PURCHASE_VALUE, \" +\n" +
-                "                \"pd.PURCHASED_PRODUCT, pd.UNIT_VALUE, pd.QUANTITY_Kg, pd.TOTAL_PRODUCT \" +\n" +
-                "                \"FROM PURCHASES p JOIN PURCHASES_DETAILS pd ON p.COD_PURCHASE = pd.COD_PURCHASE WHERE DATE_PURCHASE BETWEEN ? AND ?";
+        String sql = "SELECT COD_PURCHASE, DATE_PURCHASE, TOTAL_PURCHASE_VALUE " +
+                "FROM PURCHASES WHERE DATE_PURCHASE BETWEEN ? AND ?";
         PreparedStatement ps = conexion.prepareStatement(sql);
         ps.setString(1, fechaInicio);
         ps.setString(2, fechaFin);
@@ -51,7 +48,7 @@ public class ConsultaModelo {
     }
 
     public double sumarTotalCompras(String fechaInicio, String fechaFin) throws SQLException {
-        String sql = "SELECT SUM(TOTAL_PURHCASE_VALUE) FROM PURCHASE WHERE DATE_PURCHASE BETWEEN ? AND ?";
+        String sql = "SELECT SUM(TOTAL_PURCHASE_VALUE) FROM PURCHASES WHERE DATE_PURCHASE BETWEEN ? AND ?";
         PreparedStatement ps = conexion.prepareStatement(sql);
         ps.setString(1, fechaInicio);
         ps.setString(2, fechaFin);
