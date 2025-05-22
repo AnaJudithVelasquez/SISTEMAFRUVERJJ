@@ -4,17 +4,19 @@ import Controlador.VentaControlador;
 
 import javax.swing.*;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.font.TextAttribute;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.awt.Desktop;
+
 import Modelo.VentaModelo;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Font;
@@ -53,6 +55,9 @@ public class VentaView extends JFrame {
     private JButton volverButton;
     private JScrollPane scrollPane;
     private JScrollPane scrollPane2;
+    private JTable tableVentaActual;
+    private JButton eliminarProductoButton;
+    private JButton cancelarVentaButton;
     private JButton consultarVentasButton;
     private JButton mostrarProductosButton;
     private VentaModelo modelo = new VentaModelo();
@@ -60,6 +65,7 @@ public class VentaView extends JFrame {
     private PreparedStatement ps;
     private ResultSet rs;
     private List<VentaModelo.ProductoDetalle> productosVenta = new ArrayList<>();
+    private Set<Integer> ventasCanceladas = new HashSet<>();
 
     public VentaView() {
 
@@ -70,6 +76,7 @@ public class VentaView extends JFrame {
         setContentPane(panelVentas);
 
          actualizarTablaVentas();
+        yaMostroAlertaStock = false; // 🟢 Reinicia la alerta al abrir
         verificarStockMinimoConMargen();
          listarProductos();
 
@@ -126,6 +133,7 @@ public class VentaView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 agregarProducto();
+
             }
         });
 
@@ -147,10 +155,42 @@ public class VentaView extends JFrame {
                 if (codVenta != -1) {
                     mostrarMensaje("Venta registrada exitosamente. Código: " + codVenta);
                     limpiarCamposVenta();
+                    limpiarTablaVentaActual();
                 } else {
                     mostrarError("Error al registrar la venta.");
                 }
                actualizarTablaVentas();
+            }
+        });
+
+        eliminarProductoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int filaSeleccionada = tableVentaActual.getSelectedRow();
+                eliminarProductoDeVenta(filaSeleccionada);
+            }
+        });
+        cancelarVentaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int filaSeleccionada = table2.getSelectedRow();
+
+                if (filaSeleccionada == -1) {
+                    mostrarError("Selecciona una venta de la tabla.");
+                    return;
+                }
+
+                try {
+                    // Asegúrate de que la columna 0 sea donde está el COD_VENTA
+                    int codVenta = Integer.parseInt(table2.getValueAt(filaSeleccionada, 0).toString());
+
+                    int confirm = JOptionPane.showConfirmDialog(null, "¿Seguro que deseas cancelar la venta?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                    if (confirm == JOptionPane.YES_OPTION) {
+                        cancelarVenta(codVenta);
+                    }
+                } catch (NumberFormatException ex) {
+                    mostrarError("Código de venta no válido.");
+                }
             }
         });
 
@@ -295,9 +335,32 @@ public class VentaView extends JFrame {
         String totalProducto = getTotalPorProducto().replace(",", ".");
 
         if (codProducto.isEmpty() || nombreProducto.isEmpty() || cantidad.isEmpty() ||
-                precioProducto.isEmpty() || totalProducto.isEmpty()) {
+            precioProducto.isEmpty() || totalProducto.isEmpty()) {
             mostrarError("Debe completar todos los campos del producto");
             return;
+        }
+
+        // Verificar existencia del producto antes de agregarlo
+        double existencia = 0.0;
+
+        try {
+            PreparedStatement ps = conexion.prepareStatement(
+                    "SELECT FINAL_QUANTITY_KG FROM PRODUCTS WHERE COD_PRODUCT = ?");
+            ps.setString(1, codProducto); // Usa String si tu codProducto es tipo String
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                existencia = rs.getDouble("FINAL_QUANTITY_KG");
+            }
+
+            if (existencia == 0.0) {
+                mostrarError("No hay existencias de este producto. No se puede agregar a la venta.");
+                return; // 🚫 No permite agregarlo
+            }
+
+        } catch (SQLException e) {
+            mostrarError("Error al verificar existencias: " + e.getMessage());
+            return; // 🚫 Detener si hay error
         }
 
         // Crear el objeto ProductoDetalle y agregarlo a la lista
@@ -308,10 +371,37 @@ public class VentaView extends JFrame {
 
         // Recalcular el total de la venta
         actualizarTotalVenta();
-
+        actualizarTablaVentaActual();
         mostrarMensaje("Producto agregado a la venta.");
         limpiarCamposProducto();
     }
+
+
+    private void eliminarProductoSeleccionado() {
+        int filaSeleccionada = tableVentaActual.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            String codProducto = tableVentaActual.getValueAt(filaSeleccionada, 0).toString();
+            int codProductoInt = Integer.parseInt(codProducto); // Conversión
+            eliminarProductoDeVenta(codProductoInt); // Llamada correcta
+            actualizarTablaVentaActual();
+        } else {
+            mostrarError("Selecciona una fila para eliminar.");
+        }
+    }
+
+
+    public void eliminarProductoDeVenta(int indiceSeleccionado) {
+        if (indiceSeleccionado >= 0 && indiceSeleccionado < productosVenta.size()) {
+            productosVenta.remove(indiceSeleccionado);
+            actualizarTablaVentaActual();  // Método que debes tener para refrescar la tabla
+            actualizarTotalVenta();           // Recalcular total de la venta
+            mostrarMensaje("Producto eliminado de la venta.");
+        } else {
+            mostrarError("Selecciona un producto válido para eliminar.");
+        }
+    }
+
+
 
 
     public int agregarVenta(String codUsuario, String fechaVenta, String identificacionCliente, String totalVenta, List<VentaModelo.ProductoDetalle> productosVenta) {
@@ -384,6 +474,83 @@ public class VentaView extends JFrame {
             cerrarConexiones();
         }
     }
+
+    public void cancelarVenta(int codVenta) {
+        conectar();
+        try {
+            conexion.setAutoCommit(false);  // Iniciar transacción
+
+            // 1. Obtener detalles de productos vendidos
+            PreparedStatement psDetalle = conexion.prepareStatement(
+                    "SELECT COD_PRODUCT, PRODUCT_QUANTITY_Kg FROM SALES_DETAILS WHERE COD_SALE = ?");
+            psDetalle.setInt(1, codVenta);
+            ResultSet rsDetalle = psDetalle.executeQuery();
+
+            while (rsDetalle.next()) {
+                int codProducto = rsDetalle.getInt("COD_PRODUCT");
+                double cantidadDevuelta = rsDetalle.getDouble("PRODUCT_QUANTITY_Kg");
+
+                // 2. Devolver al inventario
+                PreparedStatement psUpdate = conexion.prepareStatement(
+                        "UPDATE PRODUCTS SET FINAL_QUANTITY_KG = FINAL_QUANTITY_KG + ? WHERE COD_PRODUCT = ?");
+                psUpdate.setDouble(1, cantidadDevuelta);
+                psUpdate.setInt(2, codProducto);
+                psUpdate.executeUpdate();
+            }
+
+            // 3. Actualizar el estado de la venta a CANCELADA (Aquí va tu línea)
+            PreparedStatement psCancelarVenta = conexion.prepareStatement(
+                    "UPDATE SALES SET STATUS = 'CANCELADA' WHERE COD_SALE = ?");
+            psCancelarVenta.setInt(1, codVenta);
+            psCancelarVenta.executeUpdate();
+
+            // 4. Confirmar cambios
+            conexion.commit();
+
+            // 5. Acciones de interfaz
+            ventasCanceladas.add(codVenta); // Si llevas un registro en memoria
+            mostrarMensaje("Venta cancelada y stock actualizado correctamente.");
+            actualizarTablaVentas(); // Refrescar tabla en la interfaz
+
+        } catch (SQLException e) {
+            try {
+                conexion.rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            mostrarError("Error al cancelar la venta: " + e.getMessage());
+        } finally {
+            cerrarConexiones();
+        }
+    }
+
+
+    private void actualizarTablaVentaActual() {
+        // Crear un nuevo modelo
+        DefaultTableModel nuevoModelo = new DefaultTableModel();
+        nuevoModelo.addColumn("Cod_Producto");
+        nuevoModelo.addColumn("Nombre_Producto");
+        nuevoModelo.addColumn("Cantidad (Kg)");
+        nuevoModelo.addColumn("Precio");
+        nuevoModelo.addColumn("Total");
+
+        // Llenar con datos
+        for (VentaModelo.ProductoDetalle producto : productosVenta) {
+            Object[] fila = {
+                    producto.getCodProducto(),
+                    producto.getNombreProducto(),
+                    producto.getCantidadKg(),
+                    producto.getPrecioProducto(),
+                    producto.getTotalProducto()
+            };
+            nuevoModelo.addRow(fila);
+        }
+
+        // Asignar el nuevo modelo a la tabla
+        tableVentaActual.setModel(nuevoModelo);
+    }
+
+
 
 
     // Métodos para actualizar las tablas
@@ -497,20 +664,22 @@ public class VentaView extends JFrame {
         modelo.addColumn("Precio_Producto");
         modelo.addColumn("Total_Por_Producto");
         modelo.addColumn("Total_Venta");
+        modelo.addColumn("Estado");
 
         conectar();
         try {
             Statement st = conexion.createStatement();
             ResultSet rs = st.executeQuery("""
     SELECT s.COD_SALE, s.COD_USER, s.DATE_SALE, s.COSTUMER_IDENTIFICATION,
-           d.COD_PRODUCT, d.PRODUCT_NAME, d.PRODUCT_QUANTITY_Kg, d.PRODUCT_PRICE,
-           d.TOTAL_PRODUCT, s.TOTAL_SALE_VALUE
-    FROM SALES s
-    JOIN SALES_DETAILS d ON s.COD_SALE = d.COD_SALE
+                                                                              d.COD_PRODUCT, d.PRODUCT_NAME, d.PRODUCT_QUANTITY_Kg, d.PRODUCT_PRICE,
+                                                                              d.TOTAL_PRODUCT, s.TOTAL_SALE_VALUE, s.STATUS
+                                                                       FROM SALES s
+                                                                       JOIN SALES_DETAILS d ON s.COD_SALE = d.COD_SALE
+             
 """);
 
             while (rs.next()) {
-                Object[] fila = new Object[10];
+                Object[] fila = new Object[11];
                 fila[0] = rs.getInt("COD_SALE");
                 fila[1] = rs.getInt("COD_USER");
                 fila[2] = rs.getString("DATE_SALE");
@@ -521,10 +690,38 @@ public class VentaView extends JFrame {
                 fila[7] = rs.getDouble("PRODUCT_PRICE");
                 fila[8] = rs.getInt("TOTAL_PRODUCT");
                 fila[9] = rs.getString("TOTAL_SALE_VALUE");
+                fila[10] = rs.getString("STATUS");
                 modelo.addRow(fila);
             }
 
             table2.setModel(modelo);
+            table2.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+                @Override
+                public Component getTableCellRendererComponent(JTable table, Object value,
+                                                               boolean isSelected, boolean hasFocus, int row, int column) {
+
+                    Component cell = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+                    try {
+                        int modelRow = table.convertRowIndexToModel(row); // importante si hay ordenamiento
+                        String estado = modelo.getValueAt(modelRow, 10).toString(); // columna STATUS (posición 10)
+
+                        if ("CANCELADA".equalsIgnoreCase(estado)) {
+                            cell.setBackground(Color.RED);
+                            cell.setForeground(Color.WHITE);
+                        } else {
+                            cell.setBackground(Color.WHITE);
+                            cell.setForeground(Color.BLACK);
+                        }
+                    } catch (Exception ex) {
+                        cell.setBackground(Color.WHITE);
+                        cell.setForeground(Color.BLACK);
+                    }
+
+                    return cell;
+                }
+            });
+
 
         } catch (SQLException e) {
             mostrarError("Error al cargar ventas: " + e.getMessage());
@@ -534,11 +731,9 @@ public class VentaView extends JFrame {
     private static boolean yaMostroAlertaStock = false;
 
     public void verificarStockMinimoConMargen() {
-        if (yaMostroAlertaStock) return;
-
         conectar();
-        double margen = 2.0;
-        boolean yaAlertoEsteProducto = false;  // Nueva bandera local
+        double margen = 1.0;
+        StringBuilder alerta = new StringBuilder();
 
         try {
             Statement st = conexion.createStatement();
@@ -549,22 +744,29 @@ public class VentaView extends JFrame {
                 double cantidadActual = rs.getDouble("FINAL_QUANTITY_KG");
                 double stockMinimo = rs.getDouble("STOCK");
 
-                if (cantidadActual <= stockMinimo + margen && !yaAlertoEsteProducto) {
-                    JOptionPane.showMessageDialog(null,
-                            "⚠ El producto '" + nombre + "' está por llegar al stock mínimo.\n" +
-                                    "Cantidad actual: " + cantidadActual + " kg (mínimo: " + stockMinimo + " kg).",
-                            "Alerta de Stock Bajo", JOptionPane.WARNING_MESSAGE);
-
-                    yaMostroAlertaStock = true;
-                    yaAlertoEsteProducto = true;  // Se asegura de no repetir alerta
-                    break;  // Ya alertamos, salimos del while
+                if (cantidadActual == 0.0) {
+                    alerta.append("🚫 El producto '").append(nombre)
+                            .append("' NO tiene existencias.\n")
+                            .append("⚠ Urgente reabastecer.\n\n");
+                } else if (cantidadActual <= stockMinimo + margen) {
+                    alerta.append("⚠ El producto '").append(nombre)
+                            .append("' está por llegar al stock mínimo.\n")
+                            .append("Cantidad actual: ").append(cantidadActual).append(" kg ")
+                            .append("(mínimo: ").append(stockMinimo).append(" kg).\n\n");
                 }
+            }
+
+            if (alerta.length() > 0) {
+                JOptionPane.showMessageDialog(null,
+                        alerta.toString(),
+                        "⚠ Alerta de Stock", JOptionPane.WARNING_MESSAGE);
             }
 
         } catch (SQLException e) {
             mostrarError("Error al verificar el stock mínimo: " + e.getMessage());
         }
     }
+
 
 
 
@@ -639,6 +841,16 @@ public class VentaView extends JFrame {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error al generar PDF: " + e.getClass().getName() + " - " + e.getMessage());
         }
+    }
+
+    private void limpiarTablaVentaActual() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Cod_Producto");
+        modelo.addColumn("Nombre_Producto");
+        modelo.addColumn("Cantidad (Kg)");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Total");
+        tableVentaActual.setModel(modelo); // ← esto limpia visualmente la tabla
     }
 
 
