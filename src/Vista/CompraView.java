@@ -8,6 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import java.awt.*;
 import java.awt.event.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -62,6 +66,19 @@ public class CompraView extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+        JTableHeader header = table1P.getTableHeader();
+        header.setBackground(new Color(109, 149, 99)); // Color verde personalizado
+        header.setForeground(Color.BLACK);             // Texto blanco
+        header.setFont(new Font("Arial", Font.BOLD, 14)); // Fuente opcional
+
+        table1P.setSelectionBackground(UIManager.getColor("Table.selectionBackground"));
+        table1P.setSelectionForeground(UIManager.getColor("Table.selectionForeground"));
+
+
+        JTableHeader header1 = table1.getTableHeader();
+        header1.setBackground(new Color(109, 149, 99)); // Color verde personalizado
+        header1.setForeground(Color.BLACK);             // Texto blanco
+        header1.setFont(new Font("Arial", Font.BOLD, 14));
 
 
         // Configurar fecha actual
@@ -145,11 +162,30 @@ public class CompraView extends JFrame {
             }
 
             table1P.setModel(model);
+            ajustarAnchoColumnas(table1P);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al mostrar los datos: " + e.getMessage());
             e.printStackTrace();
         }
     }
+
+    private void ajustarAnchoColumnas(JTable tabla) {
+        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Importante: desactiva auto-resize por defecto
+
+        for (int col = 0; col < tabla.getColumnCount(); col++) {
+            TableColumn column = tabla.getColumnModel().getColumn(col);
+            int ancho = 150; // Ancho mínimo por si no hay datos
+
+            for (int row = 0; row < tabla.getRowCount(); row++) {
+                TableCellRenderer renderer = tabla.getCellRenderer(row, col);
+                Component comp = tabla.prepareRenderer(renderer, row, col);
+                ancho = Math.max(comp.getPreferredSize().width + 10, ancho);
+            }
+
+            column.setPreferredWidth(ancho);
+        }
+    }
+
 
     public void mostrarDatosCompras(ResultSet rs) {
         try {
@@ -184,6 +220,9 @@ public class CompraView extends JFrame {
             }
 
             table1.setModel(model);
+
+            ajustarAnchoColumnas(table1);
+
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al mostrar los datos de compra: " + e.getMessage());
             e.printStackTrace();
@@ -253,6 +292,5 @@ public class CompraView extends JFrame {
         CompraControlador controlador = new CompraControlador(modelo, vista);
 
         vista.setVisible(true);
-        vista.pack();
     }
 }

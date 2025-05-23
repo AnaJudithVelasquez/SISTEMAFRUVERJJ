@@ -1,8 +1,11 @@
 package Vista;
 
 import javax.swing.*;
+
+import Controlador.PantallaInicioControlador;
 import Modelo.FruverModelo;
 import Controlador.FruverControlador;
+import Modelo.UsuarioModel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +17,7 @@ public class FruverView extends JFrame {
     private JButton productosButton;
     private JButton ventasButton;
     private JButton consultarComprasYVentasButton;
+    private JButton cerrarSesionButton;
 
     public FruverView() {
         setContentPane(panelOpciones);
@@ -51,6 +55,27 @@ public class FruverView extends JFrame {
                 dispose();
             }
         });
+        cerrarSesionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Cerramos esta ventana de forma segura
+                JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor(cerrarSesionButton);
+                if (ventanaActual != null) {
+                    ventanaActual.dispose();  // Esto cierra correctamente la ventana de FruverView
+                }
+
+                // Lanzamos la pantalla de login nuevamente
+                SwingUtilities.invokeLater(() -> {
+                    UsuarioModel modelo = new UsuarioModel();
+                    PantallaInicioView vista = new PantallaInicioView();
+                    PantallaInicioControlador controlador = new PantallaInicioControlador(modelo, vista);
+                    controlador.iniciar();
+                });
+            }
+        });
+
+
+
     }
 
     // Getters para que el controlador pueda acceder a los componentes
@@ -69,8 +94,9 @@ public class FruverView extends JFrame {
     // Método para mostrar la ventana
     public void mostrarVentana() {
         setVisible(true);
-        pack();
+
     }
+
 
 
     // Método para cerrar la ventana

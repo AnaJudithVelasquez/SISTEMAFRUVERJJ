@@ -40,7 +40,8 @@ public class ConsultaControlador {
             @Override
             public void actionPerformed(ActionEvent e) {
                 vista.dispose(); // Cierra la ventana actual
-                Vista.FruverView.mostrarVentanaFruver(); // Abre la ventana principal
+                Vista.FruverView.mostrarVentanaFruver();
+                // Abre la ventana principal
             }
         });
 

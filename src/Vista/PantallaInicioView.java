@@ -12,33 +12,40 @@ public class PantallaInicioView extends JFrame {
 
     public PantallaInicioView() {
         setContentPane(panelFruver);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH); // Pantalla completa
+        setLocationRelativeTo(null); // Centrar ventana
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // Cierra solo esta ventana
     }
 
-    // Métodos getter para obtener los valores de los componentes
+    // Obtener el texto del campo de usuario
     public String getUsuario() {
         return USER1.getText();
     }
 
+    // Obtener la contraseña
     public String getPassword() {
-        return String.valueOf(PASS1.getText());
+        return String.valueOf(PASS1.getPassword());
     }
 
+    // Obtener el botón de ingreso
     public JButton getBotonIngresar() {
         return INGRESAR;
     }
 
+    // Obtener el campo de contraseña (para usar Enter)
+    public JPasswordField getCampoPassword() {
+        return PASS1;
+    }
+
+    // Cierra la ventana
     public void cerrar() {
         dispose();
     }
 
-    // Método para mostrar la ventana principal
+    // Mostrar la ventana
     public void mostrarVentana() {
-        setVisible(true);
-        pack();
+        setVisible(true);// Ajustar tamaño a los componentes
     }
-
-
 }

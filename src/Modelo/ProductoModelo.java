@@ -3,8 +3,11 @@ package Modelo;
 
 import javax.swing.*;
 import javax.swing.JOptionPane;
+import java.awt.*;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 public class ProductoModelo extends JFrame{
     Connection conexion;
@@ -166,6 +169,8 @@ public class ProductoModelo extends JFrame{
 
         return modelo;
     }
+
+
 
 
     private void cerrarConexiones() {

@@ -9,7 +9,6 @@ import Vista.PantallaInicioView;
 import Vista.VentaView;
 import Vista.FruverView;
 
-
 public class PantallaInicioControlador {
     private UsuarioModel modelo;
     private PantallaInicioView vista;
@@ -18,15 +17,26 @@ public class PantallaInicioControlador {
         this.modelo = modelo;
         this.vista = vista;
 
+        // ✅ Asociar botón con ActionListener
+
+        // ✅ Permitir que ENTER dispare el botón por defecto
+        this.vista.getCampoPassword().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                validarUsuario();
+            }
+        });
+
         this.vista.getBotonIngresar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 validarUsuario();
             }
         });
+
     }
 
-
+    // ✅ Método que valida al usuario
     private void validarUsuario() {
         String usuario = vista.getUsuario();
         String password = vista.getPassword();
@@ -45,7 +55,7 @@ public class PantallaInicioControlador {
                 ventaView.setVisible(true);
                 break;
             case -1:
-                // Las credenciales ya se notificaron como incorrectas en el modelo
+                // Ya se notificó el error en el modelo
                 break;
             default:
                 JOptionPane.showMessageDialog(null, "El rol del usuario no está definido correctamente.");
@@ -53,11 +63,9 @@ public class PantallaInicioControlador {
         }
     }
 
-
     public void iniciar() {
         vista.mostrarVentana();
     }
-
 
     public static void main(String[] args) {
         UsuarioModel modelo = new UsuarioModel();

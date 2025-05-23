@@ -206,25 +206,20 @@
       </component>
       <component id="fbcb8" class="javax.swing.JButton" binding="eliminarButton">
         <constraints>
-          <grid row="13" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="13" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font name="Century" size="16" style="0"/>
           <text value="Eliminar"/>
         </properties>
       </component>
-      <component id="67c83" class="javax.swing.JButton" binding="mostrarButton">
-        <constraints>
-          <grid row="13" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font name="Century" size="16" style="0"/>
-          <text value="Mostrar"/>
-        </properties>
-      </component>
       <scrollpane id="b09">
         <constraints>
-          <grid row="1" column="4" row-span="11" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="4" row-span="11" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="800" height="500"/>
+            <preferred-size width="800" height="500"/>
+            <maximum-size width="800" height="500"/>
+          </grid>
         </constraints>
         <properties/>
         <border type="none"/>
