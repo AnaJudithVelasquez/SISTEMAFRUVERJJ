@@ -63,9 +63,6 @@ public class ProductoView extends JFrame {
         eliminarButton.addActionListener(listener);
     }
 
-    public void agregarListenerMostrar(ActionListener listener) {
-        mostrarButton.addActionListener(listener);
-    }
 
     public void agregarListenerVolver(ActionListener listener) {
         volverButton.addActionListener(listener);
@@ -149,7 +146,10 @@ public class ProductoView extends JFrame {
 
     public void mostrarVentana() {
         setVisible(true);
-        pack();
+    }
+
+    public JTable getTablaProductos() {
+        return table1;
     }
 
 

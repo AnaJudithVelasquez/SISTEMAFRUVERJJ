@@ -1,14 +1,16 @@
 package Vista;
 
+import Controlador.PantallaInicioControlador;
 import Controlador.VentaControlador;
 
 import javax.swing.*;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.font.TextAttribute;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.*;
@@ -17,6 +19,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 
+import Modelo.UsuarioModel;
 import Modelo.VentaModelo;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Font;
@@ -58,6 +61,7 @@ public class VentaView extends JFrame {
     private JTable tableVentaActual;
     private JButton eliminarProductoButton;
     private JButton cancelarVentaButton;
+    private JButton cerrarSesionButton;
     private JButton consultarVentasButton;
     private JButton mostrarProductosButton;
     private VentaModelo modelo = new VentaModelo();
@@ -160,6 +164,7 @@ public class VentaView extends JFrame {
                     mostrarError("Error al registrar la venta.");
                 }
                actualizarTablaVentas();
+                listarProductos();
             }
         });
 
@@ -191,9 +196,21 @@ public class VentaView extends JFrame {
                 } catch (NumberFormatException ex) {
                     mostrarError("Código de venta no válido.");
                 }
+
+                listarProductos();
             }
         });
 
+        cerrarSesionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                UsuarioModel modelo = new UsuarioModel();
+                PantallaInicioView vista = new PantallaInicioView();
+                PantallaInicioControlador controlador = new PantallaInicioControlador(modelo, vista);
+                controlador.iniciar();
+               dispose();
+            }
+        });
     }
 
 
@@ -548,6 +565,7 @@ public class VentaView extends JFrame {
 
         // Asignar el nuevo modelo a la tabla
         tableVentaActual.setModel(nuevoModelo);
+        ajustarAnchoColumnas(tableVentaActual);
     }
 
 
@@ -617,11 +635,29 @@ public class VentaView extends JFrame {
                 modelo.addRow(fila);
             }
             table1.setModel(modelo);
+            ajustarAnchoColumnas(table1);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Hay un error al mostrar los datos: " + e.getMessage());
             e.printStackTrace();
         }
 
+    }
+
+    private void ajustarAnchoColumnas(JTable tabla) {
+        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Importante: desactiva auto-resize por defecto
+
+        for (int col = 0; col < tabla.getColumnCount(); col++) {
+            TableColumn column = tabla.getColumnModel().getColumn(col);
+            int ancho = 150; // Ancho mínimo por si no hay datos
+
+            for (int row = 0; row < tabla.getRowCount(); row++) {
+                TableCellRenderer renderer = tabla.getCellRenderer(row, col);
+                Component comp = tabla.prepareRenderer(renderer, row, col);
+                ancho = Math.max(comp.getPreferredSize().width + 10, ancho);
+            }
+
+            column.setPreferredWidth(ancho);
+        }
     }
 
     // Métodos de utilidad para interactuar con el usuario
@@ -695,6 +731,7 @@ public class VentaView extends JFrame {
             }
 
             table2.setModel(modelo);
+            ajustarAnchoColumnas(table2);
             table2.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
                 @Override
                 public Component getTableCellRendererComponent(JTable table, Object value,
@@ -843,6 +880,8 @@ public class VentaView extends JFrame {
         }
     }
 
+
+
     private void limpiarTablaVentaActual() {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Cod_Producto");
@@ -853,12 +892,18 @@ public class VentaView extends JFrame {
         tableVentaActual.setModel(modelo); // ← esto limpia visualmente la tabla
     }
 
+    public static void cerrarSesion(){
+
+        PantallaInicioView pantallaInicioView = new PantallaInicioView();
+        pantallaInicioView.mostrarVentana();
+    }
+
+
 
     public static void mostrarVentanaVentas() {
         VentaView ventaView = new VentaView();
         ventaView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         ventaView.setVisible(true);
-        ventaView.pack();
     }
 
 

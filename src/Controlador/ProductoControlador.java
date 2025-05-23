@@ -4,6 +4,10 @@ import Modelo.ProductoModelo;
 import Vista.ProductoView;
 import Vista.FruverView;
 
+import javax.swing.*;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -43,12 +47,6 @@ public class ProductoControlador {
             }
         });
 
-        this.vista.agregarListenerMostrar(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mostrarDatos();
-            }
-        });
 
         this.vista.agregarListenerVolver(new ActionListener() {
             @Override
@@ -57,12 +55,6 @@ public class ProductoControlador {
             }
         });
 
-        this.vista.agregarListenerVolver(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                regresar();
-            }
-        });
 
     }
 
@@ -112,6 +104,25 @@ public class ProductoControlador {
 
     private void mostrarDatos() {
         vista.actualizarTablaProductos(modelo.listarProductos());
+        ajustarAnchoColumnas(vista.getTablaProductos()); // <-- Aquí llamas al método para ajustar columnas
+    }
+
+
+    private void ajustarAnchoColumnas(JTable tabla) {
+        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Importante: desactiva auto-resize por defecto
+
+        for (int col = 0; col < tabla.getColumnCount(); col++) {
+            TableColumn column = tabla.getColumnModel().getColumn(col);
+            int ancho = 150; // Ancho mínimo por si no hay datos
+
+            for (int row = 0; row < tabla.getRowCount(); row++) {
+                TableCellRenderer renderer = tabla.getCellRenderer(row, col);
+                Component comp = tabla.prepareRenderer(renderer, row, col);
+                ancho = Math.max(comp.getPreferredSize().width + 10, ancho);
+            }
+
+            column.setPreferredWidth(ancho);
+        }
     }
 
 

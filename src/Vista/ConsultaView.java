@@ -17,7 +17,7 @@ public class ConsultaView extends JFrame {
 
     public ConsultaView() {
         setTitle("Consulta de Ventas y Compras");
-        setSize(700, 400);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
