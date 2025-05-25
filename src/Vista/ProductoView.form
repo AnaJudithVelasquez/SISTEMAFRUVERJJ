@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="panelProductos" layout-manager="GridLayoutManager" row-count="25" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="1356" height="727"/>
+      <xy x="20" y="20" width="1358" height="742"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -14,6 +14,7 @@
         </constraints>
         <properties>
           <font name="Times New Roman" size="28" style="1"/>
+          <foreground color="-16777216"/>
           <text value="PRODUCTOS"/>
         </properties>
       </component>
@@ -29,6 +30,7 @@
         <properties>
           <enabled value="true"/>
           <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
           <text value="Cod Producto:"/>
         </properties>
       </component>
@@ -38,7 +40,10 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
+        </properties>
       </component>
       <component id="a6b1a" class="javax.swing.JLabel" binding="COD_PURCHASE">
         <constraints>
@@ -46,6 +51,7 @@
         </constraints>
         <properties>
           <font name="Century" size="16" style="0"/>
+          <foreground color="-16777216"/>
           <text value="Cod Compra:"/>
         </properties>
       </component>
@@ -55,7 +61,10 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
+        </properties>
       </component>
       <component id="8e5b4" class="javax.swing.JLabel" binding="PRODUCT_NAME">
         <constraints>
@@ -63,6 +72,7 @@
         </constraints>
         <properties>
           <font name="Century" size="16" style="0"/>
+          <foreground color="-16777216"/>
           <text value="Nombre Producto:"/>
         </properties>
       </component>
@@ -72,7 +82,10 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
+        </properties>
       </component>
       <component id="5eadc" class="javax.swing.JLabel" binding="STOCK">
         <constraints>
@@ -80,6 +93,7 @@
         </constraints>
         <properties>
           <font name="Century" size="16" style="0"/>
+          <foreground color="-16777216"/>
           <text value="Stock:"/>
         </properties>
       </component>
@@ -89,7 +103,10 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
+        </properties>
       </component>
       <component id="cf15e" class="javax.swing.JLabel" binding="QUANTITY_Kg">
         <constraints>
@@ -97,6 +114,7 @@
         </constraints>
         <properties>
           <font name="Century" size="16" style="0"/>
+          <foreground color="-16777216"/>
           <text value="Inicial Cantidad:"/>
         </properties>
       </component>
@@ -106,7 +124,10 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
+        </properties>
       </component>
       <component id="26872" class="javax.swing.JLabel" binding="FINAL_QUANTITY_Kg">
         <constraints>
@@ -114,6 +135,7 @@
         </constraints>
         <properties>
           <font name="Century" size="16" style="0"/>
+          <foreground color="-16777216"/>
           <text value="Final Cantidad:"/>
         </properties>
       </component>
@@ -123,7 +145,10 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
+        </properties>
       </component>
       <component id="d18a0" class="javax.swing.JLabel" binding="PURCHASE_VALUE">
         <constraints>
@@ -131,6 +156,7 @@
         </constraints>
         <properties>
           <font name="Century" size="16" style="0"/>
+          <foreground color="-16777216"/>
           <text value="Precio Compra:"/>
         </properties>
       </component>
@@ -140,7 +166,10 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
+        </properties>
       </component>
       <component id="cd37d" class="javax.swing.JLabel" binding="PRODUCT_PRICE">
         <constraints>
@@ -148,6 +177,7 @@
         </constraints>
         <properties>
           <font name="Century" size="16" style="0"/>
+          <foreground color="-16777216"/>
           <text value="Precio Venta:"/>
         </properties>
       </component>
@@ -157,7 +187,10 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
+        </properties>
       </component>
       <component id="1959c" class="javax.swing.JLabel" binding="DESCRIPTION_PRODUCT_STATUS">
         <constraints>
@@ -165,6 +198,7 @@
         </constraints>
         <properties>
           <font name="Century" size="16" style="0"/>
+          <foreground color="-16777216"/>
           <text value="Descripción:"/>
         </properties>
       </component>
@@ -174,14 +208,17 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font name="Times New Roman" size="16" style="0"/>
+        </properties>
       </component>
       <component id="87518" class="javax.swing.JButton" binding="agregarButton">
         <constraints>
           <grid row="21" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="Century" size="16" style="0"/>
+          <font name="Century" size="16" style="1"/>
+          <foreground color="-16777216"/>
           <text value="Agregar"/>
         </properties>
       </component>
@@ -190,7 +227,8 @@
           <grid row="21" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="Century" size="16" style="0"/>
+          <font name="Century" size="16" style="1"/>
+          <foreground color="-16777216"/>
           <text value="Modificar"/>
         </properties>
       </component>
@@ -199,7 +237,8 @@
           <grid row="23" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="Century" size="16" style="0"/>
+          <font name="Century" size="16" style="1"/>
+          <foreground color="-16777216"/>
           <text value="Eliminar"/>
         </properties>
       </component>
@@ -300,7 +339,8 @@
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="Times New Roman" size="16" style="0"/>
+          <font name="Times New Roman" size="16" style="1"/>
+          <foreground color="-16777216"/>
           <text value="Volver"/>
         </properties>
       </component>
