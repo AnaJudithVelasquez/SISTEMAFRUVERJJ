@@ -15,6 +15,8 @@
           </grid>
         </constraints>
         <properties>
+          <font name="Times New Roman" size="20" style="1"/>
+          <foreground color="-16777216"/>
           <text value="VENTAS"/>
         </properties>
       </component>
@@ -23,7 +25,9 @@
           <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Productos"/>
+          <font name="Times New Roman" size="18" style="1"/>
+          <foreground color="-16777216"/>
+          <text value="PRODUCTOS"/>
         </properties>
       </component>
       <component id="d1a9d" class="javax.swing.JLabel" binding="COD_SALE">
@@ -31,7 +35,9 @@
           <grid row="4" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Cod_Ventas"/>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
+          <text value="Cod Venta:"/>
         </properties>
       </component>
       <component id="aecb5" class="javax.swing.JTextField" binding="Cod_Venta">
@@ -40,14 +46,19 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
+        </properties>
       </component>
       <component id="2a47e" class="javax.swing.JLabel" binding="COD_USER">
         <constraints>
           <grid row="5" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Cod_Empleado"/>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
+          <text value="Cod_Empleado:"/>
         </properties>
       </component>
       <component id="ec7a9" class="javax.swing.JTextField" binding="Cod_Usuario">
@@ -56,14 +67,19 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
+        </properties>
       </component>
       <component id="6f6fa" class="javax.swing.JLabel" binding="DATE_SALE">
         <constraints>
           <grid row="6" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Fecha_Venta"/>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
+          <text value="Fecha Venta:"/>
         </properties>
       </component>
       <component id="2bc17" class="javax.swing.JTextField" binding="Fecha_Venta">
@@ -72,14 +88,19 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
+        </properties>
       </component>
       <component id="beceb" class="javax.swing.JLabel" binding="COSTUMER_IDENTIFICATION">
         <constraints>
           <grid row="7" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Identificación_Cliente:"/>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
+          <text value="Identificación Cliente:"/>
         </properties>
       </component>
       <component id="a409" class="javax.swing.JTextField" binding="Identificacion_Cliente">
@@ -89,6 +110,8 @@
           </grid>
         </constraints>
         <properties>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
           <text value=""/>
         </properties>
       </component>
@@ -97,7 +120,9 @@
           <grid row="8" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Cod_Producto:"/>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
+          <text value="Cod Producto:"/>
         </properties>
       </component>
       <component id="4b2ae" class="javax.swing.JTextField" binding="Cod_Producto">
@@ -106,14 +131,19 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
+        </properties>
       </component>
       <component id="831a1" class="javax.swing.JLabel" binding="PRODUCT_NAME">
         <constraints>
           <grid row="9" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Nombre_Producto"/>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
+          <text value="Nombre Producto:"/>
         </properties>
       </component>
       <component id="faf2b" class="javax.swing.JTextField" binding="Nombre_Producto">
@@ -122,13 +152,17 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font name="Times New Roman" size="16" style="0"/>
+        </properties>
       </component>
       <component id="b5c38" class="javax.swing.JButton" binding="cerrarSesionButton">
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font name="Times New Roman" size="16" style="1"/>
+          <foreground color="-16777216"/>
           <text value="Cerrar Sesión"/>
         </properties>
       </component>
@@ -137,6 +171,8 @@
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font name="Times New Roman" size="16" style="1"/>
+          <foreground color="-16777216"/>
           <text value="Volver"/>
         </properties>
       </component>
@@ -209,6 +245,8 @@
           <grid row="10" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
           <text value="Cantidad (Kg):"/>
         </properties>
       </component>
@@ -218,14 +256,19 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
+        </properties>
       </component>
       <component id="12483" class="javax.swing.JLabel" binding="PRODUCT_PRICE">
         <constraints>
           <grid row="11" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Precio_Producto:"/>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
+          <text value="Precio Producto:"/>
         </properties>
       </component>
       <component id="e9e2b" class="javax.swing.JTextField" binding="Precio_Producto">
@@ -234,14 +277,19 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
+        </properties>
       </component>
       <component id="c46d5" class="javax.swing.JLabel" binding="TOTAL_PRODUCT">
         <constraints>
           <grid row="12" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Total_Por_Producto:"/>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
+          <text value="Total Por Producto:"/>
         </properties>
       </component>
       <component id="c24a" class="javax.swing.JTextField" binding="Total_Por_Producto">
@@ -250,7 +298,10 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
+        </properties>
       </component>
       <hspacer id="74b09">
         <constraints>
@@ -262,7 +313,9 @@
           <grid row="13" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Total_Venta:"/>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
+          <text value="Total Venta:"/>
         </properties>
       </component>
       <component id="7ca9d" class="javax.swing.JTextField" binding="Total_Venta">
@@ -271,13 +324,18 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font name="Times New Roman" size="16" style="0"/>
+          <foreground color="-16777216"/>
+        </properties>
       </component>
       <component id="391ac" class="javax.swing.JButton" binding="agregarProductoButton">
         <constraints>
           <grid row="15" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font name="Times New Roman" size="16" style="1"/>
+          <foreground color="-16777216"/>
           <text value="Agregar Producto"/>
         </properties>
       </component>
@@ -286,6 +344,8 @@
           <grid row="15" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font name="Times New Roman" size="16" style="1"/>
+          <foreground color="-16777216"/>
           <text value="Agregar Venta"/>
         </properties>
       </component>
@@ -294,6 +354,8 @@
           <grid row="16" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font name="Times New Roman" size="16" style="1"/>
+          <foreground color="-16777216"/>
           <text value="Cancelar Venta"/>
         </properties>
       </component>
@@ -302,6 +364,8 @@
           <grid row="16" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font name="Times New Roman" size="16" style="1"/>
+          <foreground color="-16777216"/>
           <text value="Eliminar Producto"/>
         </properties>
       </component>
