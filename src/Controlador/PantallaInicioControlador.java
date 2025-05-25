@@ -17,9 +17,9 @@ public class PantallaInicioControlador {
         this.modelo = modelo;
         this.vista = vista;
 
-        // ✅ Asociar botón con ActionListener
+        //  Asociar botón con ActionListener
 
-        // ✅ Permitir que ENTER dispare el botón por defecto
+        //  Permitir que ENTER dispare el botón por defecto
         this.vista.getCampoPassword().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -36,7 +36,7 @@ public class PantallaInicioControlador {
 
     }
 
-    // ✅ Método que valida al usuario
+    //  Método que valida al usuario
     private void validarUsuario() {
         String usuario = vista.getUsuario();
         String password = vista.getPassword();
