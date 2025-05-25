@@ -1,298 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Vista.CompraView">
-  <grid id="27dc6" binding="panelCompras" layout-manager="GridLayoutManager" row-count="23" column-count="10" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-    <margin top="60" left="0" bottom="60" right="100"/>
+  <grid id="27dc6" binding="panelCompras" layout-manager="GridLayoutManager" row-count="53" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="50" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="1718" height="997"/>
+      <xy x="20" y="20" width="1449" height="2119"/>
     </constraints>
-    <properties/>
-    <border type="none"/>
+    <properties>
+      <background color="-1842037"/>
+    </properties>
+    <border type="none" title=""/>
     <children>
-      <component id="be5f7" class="javax.swing.JLabel" binding="COD_SUPPLIER">
-        <constraints>
-          <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font name="Century" size="16" style="0"/>
-          <text value="Cod_Proveedor: "/>
-        </properties>
-      </component>
       <hspacer id="97da3">
         <constraints>
-          <grid row="5" column="9" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="6" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
-      <vspacer id="b108a">
-        <constraints>
-          <grid row="16" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </vspacer>
-      <component id="3ca64" class="javax.swing.JTextField" binding="Cod_Proveedor">
-        <constraints>
-          <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="8309c" class="javax.swing.JLabel" binding="SUPPLIER_NAME">
-        <constraints>
-          <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font name="Century" size="16" style="0"/>
-          <text value="Nombre_ Proveedor:"/>
-        </properties>
-      </component>
-      <component id="6175d" class="javax.swing.JTextField" binding="Nombre_Proveedor">
-        <constraints>
-          <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="3c336" class="javax.swing.JLabel" binding="ADDRESS">
-        <constraints>
-          <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font name="Century" size="16" style="0"/>
-          <text value="Dirección:"/>
-        </properties>
-      </component>
-      <component id="16db9" class="javax.swing.JTextField" binding="Direccion">
-        <constraints>
-          <grid row="7" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="8b41f" class="javax.swing.JLabel" binding="PHONE_NUMBER">
-        <constraints>
-          <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font name="Century" size="16" style="0"/>
-          <text value="Telefono: "/>
-        </properties>
-      </component>
-      <component id="c96e3" class="javax.swing.JTextField" binding="Telefono">
-        <constraints>
-          <grid row="8" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="6407f" class="javax.swing.JLabel" binding="COD_PURCHASE">
-        <constraints>
-          <grid row="5" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font name="Century" size="16" style="0"/>
-          <text value="Cod_Compra:"/>
-        </properties>
-      </component>
-      <component id="129ed" class="javax.swing.JLabel" binding="COD_USER">
-        <constraints>
-          <grid row="6" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font name="Century" size="16" style="0"/>
-          <text value="Cod_Administrador:"/>
-        </properties>
-      </component>
-      <component id="42c44" class="javax.swing.JLabel" binding="COD_SUPPLIERC">
-        <constraints>
-          <grid row="7" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font name="Century" size="16" style="0"/>
-          <text value="Cod_Proveedor:"/>
-        </properties>
-      </component>
-      <component id="23cea" class="javax.swing.JLabel" binding="DATE_PURCHASE">
-        <constraints>
-          <grid row="8" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font name="Century" size="16" style="0"/>
-          <text value="Fecha_Compra:"/>
-        </properties>
-      </component>
-      <component id="907ba" class="javax.swing.JLabel" binding="PURCHASED_PRODUCT">
-        <constraints>
-          <grid row="9" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font name="Century" size="16" style="0"/>
-          <text value="Producto_Comprado:"/>
-        </properties>
-      </component>
-      <component id="54ab" class="javax.swing.JLabel" binding="QUANTITY_Kg">
-        <constraints>
-          <grid row="10" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font name="Century" size="16" style="0"/>
-          <text value="Cantidad_Producto:"/>
-        </properties>
-      </component>
-      <component id="465c4" class="javax.swing.JLabel" binding="UNIT_VALUE">
-        <constraints>
-          <grid row="11" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font name="Century" size="16" style="0"/>
-          <text value="Valor_Unitario:"/>
-        </properties>
-      </component>
-      <component id="3fa0e" class="javax.swing.JLabel" binding="TOTAL_PRODUCT">
-        <constraints>
-          <grid row="13" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font name="Century" size="16" style="0"/>
-          <text value="Total_Producto:"/>
-        </properties>
-      </component>
-      <component id="4caba" class="javax.swing.JTextField" binding="Cod_Compra">
-        <constraints>
-          <grid row="5" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="240e1" class="javax.swing.JTextField" binding="Cod_Usuario">
-        <constraints>
-          <grid row="6" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="a26bd" class="javax.swing.JTextField" binding="Cod_ProveedorC">
-        <constraints>
-          <grid row="7" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="b6fe6" class="javax.swing.JTextField" binding="Fecha_Compra">
-        <constraints>
-          <grid row="8" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="3b217" class="javax.swing.JTextField" binding="Producto_Comprado">
-        <constraints>
-          <grid row="9" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="8ef1f" class="javax.swing.JTextField" binding="Cantidad_Producto_Kg">
-        <constraints>
-          <grid row="10" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="5fba5" class="javax.swing.JTextField" binding="Valor_Unitario">
-        <constraints>
-          <grid row="11" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="d4d14" class="javax.swing.JTextField" binding="Total_Producto">
-        <constraints>
-          <grid row="13" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <vspacer id="fb8d9">
-        <constraints>
-          <grid row="12" column="6" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </vspacer>
-      <vspacer id="2dc82">
-        <constraints>
-          <grid row="14" column="6" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </vspacer>
-      <component id="34865" class="javax.swing.JButton" binding="agregarProductoButton">
-        <constraints>
-          <grid row="16" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font name="Century" size="16" style="0"/>
-          <text value="Agregar Producto"/>
-        </properties>
-      </component>
-      <component id="1c330" class="javax.swing.JButton" binding="agregarCompraButton">
-        <constraints>
-          <grid row="16" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font name="Century" size="16" style="0"/>
-          <text value="Agregar Compra"/>
-        </properties>
-      </component>
-      <vspacer id="e60ba">
-        <constraints>
-          <grid row="18" column="6" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </vspacer>
-      <component id="ee624" class="javax.swing.JLabel" binding="TOTAL_PURCHASE_VALUE">
-        <constraints>
-          <grid row="18" column="5" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font name="Century" size="16" style="0"/>
-          <text value="Total_Compra:"/>
-        </properties>
-      </component>
-      <component id="7080c" class="javax.swing.JTextField" binding="Total_Compra">
-        <constraints>
-          <grid row="19" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <vspacer id="5c3fd">
-        <constraints>
-          <grid row="21" column="6" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </vspacer>
-      <vspacer id="a4f1c">
-        <constraints>
-          <grid row="22" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </vspacer>
-      <vspacer id="b0cc4">
-        <constraints>
-          <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </vspacer>
       <scrollpane id="7c23a">
         <constraints>
-          <grid row="5" column="1" row-span="7" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <minimum-size width="305" height="400"/>
-            <preferred-size width="305" height="400"/>
-            <maximum-size width="305" height="400"/>
+          <grid row="3" column="3" row-span="20" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="500" height="300"/>
+            <preferred-size width="500" height="300"/>
+            <maximum-size width="500" height="300"/>
           </grid>
         </constraints>
         <properties/>
@@ -308,104 +36,540 @@
           </component>
         </children>
       </scrollpane>
-      <scrollpane id="5842d">
+      <component id="1c59" class="javax.swing.JLabel">
         <constraints>
-          <grid row="5" column="7" row-span="7" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <minimum-size width="400" height="400"/>
-            <preferred-size width="400" height="400"/>
-            <maximum-size width="400" height="400"/>
+          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="113" height="29"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-16777216"/>
+          <font name="Times New Roman" size="16" style="1"/>
+          <foreground color="-16777216"/>
+          <text value="PROVEEDORES&#10;"/>
+        </properties>
+      </component>
+      <scrollpane id="ba38a">
+        <constraints>
+          <grid row="25" column="3" row-span="27" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="500" height="300"/>
+            <preferred-size width="500" height="300"/>
+            <maximum-size width="500" height="300"/>
           </grid>
         </constraints>
         <properties/>
         <border type="none"/>
         <children>
-          <component id="e18ad" class="javax.swing.JTable" binding="table1">
+          <component id="f706c" class="javax.swing.JTable" binding="table1">
             <constraints/>
             <properties/>
           </component>
         </children>
       </scrollpane>
-      <component id="1c59" class="javax.swing.JLabel">
+      <hspacer id="70056">
         <constraints>
-          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="113" height="29"/>
-          </grid>
-        </constraints>
-        <properties>
-          <font name="Century" size="20" style="0"/>
-          <text value="Proveedores"/>
-        </properties>
-      </component>
-      <vspacer id="6b42b">
-        <constraints>
-          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </vspacer>
-      <component id="f6889" class="javax.swing.JButton" binding="agregarButton">
-        <constraints>
-          <grid row="9" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font name="Century" size="16" style="0"/>
-          <text value="Agregar"/>
-        </properties>
-      </component>
-      <component id="d6468" class="javax.swing.JButton" binding="modificarButton">
-        <constraints>
-          <grid row="9" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font name="Century" size="16" style="0"/>
-          <text value="Modificar"/>
-        </properties>
-      </component>
-      <component id="816f9" class="javax.swing.JButton" binding="eliminarButton">
-        <constraints>
-          <grid row="10" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font name="Century" size="16" style="0"/>
-          <text value="Eliminar"/>
-        </properties>
-      </component>
-      <hspacer id="fc7fd">
-        <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="51" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
-      <vspacer id="99d2a">
+      <hspacer id="49f6d">
         <constraints>
-          <grid row="17" column="6" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="50" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
-      </vspacer>
-      <vspacer id="be705">
+      </hspacer>
+      <hspacer id="a077f">
         <constraints>
-          <grid row="20" column="6" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="49" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
-      </vspacer>
-      <vspacer id="58a8a">
+      </hspacer>
+      <hspacer id="20a55">
         <constraints>
-          <grid row="15" column="6" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="48" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
-      </vspacer>
+      </hspacer>
+      <hspacer id="7afb">
+        <constraints>
+          <grid row="47" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <hspacer id="66485">
+        <constraints>
+          <grid row="46" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <hspacer id="5118b">
+        <constraints>
+          <grid row="45" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <hspacer id="c4314">
+        <constraints>
+          <grid row="43" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <hspacer id="69d63">
+        <constraints>
+          <grid row="39" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <hspacer id="7a1e9">
+        <constraints>
+          <grid row="37" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
       <component id="b7966" class="javax.swing.JLabel">
         <constraints>
-          <grid row="2" column="1" row-span="1" col-span="8" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="Century" size="28" style="0"/>
+          <background color="-16777216"/>
+          <font name="Century" size="28" style="1"/>
+          <foreground color="-16777216"/>
           <text value="COMPRAS"/>
         </properties>
       </component>
-      <component id="4ce9b" class="javax.swing.JButton" binding="volverButton">
+      <hspacer id="c875d">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
+          <grid row="15" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <hspacer id="29ccd">
+        <constraints>
+          <grid row="31" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <hspacer id="f9cba">
+        <constraints>
+          <grid row="27" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <hspacer id="36736">
+        <constraints>
+          <grid row="9" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <hspacer id="18e2b">
+        <constraints>
+          <grid row="12" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <vspacer id="e63a7">
+        <constraints>
+          <grid row="24" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="25"/>
+          </grid>
+        </constraints>
+      </vspacer>
+      <component id="2a743" class="javax.swing.JLabel" binding="COD_PURCHASE">
+        <constraints>
+          <grid row="10" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font name="Century" size="16" style="0"/>
+          <foreground color="-16777216"/>
+          <text value="Cod Compra:"/>
+        </properties>
+      </component>
+      <component id="b947" class="javax.swing.JTextField" binding="Cod_Compra">
+        <constraints>
+          <grid row="10" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <foreground color="-16777216"/>
+        </properties>
+      </component>
+      <component id="e700a" class="javax.swing.JLabel" binding="COD_USER">
+        <constraints>
+          <grid row="13" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Century" size="16" style="0"/>
+          <foreground color="-16777216"/>
+          <text value="Cod Administrador:"/>
+        </properties>
+      </component>
+      <component id="446c2" class="javax.swing.JTextField" binding="Cod_Usuario">
+        <constraints>
+          <grid row="13" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <foreground color="-16777216"/>
+        </properties>
+      </component>
+      <component id="abc1b" class="javax.swing.JLabel" binding="COD_SUPPLIERC">
+        <constraints>
+          <grid row="16" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Century" size="16" style="0"/>
+          <foreground color="-16777216"/>
+          <text value="Cod Proveedor:"/>
+        </properties>
+      </component>
+      <component id="dca8e" class="javax.swing.JTextField" binding="Cod_ProveedorC">
+        <constraints>
+          <grid row="16" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <foreground color="-16777216"/>
+        </properties>
+      </component>
+      <component id="24ddc" class="javax.swing.JLabel" binding="DATE_PURCHASE">
+        <constraints>
+          <grid row="19" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Century" size="16" style="0"/>
+          <foreground color="-16777216"/>
+          <text value="Fecha Compra:"/>
+        </properties>
+      </component>
+      <component id="af0f8" class="javax.swing.JTextField" binding="Fecha_Compra">
+        <constraints>
+          <grid row="19" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <foreground color="-16777216"/>
+        </properties>
+      </component>
+      <component id="fe913" class="javax.swing.JLabel" binding="PURCHASED_PRODUCT">
+        <constraints>
+          <grid row="22" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Century" size="16" style="0"/>
+          <foreground color="-16777216"/>
+          <text value="Producto Comprado:"/>
+        </properties>
+      </component>
+      <component id="74370" class="javax.swing.JTextField" binding="Producto_Comprado">
+        <constraints>
+          <grid row="22" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <foreground color="-16777216"/>
+        </properties>
+      </component>
+      <component id="94289" class="javax.swing.JLabel" binding="QUANTITY_Kg">
+        <constraints>
+          <grid row="25" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Century" size="16" style="0"/>
+          <foreground color="-16777216"/>
+          <text value="Cantidad Producto:"/>
+        </properties>
+      </component>
+      <component id="2ad87" class="javax.swing.JTextField" binding="Cantidad_Producto_Kg">
+        <constraints>
+          <grid row="25" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <foreground color="-16777216"/>
+        </properties>
+      </component>
+      <component id="53834" class="javax.swing.JLabel" binding="UNIT_VALUE">
+        <constraints>
+          <grid row="28" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Century" size="16" style="0"/>
+          <foreground color="-16777216"/>
+          <text value="Valor Unitario:"/>
+        </properties>
+      </component>
+      <component id="81bc9" class="javax.swing.JTextField" binding="Valor_Unitario">
+        <constraints>
+          <grid row="28" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <foreground color="-16777216"/>
+        </properties>
+      </component>
+      <component id="4ef97" class="javax.swing.JLabel" binding="TOTAL_PRODUCT">
+        <constraints>
+          <grid row="32" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Century" size="16" style="0"/>
+          <foreground color="-16777216"/>
+          <text value="Total Producto:"/>
+        </properties>
+      </component>
+      <component id="37727" class="javax.swing.JTextField" binding="Total_Producto">
+        <constraints>
+          <grid row="32" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <foreground color="-16777216"/>
+        </properties>
+      </component>
+      <component id="4d891" class="javax.swing.JLabel" binding="TOTAL_PURCHASE_VALUE">
+        <constraints>
+          <grid row="35" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Century" size="16" style="0"/>
+          <foreground color="-16777216"/>
+          <text value="Total Compra:"/>
+        </properties>
+      </component>
+      <component id="a97f5" class="javax.swing.JTextField" binding="Total_Compra">
+        <constraints>
+          <grid row="35" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <foreground color="-16777216"/>
+        </properties>
+      </component>
+      <component id="6bbff" class="javax.swing.JButton" binding="agregarProductoButton">
+        <constraints>
+          <grid row="38" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-10634915"/>
+          <font name="Century" size="16" style="1"/>
+          <foreground color="-16777216"/>
+          <text value="Agregar Producto"/>
+        </properties>
+      </component>
+      <component id="3c63c" class="javax.swing.JButton" binding="agregarCompraButton">
+        <constraints>
+          <grid row="38" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-10634915"/>
+          <font name="Century" size="16" style="1"/>
+          <foreground color="-16777216"/>
+          <text value="Agregar Compra"/>
+        </properties>
+      </component>
+      <vspacer id="d32d1">
+        <constraints>
+          <grid row="11" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="25"/>
+          </grid>
+        </constraints>
+      </vspacer>
+      <vspacer id="ddde4">
+        <constraints>
+          <grid row="14" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="25"/>
+          </grid>
+        </constraints>
+      </vspacer>
+      <vspacer id="fa7aa">
+        <constraints>
+          <grid row="17" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="25"/>
+          </grid>
+        </constraints>
+      </vspacer>
+      <vspacer id="4587f">
+        <constraints>
+          <grid row="20" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="25"/>
+          </grid>
+        </constraints>
+      </vspacer>
+      <vspacer id="4b7d1">
+        <constraints>
+          <grid row="26" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="25"/>
+          </grid>
+        </constraints>
+      </vspacer>
+      <vspacer id="5b7d1">
+        <constraints>
+          <grid row="33" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="25"/>
+          </grid>
+        </constraints>
+      </vspacer>
+      <vspacer id="7c26c">
+        <constraints>
+          <grid row="36" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="25"/>
+          </grid>
+        </constraints>
+      </vspacer>
+      <vspacer id="61b1b">
+        <constraints>
+          <grid row="23" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="25"/>
+          </grid>
+        </constraints>
+      </vspacer>
+      <vspacer id="37af5">
+        <constraints>
+          <grid row="29" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="25"/>
+          </grid>
+        </constraints>
+      </vspacer>
+      <component id="9baaa" class="javax.swing.JLabel" binding="COD_SUPPLIER">
+        <constraints>
+          <grid row="19" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-16777216"/>
+          <font name="Century" size="16" style="0"/>
+          <foreground color="-16777216"/>
+          <text value="Cod Proveedor: "/>
+        </properties>
+      </component>
+      <component id="e09fe" class="javax.swing.JTextField" binding="Cod_Proveedor">
+        <constraints>
+          <grid row="19" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <foreground color="-16777216"/>
+        </properties>
+      </component>
+      <component id="3dc8a" class="javax.swing.JLabel" binding="SUPPLIER_NAME">
+        <constraints>
+          <grid row="22" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-16777216"/>
+          <font name="Century" size="16" style="0"/>
+          <foreground color="-16777216"/>
+          <text value="Nombre Proveedor:"/>
+        </properties>
+      </component>
+      <component id="1d903" class="javax.swing.JTextField" binding="Nombre_Proveedor">
+        <constraints>
+          <grid row="22" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <foreground color="-16777216"/>
+        </properties>
+      </component>
+      <component id="f0002" class="javax.swing.JLabel" binding="ADDRESS">
+        <constraints>
+          <grid row="25" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-16777216"/>
+          <font name="Century" size="16" style="0"/>
+          <foreground color="-16777216"/>
+          <text value="Dirección:"/>
+        </properties>
+      </component>
+      <component id="e98a4" class="javax.swing.JTextField" binding="Direccion">
+        <constraints>
+          <grid row="25" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <foreground color="-16777216"/>
+        </properties>
+      </component>
+      <component id="8e61a" class="javax.swing.JLabel" binding="PHONE_NUMBER">
+        <constraints>
+          <grid row="28" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-16777216"/>
+          <font name="Century" size="16" style="0"/>
+          <foreground color="-16777216"/>
+          <text value="Teléfono: "/>
+        </properties>
+      </component>
+      <component id="56c90" class="javax.swing.JTextField" binding="Telefono">
+        <constraints>
+          <grid row="28" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <foreground color="-16777216"/>
+        </properties>
+      </component>
+      <component id="46d6b" class="javax.swing.JButton" binding="agregarButton">
+        <constraints>
+          <grid row="36" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-10634915"/>
+          <font name="Century" size="16" style="1"/>
+          <foreground color="-16777216"/>
+          <text value="Agregar"/>
+        </properties>
+      </component>
+      <component id="8d79a" class="javax.swing.JButton" binding="modificarButton">
+        <constraints>
+          <grid row="36" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-10634915"/>
+          <font name="Century" size="16" style="1"/>
+          <foreground color="-16777216"/>
+          <text value="Modificar"/>
+        </properties>
+      </component>
+      <component id="9ac39" class="javax.swing.JButton" binding="eliminarButton">
+        <constraints>
+          <grid row="38" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-10634915"/>
+          <font name="Century" size="16" style="1"/>
+          <foreground color="-16777216"/>
+          <text value="Eliminar"/>
+        </properties>
+      </component>
+      <vspacer id="e25ce">
+        <constraints>
+          <grid row="52" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="-1" height="700"/>
+            <preferred-size width="-1" height="700"/>
+            <maximum-size width="-1" height="700"/>
+          </grid>
+        </constraints>
+      </vspacer>
+      <component id="35010" class="javax.swing.JButton" binding="volverButton">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Century" size="16" style="1"/>
+          <foreground color="-16777216"/>
           <text value="Volver"/>
         </properties>
       </component>
+      <hspacer id="3c97b">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <vspacer id="171b6">
+        <constraints>
+          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
     </children>
   </grid>
 </form>

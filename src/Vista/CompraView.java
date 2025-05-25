@@ -35,12 +35,14 @@ public class CompraView extends JFrame {
     private JTextField Valor_Unitario;
     private JTextField Total_Producto;
     private JTextField Total_Compra;
-    private JLabel COD_SUPPLIER;
-    private JLabel SUPPLIER_NAME;
-    private JLabel ADDRESS;
-    private JLabel PHONE_NUMBER;
     private JTable table1P;
     private JScrollPane scrollPane1P;
+    private JTable table1;
+    private JTextField Cod_Proveedor;
+    private JTextField Cod_ProveedorC;
+    private JPanel panelCompras;
+    private JButton mostrarComprasButton;
+    private JButton volverButton;
     private JLabel COD_PURCHASE;
     private JLabel COD_USER;
     private JLabel COD_SUPPLIERC;
@@ -50,12 +52,10 @@ public class CompraView extends JFrame {
     private JLabel UNIT_VALUE;
     private JLabel TOTAL_PRODUCT;
     private JLabel TOTAL_PURCHASE_VALUE;
-    private JTable table1;
-    private JTextField Cod_Proveedor;
-    private JTextField Cod_ProveedorC;
-    private JPanel panelCompras;
-    private JButton mostrarComprasButton;
-    private JButton volverButton;
+    private JLabel COD_SUPPLIER;
+    private JLabel SUPPLIER_NAME;
+    private JLabel ADDRESS;
+    private JLabel PHONE_NUMBER;
     private JButton consultarComprasButton;
     private JScrollPane scrollPane;// nuevo botón
 
@@ -67,7 +67,7 @@ public class CompraView extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JTableHeader header = table1P.getTableHeader();
-        header.setBackground(new Color(109, 149, 99)); // Color verde personalizado
+        header.setBackground(new Color(115, 229, 127)); // Color verde personalizado
         header.setForeground(Color.BLACK);             // Texto blanco
         header.setFont(new Font("Arial", Font.BOLD, 14)); // Fuente opcional
 
@@ -76,7 +76,7 @@ public class CompraView extends JFrame {
 
 
         JTableHeader header1 = table1.getTableHeader();
-        header1.setBackground(new Color(109, 149, 99)); // Color verde personalizado
+        header1.setBackground(new Color(115, 229, 127)); // Color verde personalizado
         header1.setForeground(Color.BLACK);             // Texto blanco
         header1.setFont(new Font("Arial", Font.BOLD, 14));
 
@@ -194,7 +194,7 @@ public class CompraView extends JFrame {
 
             if (model.getColumnCount() == 0) {
                 model.addColumn("Cod_Compra");
-                model.addColumn("Cod_Administrador");
+                //model.addColumn("Cod_Administrador");
                 model.addColumn("Cod_Proveedor");
                 model.addColumn("Fecha_Compra");
                 model.addColumn("Producto_Comprado");
@@ -207,7 +207,7 @@ public class CompraView extends JFrame {
             while (rs.next()) {
                 Object[] fila = {
                         rs.getString("COD_PURCHASE"),
-                        rs.getString("COD_USER"),
+                        //rs.getString("COD_USER"),
                         rs.getString("COD_SUPPLIER"),
                         rs.getString("DATE_PURCHASE"),
                         rs.getString("PURCHASED_PRODUCT"),

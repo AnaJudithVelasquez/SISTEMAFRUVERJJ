@@ -1,6 +1,7 @@
 package Vista;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class PantallaInicioView extends JFrame {
     private JPanel panelFruver;
@@ -9,12 +10,14 @@ public class PantallaInicioView extends JFrame {
     private JLabel USER;
     private JPasswordField PASS1;
     private JButton INGRESAR;
+    private JLabel jLabel1;
 
     public PantallaInicioView() {
         setContentPane(panelFruver);
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Pantalla completa
         setLocationRelativeTo(null); // Centrar ventana
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
 
         // Cierra solo esta ventana
     }
