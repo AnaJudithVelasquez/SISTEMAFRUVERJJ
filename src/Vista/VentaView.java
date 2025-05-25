@@ -70,6 +70,7 @@ public class VentaView extends JFrame {
     private ResultSet rs;
     private List<VentaModelo.ProductoDetalle> productosVenta = new ArrayList<>();
     private Set<Integer> ventasCanceladas = new HashSet<>();
+    private JTextField lblUsuario;
 
     public VentaView() {
 
@@ -80,7 +81,7 @@ public class VentaView extends JFrame {
         setContentPane(panelVentas);
 
          actualizarTablaVentas();
-        yaMostroAlertaStock = false; // 🟢 Reinicia la alerta al abrir
+        yaMostroAlertaStock = false; //  Reinicia la alerta al abrir
         verificarStockMinimoConMargen();
          listarProductos();
 
@@ -204,6 +205,7 @@ public class VentaView extends JFrame {
         cerrarSesionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 UsuarioModel modelo = new UsuarioModel();
                 PantallaInicioView vista = new PantallaInicioView();
                 PantallaInicioControlador controlador = new PantallaInicioControlador(modelo, vista);
@@ -211,7 +213,9 @@ public class VentaView extends JFrame {
                dispose();
             }
         });
+
     }
+
 
 
     public void actualizarTablaProductos(DefaultTableModel modelo) {
