@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Vista.VentaView">
-  <grid id="27dc6" binding="panelVentas" layout-manager="GridLayoutManager" row-count="18" column-count="10" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-    <margin top="0" left="0" bottom="0" right="0"/>
+  <grid id="27dc6" binding="panelVentas" layout-manager="GridLayoutManager" row-count="28" column-count="11" same-size-horizontally="false" same-size-vertically="false" hgap="0" vgap="-1">
+    <margin top="0" left="0" bottom="300" right="200"/>
     <constraints>
-      <xy x="20" y="20" width="1485" height="670"/>
+      <xy x="20" y="20" width="2616" height="1594"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
       <component id="2f222" class="javax.swing.JLabel">
         <constraints>
-          <grid row="1" column="2" row-span="1" col-span="6" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+          <grid row="0" column="2" row-span="1" col-span="9" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="51" height="39"/>
           </grid>
         </constraints>
@@ -18,110 +18,73 @@
           <text value="VENTAS"/>
         </properties>
       </component>
-      <vspacer id="a5da8">
-        <constraints>
-          <grid row="14" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </vspacer>
       <component id="be975" class="javax.swing.JLabel">
         <constraints>
-          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Productos"/>
         </properties>
       </component>
-      <component id="20a96" class="javax.swing.JLabel" binding="COD_USER">
+      <component id="d1a9d" class="javax.swing.JLabel" binding="COD_SALE">
         <constraints>
-          <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Cod_Ventas"/>
+        </properties>
+      </component>
+      <component id="aecb5" class="javax.swing.JTextField" binding="Cod_Venta">
+        <constraints>
+          <grid row="4" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="2a47e" class="javax.swing.JLabel" binding="COD_USER">
+        <constraints>
+          <grid row="5" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Cod_Empleado"/>
         </properties>
       </component>
-      <component id="acb1f" class="javax.swing.JLabel" binding="DATE_SALE">
+      <component id="ec7a9" class="javax.swing.JTextField" binding="Cod_Usuario">
         <constraints>
-          <grid row="6" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="5" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="6f6fa" class="javax.swing.JLabel" binding="DATE_SALE">
+        <constraints>
+          <grid row="6" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Fecha_Venta"/>
         </properties>
       </component>
-      <component id="59356" class="javax.swing.JLabel" binding="COSTUMER_IDENTIFICATION">
+      <component id="2bc17" class="javax.swing.JTextField" binding="Fecha_Venta">
         <constraints>
-          <grid row="7" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="beceb" class="javax.swing.JLabel" binding="COSTUMER_IDENTIFICATION">
+        <constraints>
+          <grid row="7" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Identificación_Cliente:"/>
         </properties>
       </component>
-      <component id="761ea" class="javax.swing.JLabel" binding="COD_PRODUCT">
+      <component id="a409" class="javax.swing.JTextField" binding="Identificacion_Cliente">
         <constraints>
-          <grid row="8" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Cod_Producto:"/>
-        </properties>
-      </component>
-      <component id="12173" class="javax.swing.JLabel" binding="PRODUCT_NAME">
-        <constraints>
-          <grid row="9" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Nombre_Producto"/>
-        </properties>
-      </component>
-      <component id="f6113" class="javax.swing.JLabel" binding="PRODUCT_QUANTITY_Kg">
-        <constraints>
-          <grid row="10" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Cantidad (Kg):"/>
-        </properties>
-      </component>
-      <component id="6bf84" class="javax.swing.JLabel" binding="PRODUCT_PRICE">
-        <constraints>
-          <grid row="11" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Precio_Producto:"/>
-        </properties>
-      </component>
-      <component id="8813e" class="javax.swing.JLabel" binding="TOTAL_PRODUCT">
-        <constraints>
-          <grid row="12" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Total_Por_Producto:"/>
-        </properties>
-      </component>
-      <component id="dcbb1" class="javax.swing.JTextField" binding="Cod_Venta">
-        <constraints>
-          <grid row="4" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="14464" class="javax.swing.JTextField" binding="Cod_Usuario">
-        <constraints>
-          <grid row="5" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="b1f45" class="javax.swing.JTextField" binding="Fecha_Venta">
-        <constraints>
-          <grid row="6" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="3d559" class="javax.swing.JTextField" binding="Identificacion_Cliente">
-        <constraints>
-          <grid row="7" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="7" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -129,127 +92,100 @@
           <text value=""/>
         </properties>
       </component>
-      <component id="6820e" class="javax.swing.JTextField" binding="Cod_Producto">
+      <component id="cc320" class="javax.swing.JLabel" binding="COD_PRODUCT">
         <constraints>
-          <grid row="8" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="3cfa6" class="javax.swing.JTextField" binding="Nombre_Producto">
-        <constraints>
-          <grid row="9" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="99aa2" class="javax.swing.JTextField" binding="Cantidad">
-        <constraints>
-          <grid row="10" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="b7bcb" class="javax.swing.JTextField" binding="Precio_Producto">
-        <constraints>
-          <grid row="11" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="7fc6f" class="javax.swing.JTextField" binding="Total_Por_Producto">
-        <constraints>
-          <grid row="12" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="f168" class="javax.swing.JButton" binding="agregarProductoButton">
-        <constraints>
-          <grid row="14" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="8" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Agregar Producto"/>
+          <text value="Cod_Producto:"/>
         </properties>
       </component>
-      <component id="c57fb" class="javax.swing.JButton" binding="agregarVentaButton">
+      <component id="4b2ae" class="javax.swing.JTextField" binding="Cod_Producto">
         <constraints>
-          <grid row="14" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Agregar Venta"/>
-        </properties>
-      </component>
-      <component id="623f2" class="javax.swing.JLabel" binding="TOTAL_SALE_VALUE">
-        <constraints>
-          <grid row="16" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Total_Venta:"/>
-        </properties>
-      </component>
-      <component id="cc45f" class="javax.swing.JTextField" binding="Total_Venta">
-        <constraints>
-          <grid row="16" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="8" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
         <properties/>
       </component>
-      <vspacer id="efda0">
+      <component id="831a1" class="javax.swing.JLabel" binding="PRODUCT_NAME">
         <constraints>
-          <grid row="13" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="9" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
-      </vspacer>
-      <vspacer id="2fe13">
+        <properties>
+          <text value="Nombre_Producto"/>
+        </properties>
+      </component>
+      <component id="faf2b" class="javax.swing.JTextField" binding="Nombre_Producto">
         <constraints>
-          <grid row="15" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="9" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
         </constraints>
-      </vspacer>
-      <vspacer id="40b7">
+        <properties/>
+      </component>
+      <component id="b5c38" class="javax.swing.JButton" binding="cerrarSesionButton">
         <constraints>
-          <grid row="17" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
-      </vspacer>
-      <scrollpane id="58b70" binding="scrollPane2">
+        <properties>
+          <text value="Cerrar Sesión"/>
+        </properties>
+      </component>
+      <component id="f3566" class="javax.swing.JButton" binding="volverButton">
         <constraints>
-          <grid row="4" column="7" row-span="9" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <minimum-size width="330" height="400"/>
-            <preferred-size width="330" height="400"/>
-            <maximum-size width="330" height="400"/>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Volver"/>
+        </properties>
+      </component>
+      <scrollpane id="efb7a">
+        <constraints>
+          <grid row="4" column="10" row-span="6" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="500" height="300"/>
+            <preferred-size width="500" height="300"/>
+            <maximum-size width="500" height="300"/>
           </grid>
         </constraints>
         <properties/>
         <border type="none"/>
         <children>
-          <component id="b9b43" class="javax.swing.JTable" binding="table2">
+          <component id="c1ff3" class="javax.swing.JTable" binding="tableVentaActual">
             <constraints/>
             <properties/>
           </component>
         </children>
       </scrollpane>
-      <hspacer id="33ff6">
+      <scrollpane id="3f998" binding="scrollPane2">
         <constraints>
-          <grid row="5" column="9" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </hspacer>
-      <scrollpane id="545ed" binding="scrollPane">
-        <constraints>
-          <grid row="4" column="2" row-span="9" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <minimum-size width="305" height="400"/>
-            <preferred-size width="305" height="400"/>
-            <maximum-size width="305" height="400"/>
+          <grid row="10" column="10" row-span="15" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="500" height="300"/>
+            <preferred-size width="500" height="300"/>
+            <maximum-size width="500" height="300"/>
           </grid>
         </constraints>
         <properties/>
         <border type="none"/>
         <children>
-          <component id="44cce" class="javax.swing.JTable" binding="table1">
+          <component id="86998" class="javax.swing.JTable" binding="table2">
+            <constraints/>
+            <properties/>
+          </component>
+        </children>
+      </scrollpane>
+      <scrollpane id="a4fbb" binding="scrollPane">
+        <constraints>
+          <grid row="4" column="2" row-span="24" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="400" height="600"/>
+            <preferred-size width="400" height="600"/>
+            <maximum-size width="400" height="600"/>
+          </grid>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="87537" class="javax.swing.JTable" binding="table1">
             <constraints/>
             <properties>
               <enabled value="true"/>
@@ -259,80 +195,143 @@
           </component>
         </children>
       </scrollpane>
-      <hspacer id="8d6a3">
+      <hspacer id="5f222">
         <constraints>
-          <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="8" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="30" height="-1"/>
+            <preferred-size width="30" height="-1"/>
+            <maximum-size width="30" height="-1"/>
+          </grid>
         </constraints>
       </hspacer>
-      <vspacer id="ab9b2">
+      <component id="79059" class="javax.swing.JLabel" binding="PRODUCT_QUANTITY_Kg">
         <constraints>
-          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </vspacer>
-      <component id="fc4cc" class="javax.swing.JLabel" binding="COD_SALE">
-        <constraints>
-          <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="10" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Cod_Ventas"/>
+          <text value="Cantidad (Kg):"/>
         </properties>
       </component>
-      <hspacer id="aaa14">
+      <component id="ce4c3" class="javax.swing.JTextField" binding="Cantidad">
         <constraints>
-          <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </hspacer>
-      <component id="ec75e" class="javax.swing.JButton" binding="eliminarProductoButton" default-binding="true">
-        <constraints>
-          <grid row="3" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Eliminar Producto"/>
-        </properties>
-      </component>
-      <scrollpane id="5ea01">
-        <constraints>
-          <grid row="4" column="6" row-span="9" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <minimum-size width="250" height="400"/>
-            <preferred-size width="250" height="400"/>
-            <maximum-size width="250" height="400"/>
+          <grid row="10" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
         <properties/>
-        <border type="none"/>
-        <children>
-          <component id="c103c" class="javax.swing.JTable" binding="tableVentaActual">
-            <constraints/>
-            <properties/>
-          </component>
-        </children>
-      </scrollpane>
-      <component id="3ebf5" class="javax.swing.JButton" binding="cancelarVentaButton" default-binding="true">
+      </component>
+      <component id="12483" class="javax.swing.JLabel" binding="PRODUCT_PRICE">
         <constraints>
-          <grid row="4" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="11" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Precio_Producto:"/>
+        </properties>
+      </component>
+      <component id="e9e2b" class="javax.swing.JTextField" binding="Precio_Producto">
+        <constraints>
+          <grid row="11" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="c46d5" class="javax.swing.JLabel" binding="TOTAL_PRODUCT">
+        <constraints>
+          <grid row="12" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Total_Por_Producto:"/>
+        </properties>
+      </component>
+      <component id="c24a" class="javax.swing.JTextField" binding="Total_Por_Producto">
+        <constraints>
+          <grid row="12" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <hspacer id="74b09">
+        <constraints>
+          <grid row="24" column="7" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <component id="2f6d4" class="javax.swing.JLabel" binding="TOTAL_SALE_VALUE">
+        <constraints>
+          <grid row="13" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Total_Venta:"/>
+        </properties>
+      </component>
+      <component id="7ca9d" class="javax.swing.JTextField" binding="Total_Venta">
+        <constraints>
+          <grid row="13" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="391ac" class="javax.swing.JButton" binding="agregarProductoButton">
+        <constraints>
+          <grid row="15" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Agregar Producto"/>
+        </properties>
+      </component>
+      <component id="62a88" class="javax.swing.JButton" binding="agregarVentaButton">
+        <constraints>
+          <grid row="15" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Agregar Venta"/>
+        </properties>
+      </component>
+      <component id="a94d0" class="javax.swing.JButton" binding="cancelarVentaButton" default-binding="true">
+        <constraints>
+          <grid row="16" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Cancelar Venta"/>
         </properties>
       </component>
-      <component id="f254c" class="javax.swing.JButton" binding="volverButton">
+      <component id="4259b" class="javax.swing.JButton" binding="eliminarProductoButton" default-binding="true">
         <constraints>
-          <grid row="1" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="78" height="39"/>
+          <grid row="16" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Eliminar Producto"/>
+        </properties>
+      </component>
+      <hspacer id="7d322">
+        <constraints>
+          <grid row="10" column="9" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="30" height="-1"/>
+            <preferred-size width="30" height="-1"/>
+            <maximum-size width="30" height="-1"/>
           </grid>
         </constraints>
-        <properties>
-          <text value="Volver"/>
-        </properties>
-      </component>
-      <component id="6d809" class="javax.swing.JButton" binding="cerrarSesionButton">
+      </hspacer>
+      <hspacer id="9769e">
         <constraints>
-          <grid row="16" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="20" height="-1"/>
+            <preferred-size width="20" height="-1"/>
+            <maximum-size width="20" height="-1"/>
+          </grid>
         </constraints>
-        <properties>
-          <text value="Cerrar Sesión"/>
-        </properties>
-      </component>
+      </hspacer>
+      <hspacer id="31d27">
+        <constraints>
+          <grid row="15" column="6" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="10" height="-1"/>
+            <preferred-size width="10" height="-1"/>
+            <maximum-size width="10" height="-1"/>
+          </grid>
+        </constraints>
+      </hspacer>
     </children>
   </grid>
 </form>
