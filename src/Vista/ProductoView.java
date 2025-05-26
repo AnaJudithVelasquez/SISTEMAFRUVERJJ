@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.JFrame;
 import Controlador.ProductoControlador;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
@@ -47,6 +49,14 @@ public class ProductoView extends JFrame {
         setLocationRelativeTo(null);
         setContentPane(panelProductos);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        JTableHeader header = table1.getTableHeader();
+        header.setBackground(new Color(143, 235, 216)); // Color verde personalizado
+        header.setForeground(Color.BLACK);             // Texto blanco
+        header.setFont(new Font("Arial", Font.BOLD, 14)); // Fuente opcional
+
+        table1.setSelectionBackground(UIManager.getColor("Table.selectionBackground"));
+        table1.setSelectionForeground(UIManager.getColor("Table.selectionForeground"));
 
     }
 

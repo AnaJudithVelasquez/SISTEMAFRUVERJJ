@@ -39,12 +39,10 @@ public class ConsultaControlador {
         vista.btnVolver.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                vista.dispose(); // Cierra la ventana actual
+                vista.dispose();
                 Vista.FruverView.mostrarVentanaFruver();
-                // Abre la ventana principal
             }
         });
-
     }
 
     private Connection obtenerConexion() {
@@ -63,13 +61,12 @@ public class ConsultaControlador {
             vista.tablaResultados.setModel(modelo.consultarVentasPorFecha(inicio, fin));
 
             double total = modelo.sumarTotalVentas(inicio, fin);
-            vista.setTotal(String.format("$%.2f", total));  // <-- MOSTRAR TOTAL EN EL CAMPO
+            vista.setTotal(String.format("$%.2f", total));
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al consultar ventas: " + e.getMessage());
         }
     }
-
 
     private void consultarCompras() {
         try {
@@ -78,11 +75,10 @@ public class ConsultaControlador {
             vista.tablaResultados.setModel(modelo.consultarComprasPorFecha(inicio, fin));
 
             double total = modelo.sumarTotalCompras(inicio, fin);
-            vista.setTotal(String.format("$%.2f", total));  // <-- MOSTRAR TOTAL EN EL CAMPO
+            vista.setTotal(String.format("$%.2f", total));
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al consultar compras: " + e.getMessage());
         }
     }
-
 }

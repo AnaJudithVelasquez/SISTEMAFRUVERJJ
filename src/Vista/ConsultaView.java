@@ -21,32 +21,92 @@ public class ConsultaView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Panel superior para filtros
-        JPanel panelSuperior = new JPanel();
-        panelSuperior.add(new JLabel("Fecha Inicio:"));
-        fechaInicioChooser = new JDateChooser();
-        panelSuperior.add(fechaInicioChooser);
+        // Fuentes
+        Font fuenteRegular = new Font("Times New Roman", Font.PLAIN, 16);
+        Font fuenteBold = new Font("Times New Roman", Font.BOLD, 16);
 
-        panelSuperior.add(new JLabel("Fecha Fin:"));
+        // Fondo general
+        getContentPane().setBackground(new Color(109, 149, 99)); // Alice Blue
+
+        // Panel superior general
+        JPanel panelSuperior = new JPanel(new BorderLayout());
+        panelSuperior.setBackground(new Color(109, 149, 99)); // Light Cyan
+
+        // Panel izquierdo para botón Volver
+        JPanel panelIzquierdo = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panelIzquierdo.setBackground(new Color(186, 229, 177));
+        btnVolver = new JButton("Volver");
+        btnVolver.setPreferredSize(new Dimension(100, 30));
+        btnVolver.setBackground(new Color(246, 202, 136)); // Crimson
+        btnVolver.setForeground(Color.BLACK); // Texto negro
+        btnVolver.setFont(fuenteBold);
+        panelIzquierdo.add(btnVolver);
+        panelSuperior.add(panelIzquierdo, BorderLayout.WEST);
+
+        // Panel central para filtros y botones
+        JPanel panelCentro = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
+        panelCentro.setBackground(new Color(186, 229, 177));
+
+        JLabel lblInicio = new JLabel("Fecha Inicio:");
+        lblInicio.setFont(fuenteRegular);
+        lblInicio.setForeground(Color.BLACK);
+        panelCentro.add(lblInicio);
+
+        fechaInicioChooser = new JDateChooser();
+        fechaInicioChooser.setPreferredSize(new Dimension(190, 25));
+        fechaInicioChooser.setFont(fuenteRegular);
+        fechaInicioChooser.setForeground(Color.BLACK);
+        panelCentro.add(fechaInicioChooser);
+
+        JLabel lblFin = new JLabel("Fecha Fin:");
+        lblFin.setFont(fuenteRegular);
+        lblFin.setForeground(Color.BLACK);
+        panelCentro.add(lblFin);
+
         fechaFinChooser = new JDateChooser();
-        panelSuperior.add(fechaFinChooser);
+        fechaFinChooser.setPreferredSize(new Dimension(190, 25));
+        fechaFinChooser.setFont(fuenteRegular);
+        fechaFinChooser.setForeground(Color.BLACK);
+        panelCentro.add(fechaFinChooser);
 
         btnConsultarVentas = new JButton("Consultar Ventas");
-        btnConsultarCompras = new JButton("Consultar Compras");
-        btnVolver = new JButton("Volver");
-        panelSuperior.add(btnConsultarVentas);
-        panelSuperior.add(btnConsultarCompras);
-        panelSuperior.add(btnVolver);
+        btnConsultarVentas.setPreferredSize(new Dimension(160, 30));
+        btnConsultarVentas.setBackground(new Color(109, 149, 99)); // Verde
+        btnConsultarVentas.setForeground(Color.BLACK);
+        btnConsultarVentas.setFont(fuenteBold);
+        panelCentro.add(btnConsultarVentas);
 
+        btnConsultarCompras = new JButton("Consultar Compras");
+        btnConsultarCompras.setPreferredSize(new Dimension(180, 30));
+        btnConsultarCompras.setBackground(new Color(109, 149, 99)); // Azul
+        btnConsultarCompras.setForeground(Color.BLACK);
+        btnConsultarCompras.setFont(fuenteBold);
+        panelCentro.add(btnConsultarCompras);
+
+        JLabel lblTotal = new JLabel("Total:");
+        lblTotal.setFont(fuenteRegular);
+        lblTotal.setForeground(Color.BLACK);
+        panelCentro.add(lblTotal);
+
+        txtTotal = new JTextField(20);
+        txtTotal.setEditable(false);
+        txtTotal.setFont(fuenteRegular);
+        txtTotal.setForeground(Color.BLACK);
+        panelCentro.add(txtTotal);
+
+        panelSuperior.add(panelCentro, BorderLayout.CENTER);
         add(panelSuperior, BorderLayout.NORTH);
 
-        panelSuperior.add(new JLabel("Total:"));
-        txtTotal = new JTextField(10);
-        txtTotal.setEditable(false);
-        panelSuperior.add(txtTotal);
-
-        // Tabla en el centro
+        // Tabla de resultados en el centro
         tablaResultados = new JTable();
+        tablaResultados.setFont(fuenteRegular);
+        tablaResultados.setForeground(Color.BLACK);
+        tablaResultados.setRowHeight(24);
+
+        tablaResultados.getTableHeader().setFont(fuenteBold);
+        tablaResultados.getTableHeader().setForeground(Color.BLACK); // Encabezado negro
+        tablaResultados.getTableHeader().setBackground(new Color(236, 161, 158)); // Gris claro
+
         JScrollPane scrollPane = new JScrollPane(tablaResultados);
         add(scrollPane, BorderLayout.CENTER);
 
@@ -67,7 +127,7 @@ public class ConsultaView extends JFrame {
 
     public static void mostrarVentanaConsulta() {
         ConsultaView ventana = new ConsultaView();
-        new ConsultaControlador(ventana); // <--- AÑADE ESTO
+        new ConsultaControlador(ventana);
         ventana.setVisible(true);
     }
 }
