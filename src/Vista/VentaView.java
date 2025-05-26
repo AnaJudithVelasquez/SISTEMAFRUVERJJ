@@ -5,10 +5,7 @@ import Controlador.VentaControlador;
 
 import javax.swing.*;
 import javax.swing.JFrame;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
+import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -26,6 +23,7 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import Modelo.UsuarioSesion;
 
 public class VentaView extends JFrame {
     private JPanel panelVentas;
@@ -79,6 +77,43 @@ public class VentaView extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setContentPane(panelVentas);
+
+        JTableHeader header = table1.getTableHeader();
+        header.setBackground(new Color(241, 202, 136)); // Color verde personalizado
+        header.setForeground(Color.BLACK);             // Texto blanco
+        header.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 14)); // Fuente opcional
+
+        table1.setSelectionBackground(UIManager.getColor("Table.selectionBackground"));
+        table1.setSelectionForeground(UIManager.getColor("Table.selectionForeground"));
+
+        JTableHeader header1 = table2.getTableHeader();
+        header1.setBackground(new Color(241, 202, 136)); // Color verde personalizado
+        header1.setForeground(Color.BLACK);             // Texto blanco
+        header1.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 14)); // Fuente opcional
+
+        table2.setSelectionBackground(UIManager.getColor("Table.selectionBackground"));
+        table2.setSelectionForeground(UIManager.getColor("Table.selectionForeground"));
+
+        JTableHeader header2 = tableVentaActual.getTableHeader();
+        header2.setBackground(new Color(241, 202, 136)); // Color verde personalizado
+        header2.setForeground(Color.BLACK);             // Texto blanco
+        header2.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 14)); // Fuente opcional
+
+        tableVentaActual.setSelectionBackground(UIManager.getColor("Table.selectionBackground"));
+        tableVentaActual.setSelectionForeground(UIManager.getColor("Table.selectionForeground"));
+
+        int posicion = UsuarioSesion.getPosicion();
+
+        if (posicion == 1) { // ADMIN
+            volverButton.setVisible(true);
+            cerrarSesionButton.setVisible(false);
+        } else if (posicion == 2) { // EMPLEADO
+            volverButton.setVisible(false);
+            cerrarSesionButton.setVisible(true);
+        } else {
+            volverButton.setVisible(false);
+            cerrarSesionButton.setVisible(false);
+        }
 
          actualizarTablaVentas();
         yaMostroAlertaStock = false; //  Reinicia la alerta al abrir
@@ -902,18 +937,9 @@ public class VentaView extends JFrame {
         pantallaInicioView.mostrarVentana();
     }
 
-
-
     public static void mostrarVentanaVentas() {
         VentaView ventaView = new VentaView();
         ventaView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         ventaView.setVisible(true);
     }
-
-
-
 }
-
-
-
-

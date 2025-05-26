@@ -19,9 +19,10 @@ public class ConsultaModelo {
         ps.setString(2, fechaFin);
         ResultSet rs = ps.executeQuery();
 
-        return construirModeloDesdeResultSet(rs);
+        // Títulos personalizados en español
+        String[] titulos = {"Código Venta", "Fecha de Venta", "Identificación del Cliente", "Valor Total de la Venta"};
+        return construirModeloDesdeResultSet(rs, titulos);
     }
-
 
     public DefaultTableModel consultarComprasPorFecha(String fechaInicio, String fechaFin) throws SQLException {
         String sql = "SELECT COD_PURCHASE, DATE_PURCHASE, TOTAL_PURCHASE_VALUE " +
@@ -31,7 +32,9 @@ public class ConsultaModelo {
         ps.setString(2, fechaFin);
         ResultSet rs = ps.executeQuery();
 
-        return construirModeloDesdeResultSet(rs);
+        // Títulos personalizados en español
+        String[] titulos = {"Código Compra", "Fecha de Compra", "Valor Total de la Compra"};
+        return construirModeloDesdeResultSet(rs, titulos);
     }
 
     public double sumarTotalVentas(String fechaInicio, String fechaFin) throws SQLException {
@@ -60,12 +63,13 @@ public class ConsultaModelo {
         return 0.0;
     }
 
-    private DefaultTableModel construirModeloDesdeResultSet(ResultSet rs) throws SQLException {
+    private DefaultTableModel construirModeloDesdeResultSet(ResultSet rs, String[] titulos) throws SQLException {
         ResultSetMetaData metaData = rs.getMetaData();
-        Vector<String> columnas = new Vector<>();
         int columnCount = metaData.getColumnCount();
-        for (int column = 1; column <= columnCount; column++) {
-            columnas.add(metaData.getColumnName(column));
+
+        Vector<String> columnas = new Vector<>();
+        for (String titulo : titulos) {
+            columnas.add(titulo);
         }
 
         Vector<Vector<Object>> datos = new Vector<>();

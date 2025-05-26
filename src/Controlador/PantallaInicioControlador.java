@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import Modelo.UsuarioModel;
+import Modelo.UsuarioSesion; // <--- Asegúrate de importar esta clase
 import Vista.PantallaInicioView;
 import Vista.VentaView;
 import Vista.FruverView;
@@ -17,9 +18,7 @@ public class PantallaInicioControlador {
         this.modelo = modelo;
         this.vista = vista;
 
-        //  Asociar botón con ActionListener
-
-        //  Permitir que ENTER dispare el botón por defecto
+        // Asociar botón con ActionListener
         this.vista.getCampoPassword().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -33,26 +32,29 @@ public class PantallaInicioControlador {
                 validarUsuario();
             }
         });
-
     }
 
-    //  Método que valida al usuario
+    // Método que valida al usuario
     private void validarUsuario() {
         String usuario = vista.getUsuario();
         String password = vista.getPassword();
 
         int posicion = modelo.validarUsuario(usuario, password);
 
+        if (posicion != -1) {
+            // Guarda el rol en la sesión
+            UsuarioSesion.setPosicion(posicion);
+        }
+
         switch (posicion) {
-            case 1:
+            case 1: // Administrador
                 vista.cerrar();
                 FruverView menuview = new FruverView();
                 menuview.setVisible(true);
                 break;
-            case 2:
+            case 2: // Empleado
                 vista.cerrar();
-                VentaView ventaView = new VentaView();
-                ventaView.setVisible(true);
+                VentaView.mostrarVentanaVentas(); // Usamos el método estático
                 break;
             case -1:
                 // Ya se notificó el error en el modelo
